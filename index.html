@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AyuVinc — Healthcare Infrastructure for India</title>
+    <title>AyuVinc — AI and Healthcare Products</title>
     <style>
         * {
             margin: 0;
@@ -25,11 +25,7 @@
             background-color: var(--color-bg);
             color: var(--color-text);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
+            padding: 4rem 2rem 5rem;
             position: relative;
         }
 
@@ -46,22 +42,21 @@
         }
 
         .container {
-            max-width: 540px;
-            text-align: center;
+            max-width: 680px;
+            margin: 0 auto;
             position: relative;
             z-index: 1;
             animation: fadeUp 0.8s ease-out;
         }
 
         @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
         .logo {
@@ -77,7 +72,7 @@
             text-transform: uppercase;
             letter-spacing: 0.25em;
             color: var(--color-text-muted);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .divider {
@@ -87,22 +82,96 @@
             margin: 0 auto 2rem;
         }
 
-        .message {
+        .mission {
             font-size: 0.95rem;
             line-height: 1.8;
             color: var(--color-text);
-            margin-bottom: 1.25rem;
+            margin-bottom: 0.75rem;
         }
 
-        .message strong {
+        .mission strong {
             color: var(--color-teal);
         }
 
-        .description {
-            font-size: 0.85rem;
-            line-height: 1.7;
+        .section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-teal);
+            margin-bottom: 1.25rem;
+            margin-top: 3rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+            display: block;
+        }
+
+        .product-card:hover {
+            border-color: var(--color-teal);
+            box-shadow: 0 4px 12px rgba(0, 128, 128, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .product-card.private {
+            opacity: 0.8;
+        }
+
+        .product-name {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--color-text);
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .badge {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+
+        .badge-public {
+            background: var(--color-teal-light);
+            color: var(--color-teal);
+        }
+
+        .badge-private {
+            background: #F0F0F0;
+            color: #888;
+        }
+
+        .badge-dev {
+            background: #FFF8E1;
+            color: #C67C00;
+        }
+
+        .product-desc {
+            font-size: 0.78rem;
+            line-height: 1.6;
             color: var(--color-text-muted);
-            margin-bottom: 2rem;
+        }
+
+        .product-card-wide {
+            grid-column: 1 / -1;
         }
 
         .team-section {
@@ -110,8 +179,8 @@
             border: 1px solid var(--color-border);
             border-radius: 8px;
             padding: 1.5rem;
+            margin-top: 3rem;
             margin-bottom: 2.5rem;
-            text-align: left;
         }
 
         .team-title {
@@ -126,6 +195,11 @@
             font-size: 0.85rem;
             line-height: 1.7;
             color: var(--color-text-muted);
+        }
+
+        .contact-row {
+            text-align: center;
+            margin-top: 2.5rem;
         }
 
         .contact {
@@ -155,8 +229,8 @@
         }
 
         .footer {
-            position: fixed;
-            bottom: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
             font-size: 0.7rem;
             color: var(--color-text-muted);
             letter-spacing: 0.05em;
@@ -166,35 +240,77 @@
             color: var(--color-teal);
         }
 
-        @media (max-width: 600px) {
-            .logo {
-                font-size: 2rem;
-            }
-            
-            .message {
-                font-size: 0.9rem;
-            }
-            
-            .team-section {
-                padding: 1.25rem;
-            }
+        @media (max-width: 540px) {
+            .logo { font-size: 2rem; }
+            .products-grid { grid-template-columns: 1fr; }
+            .product-card-wide { grid-column: 1; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="logo">AyuVinc</h1>
-        <p class="tagline">Coming Soon</p>
-        
-        <div class="divider"></div>
-        
-        <p class="message">
-            We're building <strong>India's healthcare operating system</strong> — infrastructure that empowers doctors as well as their patients to achieve better health outcomes.
-        </p>
-        
-        <p class="description">
-            70% of India's primary care happens through independent practitioners operating without real clinical infrastructure. AyuVinc will change that.
-        </p>
+        <div class="header">
+            <h1 class="logo">AyuVinc</h1>
+            <p class="tagline">AI &amp; Healthcare Products</p>
+            <div class="divider"></div>
+            <p class="mission">
+                Building <strong>AI-powered tools</strong> for professionals — from forensic consulting and clinical workflows to corporate intelligence and coaching.
+            </p>
+        </div>
+
+        <p class="section-label">Products</p>
+
+        <div class="products-grid">
+
+            <a class="product-card" href="https://github.com/ayuvinc/forensic-ai" target="_blank">
+                <div class="product-name">
+                    forensic-ai
+                    <span class="badge badge-public">Open</span>
+                </div>
+                <p class="product-desc">Multi-agent AI framework for forensic consulting — investigation pipelines, fraud risk registers, and compliance documentation.</p>
+            </a>
+
+            <a class="product-card" href="https://github.com/ayuvinc/AK-Cognitive-OS" target="_blank">
+                <div class="product-name">
+                    AK-Cognitive-OS
+                    <span class="badge badge-public">Open</span>
+                </div>
+                <p class="product-desc">Portable multi-persona AI development framework. Drop in and run a full AI team — Architect, BA, UX, Dev, QA, Researcher — in 15 minutes.</p>
+            </a>
+
+            <a class="product-card" href="https://github.com/ayuvinc/Institutional-Reasoning-Engine" target="_blank">
+                <div class="product-name">
+                    Institutional Reasoning Engine
+                    <span class="badge badge-public">Open</span>
+                </div>
+                <p class="product-desc">Modular architecture for AI-powered regulated investigation — 8 base components, 7 plug-and-play clusters, 6 deployment profiles.</p>
+            </a>
+
+            <div class="product-card private">
+                <div class="product-name">
+                    PolicyBrain
+                    <span class="badge badge-private">Private</span>
+                </div>
+                <p class="product-desc">AI-powered company policy intelligence for Indian SMBs — turn policy documents into an always-on compliance assistant.</p>
+            </div>
+
+            <div class="product-card private">
+                <div class="product-name">
+                    akcoach
+                    <span class="badge badge-dev">In Dev</span>
+                </div>
+                <p class="product-desc">AI fitness coaching web app — personalised training plans, habit tracking, and real-time coaching powered by AI.</p>
+            </div>
+
+            <div class="product-card private">
+                <div class="product-name">
+                    Dhara Healthcare OS
+                    <span class="badge badge-private">Private</span>
+                </div>
+                <p class="product-desc">India's healthcare operating system — drug interactions database, organ transplant workflow automation, and clinical infrastructure for independent practitioners.</p>
+            </div>
+
+        </div>
 
         <div class="team-section">
             <p class="team-title">The Team</p>
@@ -202,15 +318,17 @@
                 Founded by a patient who spent 20 years navigating India's healthcare system through multiple organ transplants. Backed by a team of technologists, doctors, and economists.
             </p>
         </div>
-        
-        <a href="mailto:aditya@ayuvinc.com" class="contact">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-            </svg>
-            aditya@ayuvinc.com
-        </a>
+
+        <div class="contact-row">
+            <a href="mailto:aditya@ayuvinc.com" class="contact">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                </svg>
+                aditya@ayuvinc.com
+            </a>
+        </div>
+
+        <p class="footer"><span>AyuVinc</span> · © 2026</p>
     </div>
-    
-    <p class="footer"><span>Launching 2026</span> · © AyuVinc</p>
 </body>
 </html>
