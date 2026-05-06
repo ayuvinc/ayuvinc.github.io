@@ -394,19 +394,29 @@
             margin-bottom: 1rem;
         }
         .advisors-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .advisor-item {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.1rem 1.25rem;
         }
         .advisor-item h5 {
-            font-size: 0.82rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 700;
             color: var(--text);
+            margin-bottom: 0.4rem;
         }
         .advisor-item p {
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             color: var(--muted);
-            margin-top: 0.1rem;
+            line-height: 1.65;
+        }
+        @media (max-width: 900px) {
+            .advisors-list { grid-template-columns: 1fr; }
         }
 
         /* ── TRACTION ── */
@@ -743,16 +753,16 @@
             <p class="advisors-label">Advisors</p>
             <div class="advisors-list">
                 <div class="advisor-item">
-                    <h5>Dr. Madhav Kumar</h5>
-                    <p>Assistant Professor, Harvard Business School · PhD MIT</p>
-                </div>
-                <div class="advisor-item">
                     <h5>Dr. Vipin Koushal</h5>
-                    <p>Former Medical Superintendent, PGI Chandigarh</p>
+                    <p>Former Medical Superintendent, PGI Chandigarh. Our clinical anchor for Setu — his institutional relationships and deep knowledge of India's transplant infrastructure are central to the PGI pilot and our national rollout strategy.</p>
                 </div>
                 <div class="advisor-item">
                     <h5>Lotika Khajuria</h5>
-                    <p>Former Drug Controller, J&amp;K · NMC regulatory strategy</p>
+                    <p>Former Drug Controller, Jammu &amp; Kashmir. Advising on regulatory architecture for pharmacy and prescription compliance, NMC alignment, and state-level regulatory strategy across India's healthcare system.</p>
+                </div>
+                <div class="advisor-item">
+                    <h5>Dr. Madhav Kumar</h5>
+                    <p>Assistant Professor, Harvard Business School · PhD, MIT. Advising on platform design, AI marketplace strategy, network effects, commercial architecture, and global scale — specifically our path from India to GCC and Southeast Asia.</p>
                 </div>
             </div>
         </div>
@@ -778,7 +788,7 @@
                     <div class="pgi-icon">🏛️</div>
                     <div class="pgi-text">
                         <h4>PGI Chandigarh — Institutional Engagement</h4>
-                        <p>In active discussion with the Nephrology Department of PGI Chandigarh — one of India's foremost government medical institutions. We have been invited to present to the clinical team within the next four weeks.</p>
+                        <p>In active discussion with the Nephrology Department of PGI Chandigarh — one of India's foremost government medical institutions. We have been invited to present to the clinical team in June 2026.</p>
                         <div class="pgi-modules">
                             <span class="pgi-module-tag">Dhara</span>
                             <span class="pgi-module-tag">Vaani</span>
