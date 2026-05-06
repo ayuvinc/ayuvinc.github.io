@@ -11,17 +11,15 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --teal:       #008080;
-            --teal-dark:  #005f5f;
-            --teal-mid:   #006d6d;
-            --teal-light: #e6f4f4;
-            --teal-xlight:#f2fafa;
-            --bg:         #f9fafb;
-            --white:      #ffffff;
-            --text:       #111827;
-            --muted:      #6b7280;
-            --border:     #e5e7eb;
-            --shadow:     0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+            --teal:        #008080;
+            --teal-dark:   #005f5f;
+            --teal-light:  #e6f4f4;
+            --teal-xlight: #f2fafa;
+            --bg:          #f9fafb;
+            --white:       #ffffff;
+            --text:        #111827;
+            --muted:       #6b7280;
+            --border:      #e5e7eb;
             --shadow-hover: 0 4px 16px rgba(0,128,128,0.14);
         }
 
@@ -73,7 +71,7 @@
         }
         .nav-links a:hover { color: var(--teal); }
 
-        /* ── SECTIONS ── */
+        /* ── SHARED ── */
         section { padding: 80px 2rem; }
         .container { max-width: 1080px; margin: 0 auto; }
 
@@ -91,7 +89,6 @@
             letter-spacing: -0.03em;
             line-height: 1.2;
             margin-bottom: 1rem;
-            color: var(--text);
         }
         .section-sub {
             font-size: 1rem;
@@ -106,10 +103,7 @@
             background: linear-gradient(135deg, #f2fafa 0%, #f9fafb 60%);
             border-bottom: 1px solid var(--border);
         }
-        .hero-inner {
-            max-width: 1080px;
-            margin: 0 auto;
-        }
+        .hero-inner { max-width: 1080px; margin: 0 auto; }
         .hero-badge {
             display: inline-block;
             background: var(--teal-light);
@@ -126,17 +120,24 @@
             font-weight: 700;
             letter-spacing: -0.04em;
             line-height: 1.1;
-            margin-bottom: 1.25rem;
-            color: var(--text);
+            margin-bottom: 1.5rem;
             max-width: 700px;
         }
         .hero-title span { color: var(--teal); }
         .hero-sub {
-            font-size: 1.1rem;
-            color: var(--muted);
-            max-width: 540px;
-            line-height: 1.75;
             margin-bottom: 2.25rem;
+            max-width: 540px;
+        }
+        .hero-sub p {
+            font-size: 1rem;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+        .hero-sub p + p { margin-top: 0.35rem; }
+        .hero-sub p.hero-feature {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--teal-dark);
         }
         .hero-cta {
             display: inline-flex;
@@ -192,28 +193,46 @@
             border-radius: 0 10px 10px 0;
         }
         .problem-quote p {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-style: italic;
             color: var(--text);
-            line-height: 1.65;
+            line-height: 1.7;
         }
 
         /* ── PRODUCTS ── */
         #products { background: var(--bg); border-bottom: 1px solid var(--border); }
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+
+        .products-launch-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 1rem;
             margin-top: 3rem;
         }
+        .products-launch-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 1.25rem;
+        }
+        .products-next-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+        }
+
         .product-card {
             background: var(--white);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 2rem;
+            padding: 1.75rem;
             transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
             position: relative;
-            overflow: hidden;
         }
         .product-card:hover {
             border-color: var(--teal);
@@ -224,6 +243,15 @@
             border-color: var(--teal);
             background: linear-gradient(160deg, #f2fafa 0%, var(--white) 100%);
         }
+        .product-card.next-phase {
+            background: var(--bg);
+            opacity: 0.8;
+            max-width: 400px;
+        }
+        .product-card.next-phase:hover {
+            opacity: 1;
+        }
+
         .product-badge {
             display: inline-block;
             font-size: 0.65rem;
@@ -232,26 +260,35 @@
             text-transform: uppercase;
             padding: 0.2rem 0.55rem;
             border-radius: 100px;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.1rem;
         }
-        .badge-live    { background: #dcfce7; color: #166534; }
-        .badge-demo    { background: #fef9c3; color: #854d0e; }
-        .badge-phase2  { background: #f0f0f0; color: #6b7280; }
+        .badge-live   { background: #dcfce7; color: #166534; }
+        .badge-demo   { background: #fef9c3; color: #854d0e; }
+        .badge-phase2 { background: #f0f0f0; color: #9ca3af; }
 
-        .product-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            display: block;
+        .by-tag {
+            display: inline-block;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            background: var(--teal-light);
+            color: var(--teal-dark);
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
         }
+
         .product-name {
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--text);
-            margin-bottom: 0.2rem;
             letter-spacing: -0.02em;
+            margin-bottom: 0.15rem;
         }
         .product-hindi {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--teal);
             font-weight: 500;
             margin-bottom: 0.85rem;
@@ -260,84 +297,72 @@
             font-size: 0.875rem;
             color: var(--muted);
             line-height: 1.7;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1rem;
         }
-
-        /* Vaani hero feature block */
-        .vaani-feature {
-            background: var(--teal-xlight);
-            border: 1px solid var(--teal-light);
-            border-radius: 8px;
-            padding: 1rem 1.1rem;
-            margin-top: 0.5rem;
-        }
-        .vaani-feature-label {
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--teal);
-            margin-bottom: 0.35rem;
-        }
-        .vaani-feature-text {
-            font-size: 0.82rem;
-            color: var(--text);
-            line-height: 1.6;
-        }
-
         .product-detail {
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             color: var(--muted);
             line-height: 1.6;
             padding-top: 1rem;
             border-top: 1px solid var(--border);
-            margin-top: 1.25rem;
         }
 
-        /* ── WHY ── */
-        #why { background: var(--white); border-bottom: 1px solid var(--border); }
-        .why-headline {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.3;
-            color: var(--text);
-            max-width: 640px;
-            margin: 1.25rem 0 3rem;
-        }
-        .why-headline em {
-            font-style: normal;
-            color: var(--teal);
-        }
-        .stories-grid {
+        /* ── STORY + TEAM (merged) ── */
+        #team { background: var(--white); border-bottom: 1px solid var(--border); }
+
+        .founder-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
+            margin-top: 3rem;
         }
-        .story-card {
+        .founder-card {
             background: var(--bg);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 1.75rem;
+            transition: box-shadow 0.2s, transform 0.2s;
         }
-        .story-name {
-            font-size: 0.875rem;
+        .founder-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+        .founder-photo {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            margin-bottom: 1rem;
+            border: 2px solid var(--teal-light);
+        }
+        .founder-name {
+            font-size: 1rem;
             font-weight: 700;
             color: var(--text);
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.15rem;
         }
-        .story-role {
+        .founder-role {
             font-size: 0.75rem;
+            font-weight: 600;
             color: var(--teal);
-            font-weight: 500;
+            margin-bottom: 0.85rem;
+        }
+        .founder-bio {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.7;
             margin-bottom: 1rem;
         }
-        .story-text {
-            font-size: 0.84rem;
-            color: var(--muted);
-            line-height: 1.75;
+        .founder-story {
+            font-size: 0.82rem;
             font-style: italic;
+            color: var(--text);
+            line-height: 1.75;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
         }
+
         .mission-bar {
             margin-top: 3rem;
             padding: 2rem 2.5rem;
@@ -353,11 +378,42 @@
             line-height: 1.5;
         }
 
+        .advisors-row {
+            margin-top: 2rem;
+            padding: 1.5rem 2rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        .advisors-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+        .advisors-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .advisor-item h5 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .advisor-item p {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-top: 0.1rem;
+        }
+
         /* ── TRACTION ── */
         #traction { background: var(--bg); border-bottom: 1px solid var(--border); }
         .traction-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 2fr;
             gap: 1.5rem;
             margin-top: 3rem;
         }
@@ -370,7 +426,6 @@
         .traction-card.highlight {
             border-color: var(--teal);
             background: linear-gradient(135deg, #f2fafa, var(--white));
-            grid-column: 1 / -1;
         }
         .traction-number {
             font-size: 2.5rem;
@@ -389,7 +444,7 @@
         .traction-detail {
             font-size: 0.8rem;
             color: var(--muted);
-            line-height: 1.55;
+            line-height: 1.6;
         }
         .pgi-block {
             display: flex;
@@ -416,13 +471,13 @@
         .pgi-text p {
             font-size: 0.84rem;
             color: var(--muted);
-            line-height: 1.6;
+            line-height: 1.65;
         }
         .pgi-modules {
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
-            margin-top: 0.6rem;
+            margin-top: 0.75rem;
         }
         .pgi-module-tag {
             font-size: 0.7rem;
@@ -433,157 +488,71 @@
             border-radius: 100px;
         }
 
-        /* ── TEAM ── */
-        #team { background: var(--white); border-bottom: 1px solid var(--border); }
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+        /* ── CONTACT ── */
+        #contact { background: var(--white); }
+        .contact-strip {
             margin-top: 3rem;
-        }
-        .team-card {
             background: var(--bg);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 1.75rem;
-            transition: box-shadow 0.2s, transform 0.2s;
+            border-radius: 16px;
+            overflow: hidden;
         }
-        .team-card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-2px);
+        .contact-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
         }
-        .team-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--teal-light);
+        .contact-person {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--teal-dark);
-            margin-bottom: 1rem;
+            gap: 1rem;
+            padding: 1.75rem 2rem;
+            border-right: 1px solid var(--border);
+            transition: background 0.15s;
         }
-        .team-name {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 0.15rem;
-        }
-        .team-role {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--teal);
-            margin-bottom: 0.85rem;
-        }
-        .team-bio {
-            font-size: 0.8rem;
-            color: var(--muted);
-            line-height: 1.7;
-        }
-        .advisors-row {
-            margin-top: 2.5rem;
-            padding: 1.5rem 2rem;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-        }
-        .advisors-label {
-            font-size: 0.68rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 1rem;
-        }
-        .advisors-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
-        .advisor-item h5 {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--text);
-        }
-        .advisor-item p {
-            font-size: 0.75rem;
-            color: var(--muted);
-            margin-top: 0.1rem;
-        }
-
-        /* ── CONTACT ── */
-        #contact { background: var(--bg); }
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-        .contact-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 1.75rem;
-            text-align: center;
-            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-        }
-        .contact-card:hover {
-            border-color: var(--teal);
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-2px);
-        }
-        .contact-avatar {
+        .contact-person:last-child { border-right: none; }
+        .contact-person:hover { background: var(--teal-xlight); }
+        .contact-photo {
             width: 52px;
             height: 52px;
             border-radius: 50%;
-            background: var(--teal-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--teal-dark);
-            margin: 0 auto 1rem;
+            object-fit: cover;
+            object-position: center top;
+            flex-shrink: 0;
+            border: 2px solid var(--teal-light);
         }
+        .contact-info { min-width: 0; }
         .contact-name {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
             color: var(--text);
-            margin-bottom: 0.15rem;
+            margin-bottom: 0.1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .contact-role {
-            font-size: 0.74rem;
+            font-size: 0.72rem;
             color: var(--teal);
             font-weight: 500;
-            margin-bottom: 1.1rem;
+            margin-bottom: 0.5rem;
         }
         .contact-link {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            font-size: 0.8rem;
+            gap: 0.35rem;
+            font-size: 0.76rem;
             color: var(--teal);
             text-decoration: none;
             font-weight: 500;
-            border: 1px solid var(--teal-light);
-            background: var(--teal-xlight);
-            padding: 0.45rem 0.9rem;
-            border-radius: 6px;
-            transition: background 0.15s, border-color 0.15s;
+            transition: opacity 0.15s;
         }
-        .contact-link:hover {
-            background: var(--teal-light);
-            border-color: var(--teal);
-        }
+        .contact-link:hover { opacity: 0.7; }
 
         /* ── FOOTER ── */
         footer {
-            background: var(--white);
+            background: var(--bg);
             border-top: 1px solid var(--border);
-            padding: 2rem;
-            text-align: center;
+            padding: 1.75rem 2rem;
         }
         .footer-inner {
             max-width: 1080px;
@@ -594,25 +563,18 @@
             flex-wrap: wrap;
             gap: 0.75rem;
         }
-        .footer-logo {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--teal);
-        }
-        .footer-copy {
-            font-size: 0.76rem;
-            color: var(--muted);
-        }
+        .footer-logo { font-size: 1rem; font-weight: 700; color: var(--teal); }
+        .footer-copy { font-size: 0.76rem; color: var(--muted); }
 
         /* ── RESPONSIVE ── */
-        @media (max-width: 840px) {
-            .stats-grid, .products-grid, .stories-grid, .team-grid, .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            .traction-grid {
-                grid-template-columns: 1fr;
-            }
-            .traction-card.highlight { grid-column: 1; }
+        @media (max-width: 900px) {
+            .products-launch-grid { grid-template-columns: 1fr; }
+            .founder-grid { grid-template-columns: 1fr; }
+            .traction-grid { grid-template-columns: 1fr; }
+            .contact-row { grid-template-columns: 1fr; }
+            .contact-person { border-right: none; border-bottom: 1px solid var(--border); }
+            .contact-person:last-child { border-bottom: none; }
+            .stats-grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
             .hero-title { font-size: 2rem; }
             section { padding: 56px 1.25rem; }
@@ -628,9 +590,8 @@
         <a href="#hero" class="nav-logo">AyuVinc</a>
         <ul class="nav-links">
             <li><a href="#products">Products</a></li>
-            <li><a href="#why">Our Story</a></li>
+            <li><a href="#team">Our Story</a></li>
             <li><a href="#traction">Traction</a></li>
-            <li><a href="#team">Team</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </div>
@@ -641,7 +602,11 @@
     <div class="hero-inner">
         <span class="hero-badge">AyuVinc Healthcare Systems</span>
         <h1 class="hero-title">Building the <span>OS for healthcare</span> in India.</h1>
-        <p class="hero-sub">Patient-owned records · AI documentation · Transplant coordination. India has 600,000 independent clinics and 1.7% EMR adoption. We're fixing the infrastructure.</p>
+        <div class="hero-sub">
+            <p class="hero-feature">Patient-owned records · AI documentation · Transplant coordination.</p>
+            <p>India has 600,000 independent clinics and 1.7% EMR adoption.</p>
+            <p>We're fixing the infrastructure.</p>
+        </div>
         <a href="#contact" class="hero-cta">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
@@ -660,21 +625,21 @@
 
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number">1.7%</div>
-                <div class="stat-label">EMR adoption across India's independent clinics. The rest still run on paper.</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">600K</div>
-                <div class="stat-label">Independent clinics, each owning their own data silo — disconnected from each other and from the patient.</div>
+                <div class="stat-number">600K+</div>
+                <div class="stat-label">Independent clinics in India, each owning their own data silo — disconnected from each other and from the patient.</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">₹22B+</div>
                 <div class="stat-label">Annual prescription and pharma flow happening on paper, with no audit trail, no continuity, no intelligence.</div>
             </div>
+            <div class="stat-card">
+                <div class="stat-number">Zero</div>
+                <div class="stat-label">Longitudinal patient records across India's independent clinic network. Every new appointment starts from scratch.</div>
+            </div>
         </div>
 
         <div class="problem-quote">
-            <p>"For 15 years, I was my own medical record system. I carried my history in my head, across three countries and five surgeries. That is not a patient problem. That is an infrastructure problem."<br><br>— Aditya Kaushal, Founder &amp; CEO</p>
+            <p>"At 17, my kidneys failed. My father gave me his. But my records didn't follow me — they came in hundreds of loose papers, scattered across clinics, carried in bags, stuffed into folders, recalled from memory at every new appointment. For 17 years, I was my own medical record system."<br><br>— Aditya Kaushal, Founder &amp; CEO</p>
         </div>
     </div>
 </section>
@@ -686,150 +651,92 @@
         <h2 class="section-title">Three products.<br>One architecture.</h2>
         <p class="section-sub">Patient-owned from day one. Built on ABDM rails. Designed so no competitor can retrofit the moat.</p>
 
-        <div class="products-grid">
+        <p class="products-launch-label">Launch Products</p>
+        <div class="products-launch-grid">
 
             <!-- DHARA -->
             <div class="product-card featured">
                 <span class="product-badge badge-live">Live Beta</span>
-                <span class="product-icon">🏥</span>
-                <div class="product-name">Dhara</div>
-                <div class="product-hindi">धारा — "flow"</div>
-                <p class="product-desc">AI Clinical OS for India's independent doctors. The patient owns their record — not the clinic. Every consultation, prescription, and diagnosis follows the patient for life, across every doctor and every city.</p>
-
-                <div class="vaani-feature">
-                    <div class="vaani-feature-label">✦ Featured: Vaani (वाणी)</div>
-                    <p class="vaani-feature-text">Real-time AI clinical scribe. Vaani transcribes the live consultation, generates a structured summary, and waits for the doctor's sign-off before saving anything. Average consult time: 2.1 minutes. The Doctor Approval Gate is non-negotiable — every AI output is a suggestion, nothing more.</p>
-                </div>
-
+                <div class="product-name">Dhara <span style="font-size:0.9rem; color:var(--muted); font-weight:400;">धारा</span></div>
+                <div class="product-hindi">"flow" — AI Clinical OS for India's independent doctors</div>
+                <p class="product-desc">The patient owns their record — not the clinic. Every consultation, prescription, and diagnosis follows the patient for life, across every doctor and every city. Built ABDM-native from day one — consent tokens issued per patient, not per institution.</p>
                 <div class="product-detail">
-                    ABDM-native · ABHA consent tokens per patient · ₹199/month entry price · 73.3% gross margin on Vaani sessions
+                    ABDM-native · ABHA consent tokens · ₹199/month · Competitors cannot retrofit this — it is the moat.
+                </div>
+            </div>
+
+            <!-- VAANI -->
+            <div class="product-card featured">
+                <span class="product-badge badge-live">Live Beta</span>
+                <div class="product-name">Vaani <span style="font-size:0.85rem; color:var(--muted); font-weight:400;">वाणी</span> <span class="by-tag">by Dhara</span></div>
+                <div class="product-hindi">"voice" — Real-time AI clinical scribe</div>
+                <p class="product-desc">Transcribes the live consultation, generates a structured clinical summary, and waits for the doctor's sign-off before saving anything. The Doctor Approval Gate is non-negotiable — every AI output is a suggestion, nothing more.</p>
+                <div class="product-detail">
+                    Powered by Sarvam AI · 73.3% gross margin · Avg consult: 2.1 min · Sold standalone and with Dhara
                 </div>
             </div>
 
             <!-- SETU -->
-            <div class="product-card">
+            <div class="product-card featured">
                 <span class="product-badge badge-demo">Demo · Pilot Stage</span>
-                <span class="product-icon">🔗</span>
-                <div class="product-name">Setu</div>
-                <div class="product-hindi">सेतु — "bridge"</div>
-                <p class="product-desc">AI-assisted transplant coordination platform for NOTTO-registered hospitals. Replaces paper forms and WhatsApp chains with structured, auditable workflows — waitlist management, donor workup, cold ischemia timers, and NOTTO compliance reporting.</p>
+                <div class="product-name">Setu <span style="font-size:0.85rem; color:var(--muted); font-weight:400;">सेतु</span></div>
+                <div class="product-hindi">"bridge" — Transplant coordination platform</div>
+                <p class="product-desc">Replaces paper forms and WhatsApp chains with structured, auditable workflows for NOTTO-registered hospitals — waitlist management, donor workup, cold ischemia timers, and compliance reporting.</p>
                 <div class="product-detail">
-                    THOTA-aligned · Administrative support only — no automated allocation · 10-year immutable audit trail · Target: 250+ NOTTO centres
-                </div>
-            </div>
-
-            <!-- HAATH -->
-            <div class="product-card">
-                <span class="product-badge badge-phase2">Phase 2</span>
-                <span class="product-icon">🤝</span>
-                <div class="product-name">Haath</div>
-                <div class="product-hindi">हाथ — "hand"</div>
-                <p class="product-desc">Hospital navigation for patients and families. When someone is admitted, their family doesn't know the system — which ward, which form, which agent to trust. Haath connects families with vetted hospital social-service agents in real time.</p>
-                <div class="product-detail">
-                    Unlocks after Phase 1 reaches EBITDA positive · In-patients + caregivers · Vetted agent network
+                    THOTA-aligned · No automated allocation · 10-year audit trail · Target: 250+ NOTTO centres
                 </div>
             </div>
 
         </div>
+
+        <p class="products-next-label">Coming Next</p>
+        <div class="product-card next-phase" style="display:inline-block; width:100%;">
+            <span class="product-badge badge-phase2">Phase 2</span>
+            <div class="product-name">Haath <span style="font-size:0.85rem; color:var(--muted); font-weight:400;">हाथ</span></div>
+            <div class="product-hindi">"hand" — Hospital navigation for patients and families</div>
+            <p class="product-desc" style="max-width:600px;">When someone is admitted, their family doesn't know the system. Haath connects families with vetted hospital social-service agents in real time. Unlocks after Phase 1 reaches EBITDA positive.</p>
+        </div>
+
     </div>
 </section>
 
-<!-- WHY -->
-<section id="why">
+<!-- STORY + TEAM (merged) -->
+<section id="team">
     <div class="container">
-        <p class="section-label">Our Story</p>
+        <p class="section-label">Who We Are</p>
         <h2 class="section-title">Three founders.<br>Three failures of the same system.</h2>
-        <p class="why-headline">We didn't find this problem in a market report. <em>We lived it.</em></p>
+        <p class="section-sub">We didn't find this problem in a market report. We lived it. A CFE, an enterprise architect, and a clinician — each with a personal reason to build this.</p>
 
-        <div class="stories-grid">
-            <div class="story-card">
-                <div class="team-name">Aditya Kaushal</div>
-                <div class="team-role">Founder &amp; CEO</div>
-                <p class="story-text">"Two kidney transplants. Five surgeries across three countries. In 2022, I was alone in a Tunisian ICU — my records were in India, on paper, in a bag at home. In 2024, my mother gave me her kidney after an 11-month wait. For 15 years, I was my own medical record system. I built this because I lived every failure it fixes."</p>
+        <div class="founder-grid">
+
+            <div class="founder-card">
+                <img src="images/aditya.png" alt="Aditya Kaushal" class="founder-photo">
+                <div class="founder-name">Aditya Kaushal</div>
+                <div class="founder-role">Founder &amp; CEO</div>
+                <p class="founder-bio">CFE · 13+ years forensic investigations at Deloitte, PwC, Optum. Patient Zero of Dhara.</p>
+                <p class="founder-story">"At 17, my kidneys failed. My father gave me his. That kidney failed. I was alone in a Tunisian ICU in 2022 — my records were in India, on paper. My mother gave me her kidney in 2024 after an 11-month wait. For 17 years, I was my own medical record system. I built this because I lived every failure it fixes."</p>
             </div>
-            <div class="story-card">
-                <div class="team-name">Raghu Raja Sharma</div>
-                <div class="team-role">Co-Founder &amp; CTO</div>
-                <p class="story-text">"On the day my son was born, my mother had a stroke. I had spent 14 years building enterprise systems at JP Morgan, Cigna, and HSBC — systems that moved billions of dollars across 7 countries. I had never felt more helpless than navigating a hospital with no map, no record, no system."</p>
+
+            <div class="founder-card">
+                <img src="images/raghu.png" alt="Raghu Raja Sharma" class="founder-photo">
+                <div class="founder-name">Raghu Raja Sharma</div>
+                <div class="founder-role">Co-Founder &amp; CTO</div>
+                <p class="founder-bio">Enterprise architect · 14+ years across 7 countries · JP Morgan, Cigna, HSBC · TOGAF certified.</p>
+                <p class="founder-story">"On the day my son was born, my mother had a stroke. I had built enterprise systems that moved billions across 7 countries. I had never felt more helpless than navigating a hospital with no map, no record, no system."</p>
             </div>
-            <div class="story-card">
-                <div class="team-name">Dr. Komal Sharma</div>
-                <div class="team-role">Co-Founder &amp; Chief Clinical Officer</div>
-                <p class="story-text">"Every day in clinic, my patients bring years of history in plastic bags — photographs of old prescriptions, half-remembered diagnoses. They have seen seven doctors and none of them knew what the others said. The Doctor Approval Gate in Dhara is my clinical principle: AI is a tool, not a decision-maker."</p>
+
+            <div class="founder-card">
+                <img src="images/komal.png" alt="Dr. Komal Sharma" class="founder-photo">
+                <div class="founder-name">Dr. Komal Sharma</div>
+                <div class="founder-role">Co-Founder &amp; Chief Clinical Officer</div>
+                <p class="founder-bio">MD Dermatology · Medanta Fellowship · Consultant, Healing Hospital Chandigarh.</p>
+                <p class="founder-story">"Every day in clinic, my patients bring years of history in plastic bags — photographs of old prescriptions, half-remembered diagnoses. They have seen seven doctors and none of them knew what the others said. The Doctor Approval Gate is my clinical principle: AI is a tool, not a decision-maker."</p>
             </div>
+
         </div>
 
         <div class="mission-bar">
             <p>"We are not building an EMR. We are building the OS for healthcare in India."</p>
-        </div>
-    </div>
-</section>
-
-<!-- TRACTION -->
-<section id="traction">
-    <div class="container">
-        <p class="section-label">Traction</p>
-        <h2 class="section-title">Early proof.<br>Real momentum.</h2>
-
-        <div class="traction-grid">
-
-            <div class="traction-card">
-                <div class="traction-number">10</div>
-                <div class="traction-label">Clinics in Beta</div>
-                <p class="traction-detail">Ten clinics onboarded and actively using Dhara + Vaani. Every early clinic is a design partner — their feedback shapes the product in real time.</p>
-            </div>
-
-            <div class="traction-card">
-                <div class="traction-number">25</div>
-                <div class="traction-label">Clinics in Pipeline</div>
-                <p class="traction-detail">Twenty-five clinics in the onboarding pipeline. Founder-led direct sales. Each clinic brings 2–3 referrals into the network.</p>
-            </div>
-
-            <div class="traction-card highlight">
-                <div class="pgi-block">
-                    <div class="pgi-icon">🏛️</div>
-                    <div class="pgi-text">
-                        <h4>PGI Chandigarh — Institutional Engagement</h4>
-                        <p>In active discussion with the Nephrology Department of PGI Chandigarh — one of India's foremost government medical institutions. We have been invited to present to the clinical team within the next four weeks.</p>
-                        <div class="pgi-modules">
-                            <span class="pgi-module-tag">Dhara</span>
-                            <span class="pgi-module-tag">Vaani</span>
-                            <span class="pgi-module-tag">Setu</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- TEAM -->
-<section id="team">
-    <div class="container">
-        <p class="section-label">Who We Are</p>
-        <h2 class="section-title">Built by people<br>who know the cost.</h2>
-        <p class="section-sub">A CFE, an enterprise architect, and a clinician — each with a personal reason to build this. Equal salaries. Equal ownership. Different expertise.</p>
-
-        <div class="team-grid">
-            <div class="team-card">
-                <div class="team-avatar">AK</div>
-                <div class="team-name">Aditya Kaushal</div>
-                <div class="team-role">Founder &amp; CEO</div>
-                <p class="team-bio">CFE (Certified Fraud Examiner). 13+ years in forensic investigations at Deloitte, PwC, and Optum. Two-time kidney transplant recipient. Patient Zero of Dhara — built this because he lived every failure it fixes.</p>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">RR</div>
-                <div class="team-name">Raghu Raja Sharma</div>
-                <div class="team-role">Co-Founder &amp; CTO</div>
-                <p class="team-bio">Enterprise architect with 14+ years across 7 countries. JP Morgan, Cigna, HSBC. TOGAF-certified. Builds healthcare data infrastructure at enterprise scale.</p>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">KS</div>
-                <div class="team-name">Dr. Komal Sharma</div>
-                <div class="team-role">Co-Founder &amp; Chief Clinical Officer</div>
-                <p class="team-bio">MD Dermatology, Medanta Fellowship. Consultant at Healing Hospital, Chandigarh. Validates every clinical decision in Dhara before it ships. Author of the Doctor Approval Gate principle.</p>
-            </div>
         </div>
 
         <div class="advisors-row">
@@ -852,46 +759,91 @@
     </div>
 </section>
 
+<!-- TRACTION -->
+<section id="traction">
+    <div class="container">
+        <p class="section-label">Traction</p>
+        <h2 class="section-title">Early proof.<br>Real momentum.</h2>
+
+        <div class="traction-grid">
+
+            <div class="traction-card">
+                <div class="traction-number">25</div>
+                <div class="traction-label">Clinics in Pipeline</div>
+                <p class="traction-detail">Twenty-five clinics in the onboarding pipeline. Founder-led direct sales. Each clinic is a design partner — their feedback shapes the product in real time.</p>
+            </div>
+
+            <div class="traction-card highlight">
+                <div class="pgi-block">
+                    <div class="pgi-icon">🏛️</div>
+                    <div class="pgi-text">
+                        <h4>PGI Chandigarh — Institutional Engagement</h4>
+                        <p>In active discussion with the Nephrology Department of PGI Chandigarh — one of India's foremost government medical institutions. We have been invited to present to the clinical team within the next four weeks.</p>
+                        <div class="pgi-modules">
+                            <span class="pgi-module-tag">Dhara</span>
+                            <span class="pgi-module-tag">Vaani</span>
+                            <span class="pgi-module-tag">Setu</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
     <div class="container">
-        <p class="section-label">Contact</p>
-        <h2 class="section-title">Get in touch.</h2>
-        <p class="section-sub">We're in active conversations with hospitals, clinicians, and investors. Reach out to the right person directly.</p>
+        <p class="section-label">Get in Touch</p>
+        <h2 class="section-title">Talk to us directly.</h2>
+        <p class="section-sub">We're in active conversations with hospitals, clinicians, and investors. Reach the right person directly.</p>
 
-        <div class="contact-grid">
-            <div class="contact-card">
-                <div class="contact-avatar">AK</div>
-                <div class="contact-name">Aditya Kaushal</div>
-                <div class="contact-role">Founder &amp; CEO</div>
-                <a href="mailto:aditya@ayuvinc.com" class="contact-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                    </svg>
-                    aditya@ayuvinc.com
-                </a>
-            </div>
-            <div class="contact-card">
-                <div class="contact-avatar">RR</div>
-                <div class="contact-name">Raghu Raja Sharma</div>
-                <div class="contact-role">Co-Founder &amp; CTO</div>
-                <a href="mailto:raghua@ayuvinc.com" class="contact-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                    </svg>
-                    raghua@ayuvinc.com
-                </a>
-            </div>
-            <div class="contact-card">
-                <div class="contact-avatar">KS</div>
-                <div class="contact-name">Dr. Komal Sharma</div>
-                <div class="contact-role">Co-Founder &amp; CCO</div>
-                <a href="mailto:komal@ayuvinc.com" class="contact-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                    </svg>
-                    komal@ayuvinc.com
-                </a>
+        <div class="contact-strip">
+            <div class="contact-row">
+
+                <div class="contact-person">
+                    <img src="images/aditya.png" alt="Aditya Kaushal" class="contact-photo">
+                    <div class="contact-info">
+                        <div class="contact-name">Aditya Kaushal</div>
+                        <div class="contact-role">Founder &amp; CEO</div>
+                        <a href="mailto:aditya@ayuvinc.com" class="contact-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                            aditya@ayuvinc.com
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-person">
+                    <img src="images/raghu.png" alt="Raghu Raja Sharma" class="contact-photo">
+                    <div class="contact-info">
+                        <div class="contact-name">Raghu Raja Sharma</div>
+                        <div class="contact-role">Co-Founder &amp; CTO</div>
+                        <a href="mailto:raghu@ayuvinc.com" class="contact-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                            raghu@ayuvinc.com
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-person">
+                    <img src="images/komal.png" alt="Dr. Komal Sharma" class="contact-photo">
+                    <div class="contact-info">
+                        <div class="contact-name">Dr. Komal Sharma</div>
+                        <div class="contact-role">Co-Founder &amp; CCO</div>
+                        <a href="mailto:komal@ayuvinc.com" class="contact-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                            komal@ayuvinc.com
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
