@@ -6,7 +6,7 @@
     <title>AyuVinc — Every Patient. One Record. Every Doctor.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -18,8 +18,11 @@
             --bg:          #f9fafb;
             --white:       #ffffff;
             --text:        #111827;
-            --muted:       #6b7280;
-            --border:      #e5e7eb;
+            --text-soft:   #4a4840;
+            --muted:       #888070;
+            --border:      #e3e0d8;
+            --dark:        #1a1915;
+            --dark-text:   #f7f6f3;
             --shadow-hover: 0 4px 16px rgba(0,128,128,0.14);
         }
 
@@ -32,6 +35,11 @@
             line-height: 1.6;
         }
 
+        /* ── GLOBAL TYPOGRAPHY ── */
+        h1, h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+        }
+
         /* ── NAV ── */
         nav {
             position: sticky;
@@ -40,12 +48,18 @@
             background: rgba(249,250,251,0.92);
             backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--border);
-            padding: 0 2rem;
+            padding: 0 24px;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        nav.scrolled {
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 1px 0 var(--border);
         }
         .nav-inner {
-            max-width: 1080px;
+            max-width: 1200px;
             margin: 0 auto;
-            height: 56px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -70,27 +84,24 @@
             transition: color 0.15s;
         }
         .nav-links a:hover { color: var(--teal); }
-        .nav-cta {
+        .btn-primary {
             display: inline-flex;
             align-items: center;
-            background: var(--teal);
-            color: white;
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 0.45rem 1.1rem;
-            border-radius: 6px;
+            background: var(--dark);
+            color: var(--dark-text);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 999px;
             text-decoration: none;
-            transition: background 0.2s, transform 0.15s;
+            transition: background 0.15s;
             white-space: nowrap;
         }
-        .nav-cta:hover { background: var(--teal-dark); transform: translateY(-1px); }
-        @media (max-width: 900px) {
-            .nav-cta { font-size: 0.78rem; padding: 0.4rem 0.9rem; }
-        }
+        .btn-primary:hover { background: #333; }
 
         /* ── SHARED ── */
-        section { padding: 80px 2rem; }
-        .container { max-width: 1080px; margin: 0 auto; }
+        section { padding: 80px 24px; }
+        .container { max-width: 1200px; margin: 0 auto; }
 
         .section-label {
             font-size: 0.72rem;
@@ -99,14 +110,18 @@
             text-transform: uppercase;
             color: var(--teal);
             margin-bottom: 0.75rem;
+            font-family: monospace;
         }
         .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
             line-height: 1.2;
             margin-bottom: 1rem;
         }
+        .h2-soft { color: var(--text-soft); font-style: normal; }
+        .h2-strong { color: var(--dark); font-style: italic; }
         .section-sub {
             font-size: 1rem;
             color: var(--muted);
@@ -116,31 +131,34 @@
 
         /* ── HERO ── */
         #hero {
-            padding: 100px 2rem 80px;
+            padding: 100px 24px 80px;
             background: linear-gradient(135deg, #f2fafa 0%, #f9fafb 60%);
             border-bottom: 1px solid var(--border);
         }
-        .hero-inner { max-width: 1080px; margin: 0 auto; }
+        .hero-inner { max-width: 1200px; margin: 0 auto; }
         .hero-badge {
             display: inline-block;
-            background: var(--teal-light);
-            color: var(--teal-dark);
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 0.3rem 0.75rem;
-            border-radius: 100px;
+            background: transparent;
+            color: var(--muted);
+            font-size: 12px;
+            font-family: monospace;
+            letter-spacing: 0.08em;
+            padding: 4px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
             margin-bottom: 1.5rem;
-            letter-spacing: 0.02em;
         }
         .hero-title {
-            font-size: clamp(2.2rem, 5vw, 3.4rem);
-            font-weight: 700;
-            letter-spacing: -0.04em;
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(42px, 6vw, 80px);
+            font-weight: 400;
+            letter-spacing: -0.02em;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            max-width: 700px;
+            max-width: 800px;
+            color: var(--dark);
         }
-        .hero-title span { color: var(--teal); }
+        .hero-title span { color: var(--teal); font-style: italic; }
         .hero-sub {
             margin-bottom: 2.25rem;
             max-width: 540px;
@@ -150,62 +168,67 @@
             color: var(--muted);
             line-height: 1.8;
         }
-        .hero-sub p + p { margin-top: 0.35rem; }
         .hero-sub p.hero-feature {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 500;
-            color: var(--teal-dark);
+            color: var(--text-soft);
         }
         .hero-cta {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: var(--teal);
-            color: white;
+            background: var(--dark);
+            color: var(--dark-text);
             text-decoration: none;
             font-size: 0.875rem;
             font-weight: 600;
             padding: 0.8rem 1.6rem;
             border-radius: 8px;
-            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            transition: background 0.2s;
         }
-        .hero-cta:hover {
-            background: var(--teal-dark);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(0,128,128,0.25);
-        }
+        .hero-cta:hover { background: #333; }
         .hero-microcopy {
             margin-top: 0.75rem;
-            font-size: 0.76rem;
+            font-size: 12px;
             color: var(--muted);
-        }
-        .hero-trust {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1.25rem;
-            margin-top: 2.5rem;
             align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
         }
-        .hero-trust-label {
-            font-size: 0.7rem;
+        .hero-microcopy .check { color: #56a06e; }
+
+        /* Trust strip */
+        .trust-strip {
+            margin-top: 2.5rem;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+        }
+        .trust-label {
+            font-size: 10px;
+            font-family: monospace;
             font-weight: 600;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--muted);
+            margin-bottom: 12px;
         }
-        .hero-trust-items {
+        .trust-names {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
+            align-items: center;
         }
-        .hero-trust-pill {
-            font-size: 0.74rem;
+        .trust-name {
+            font-size: 13px;
             font-weight: 500;
-            color: var(--teal-dark);
-            background: var(--teal-light);
-            border: 1px solid rgba(0,128,128,0.15);
-            padding: 0.25rem 0.75rem;
-            border-radius: 100px;
+            color: var(--text-soft);
+        }
+        .trust-divider {
+            display: inline-block;
+            width: 1px;
+            height: 14px;
+            background: var(--border);
+            margin: 0 20px;
         }
 
         /* ── PROBLEM ── */
@@ -213,23 +236,24 @@
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            gap: 16px;
             margin-top: 3rem;
         }
         .stat-card {
-            background: var(--teal-xlight);
-            border: 1px solid var(--teal-light);
+            background: var(--white);
+            border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 1.75rem;
+            padding: 32px;
         }
-        .stat-number {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: var(--teal);
-            letter-spacing: -0.04em;
+        .stat-num {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 64px;
+            font-weight: 400;
+            color: var(--dark);
             line-height: 1;
             margin-bottom: 0.5rem;
         }
+        .stat-critical .stat-num { color: oklch(50% 0.18 25); }
         .stat-label {
             font-size: 0.85rem;
             color: var(--muted);
@@ -237,16 +261,22 @@
         }
         .problem-quote {
             margin-top: 3rem;
-            padding: 1.5rem 2rem;
-            border-left: 3px solid var(--teal);
-            background: var(--teal-xlight);
-            border-radius: 0 10px 10px 0;
+            padding-left: 20px;
+            border-left: 3px solid var(--dark);
         }
         .problem-quote p {
-            font-size: 1.05rem;
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 22px;
             font-style: italic;
-            color: var(--text);
-            line-height: 1.7;
+            color: var(--dark);
+            line-height: 1.5;
+        }
+        .problem-quote cite {
+            display: block;
+            margin-top: 0.75rem;
+            font-size: 13px;
+            color: var(--muted);
+            font-style: normal;
         }
 
         /* ── PRODUCTS ── */
@@ -275,14 +305,12 @@
             margin-bottom: 1rem;
             margin-top: 2.5rem;
         }
-
         .product-card {
             background: var(--white);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 1.75rem;
+            padding: 28px;
             transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-            position: relative;
         }
         .product-card:hover {
             border-color: var(--teal);
@@ -293,33 +321,38 @@
             border-color: var(--teal);
             background: linear-gradient(160deg, #f2fafa 0%, var(--white) 100%);
         }
-        .product-card.next-phase {
-            background: var(--bg);
-            border-style: dashed;
-            opacity: 0.75;
+        .product-card--roadmap {
+            background: #f7f6f3;
+            border: 1px dashed #c8c4bc;
             display: flex;
             align-items: center;
             gap: 2rem;
             flex-wrap: wrap;
         }
-        .product-card.next-phase:hover {
-            opacity: 1;
+        .product-card--roadmap:hover {
+            border-color: #a8a49c;
+            box-shadow: none;
+            transform: none;
         }
+        .product-card--roadmap .product-name,
+        .product-card--roadmap .product-hindi,
+        .product-card--roadmap .product-desc { color: var(--muted); }
         .next-phase-body { flex: 1; min-width: 200px; }
 
         .product-badge {
             display: inline-block;
-            font-size: 0.65rem;
+            font-size: 11px;
             font-weight: 600;
+            font-family: monospace;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             padding: 0.2rem 0.55rem;
             border-radius: 100px;
             margin-bottom: 1.1rem;
         }
-        .badge-live   { background: #dcfce7; color: #166534; }
-        .badge-demo   { background: #fef9c3; color: #854d0e; }
-        .badge-phase2 { background: #f0f0f0; color: #9ca3af; }
+        .badge-live   { border: 1px solid oklch(60% 0.16 158); color: oklch(38% 0.14 158); background: oklch(95% 0.03 158); }
+        .badge-demo   { border: 1px solid oklch(60% 0.14 80); color: oklch(38% 0.12 80); background: oklch(95% 0.03 80); }
+        .badge-phase2 { background: #f0f0f0; color: #9ca3af; border: 1px solid #e0e0e0; }
 
         .by-tag {
             display: inline-block;
@@ -334,13 +367,14 @@
             margin-left: 0.4rem;
             vertical-align: middle;
         }
-
         .product-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: -0.02em;
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--dark);
+            letter-spacing: -0.01em;
             margin-bottom: 0.15rem;
+            line-height: 1.1;
         }
         .product-hindi {
             font-size: 0.78rem;
@@ -348,23 +382,44 @@
             font-weight: 500;
             margin-bottom: 0.85rem;
         }
+        .product-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 1rem 0;
+        }
         .product-desc {
-            font-size: 0.875rem;
+            font-size: 14px;
             color: var(--muted);
             line-height: 1.7;
             margin-bottom: 1rem;
         }
-        .product-detail {
-            font-size: 0.76rem;
-            color: var(--muted);
-            line-height: 1.6;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
+        .product-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .product-tag {
+            font-size: 10px;
+            font-family: monospace;
+            font-weight: 600;
+            background: var(--teal-light);
+            color: var(--teal-dark);
+            padding: 0.2rem 0.55rem;
+            border-radius: 100px;
+        }
+        .moat-callout {
+            background: var(--dark);
+            color: var(--dark-text);
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: monospace;
+            margin-top: 12px;
+            line-height: 1.5;
         }
 
-        /* ── STORY + TEAM (merged) ── */
+        /* ── TEAM ── */
         #team { background: var(--white); border-bottom: 1px solid var(--border); }
-
         .founder-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -378,37 +433,20 @@
             padding: 1.75rem;
             transition: box-shadow 0.2s, transform 0.2s;
         }
-        .founder-card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-2px);
-        }
+        .founder-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
         .founder-photo {
-            width: 72px;
-            height: 72px;
+            width: 96px;
+            height: 96px;
             border-radius: 50%;
             object-fit: cover;
             object-position: center top;
             margin-bottom: 1rem;
-            border: 2px solid var(--teal-light);
+            border: 2px solid var(--border);
+            display: block;
         }
-        .founder-name {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 0.15rem;
-        }
-        .founder-role {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--teal);
-            margin-bottom: 0.85rem;
-        }
-        .founder-bio {
-            font-size: 0.82rem;
-            color: var(--muted);
-            line-height: 1.7;
-            margin-bottom: 1rem;
-        }
+        .founder-name { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.15rem; }
+        .founder-role { font-size: 0.75rem; font-weight: 600; color: var(--teal); margin-bottom: 0.85rem; }
+        .founder-bio { font-size: 0.82rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
         .founder-story {
             font-size: 0.82rem;
             font-style: italic;
@@ -417,45 +455,50 @@
             padding-top: 1rem;
             border-top: 1px solid var(--border);
         }
+        .quote-full { display: none; }
+        .quote-toggle {
+            background: none;
+            border: none;
+            color: var(--teal);
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0;
+            margin-top: 0.5rem;
+            display: block;
+            font-style: normal;
+        }
+        .quote-toggle:hover { opacity: 0.7; }
 
         .mission-bar {
             margin-top: 3rem;
             padding: 2rem 2.5rem;
-            background: var(--teal);
+            background: var(--dark);
             border-radius: 14px;
-            color: white;
+            color: var(--dark-text);
             text-align: center;
         }
         .mission-bar p {
-            font-size: 1.15rem;
-            font-weight: 600;
-            letter-spacing: -0.01em;
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            font-weight: 400;
             line-height: 1.5;
         }
 
-        .advisors-row {
-            margin-top: 2rem;
-            padding: 1.5rem 2rem;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+        .advisors-section {
+            margin-top: 48px;
+            padding-top: 48px;
+            border-top: 1px solid var(--border);
         }
         .advisors-label {
-            font-size: 0.68rem;
+            font-size: 12px;
+            font-family: monospace;
             font-weight: 600;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--muted);
-            margin-bottom: 1rem;
-        }
-        .advisor-photo {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center 20%;
-            margin-bottom: 0.85rem;
-            border: 2px solid var(--teal-light);
+            margin-bottom: 1.5rem;
         }
         .advisors-list {
             display: grid;
@@ -463,17 +506,22 @@
             gap: 1.5rem;
         }
         .advisor-item {
-            background: var(--white);
+            background: var(--bg);
             border: 1px solid var(--border);
             border-radius: 10px;
             padding: 1.1rem 1.25rem;
         }
-        .advisor-item h5 {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 0.25rem;
+        .advisor-photo {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            margin-bottom: 0.85rem;
+            border: 2px solid var(--border);
+            display: block;
         }
+        .advisor-item h5 { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
         .advisor-institution {
             font-size: 0.68rem;
             font-weight: 600;
@@ -484,22 +532,30 @@
             display: inline-block;
             margin-bottom: 0.5rem;
         }
-        .advisor-item p {
-            font-size: 0.78rem;
-            color: var(--muted);
-            line-height: 1.65;
-        }
-        @media (max-width: 900px) {
-            .advisors-list { grid-template-columns: 1fr; }
-        }
+        .advisor-item p { font-size: 0.78rem; color: var(--muted); line-height: 1.65; }
 
         /* ── TRACTION ── */
         #traction { background: var(--bg); border-bottom: 1px solid var(--border); }
-        .traction-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 1.5rem;
+        .pgi-highlight {
+            background: var(--dark);
+            color: var(--dark-text);
+            border-radius: 14px;
+            padding: 2.5rem;
             margin-top: 3rem;
+        }
+        .pgi-highlight h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+        }
+        .pgi-highlight p { font-size: 0.9rem; color: rgba(247,246,243,0.7); line-height: 1.65; }
+        .traction-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
         .traction-card {
             background: var(--white);
@@ -507,151 +563,88 @@
             border-radius: 12px;
             padding: 1.75rem;
         }
-        .traction-card.highlight {
-            border-color: var(--teal);
-            background: linear-gradient(135deg, #f2fafa, var(--white));
-        }
         .traction-number {
+            font-family: 'Instrument Serif', Georgia, serif;
             font-size: 2.5rem;
-            font-weight: 700;
+            font-weight: 400;
             color: var(--teal);
-            letter-spacing: -0.05em;
             line-height: 1;
             margin-bottom: 0.4rem;
         }
-        .traction-label {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 0.3rem;
-        }
-        .traction-detail {
-            font-size: 0.8rem;
-            color: var(--muted);
-            line-height: 1.6;
-        }
-        .pgi-block {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.25rem;
-        }
-        .pgi-icon {
-            width: 44px;
-            height: 44px;
-            background: var(--teal-light);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 1.3rem;
-        }
-        .pgi-text h4 {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 0.3rem;
-        }
-        .pgi-text p {
-            font-size: 0.84rem;
-            color: var(--muted);
-            line-height: 1.65;
-        }
-        .pgi-modules {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-top: 0.75rem;
-        }
-        .pgi-module-tag {
-            font-size: 0.7rem;
-            font-weight: 600;
-            background: var(--teal-light);
-            color: var(--teal-dark);
-            padding: 0.2rem 0.55rem;
-            border-radius: 100px;
-        }
+        .traction-label { font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+        .traction-detail { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
 
         /* ── CONTACT ── */
         #contact { background: var(--white); }
-        .contact-strip {
-            margin-top: 3rem;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
+        .contact-intro {
+            font-size: 14px;
+            color: var(--text-soft);
+            margin-bottom: 0;
         }
-        .contact-row {
+        .contact-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 3rem;
         }
-        .contact-person {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.75rem 2rem;
-            border-right: 1px solid var(--border);
-            transition: background 0.15s;
-            text-decoration: none;
-            color: inherit;
-            cursor: pointer;
+        .contact-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
         }
-        .contact-person:last-child { border-right: none; }
-        .contact-person:hover { background: var(--teal-xlight); }
         .contact-photo {
-            width: 52px;
-            height: 52px;
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
             object-fit: cover;
             object-position: center top;
-            flex-shrink: 0;
-            border: 2px solid var(--teal-light);
+            border: 2px solid var(--border);
+            display: block;
+            margin-bottom: 1rem;
         }
-        .contact-info { min-width: 0; }
-        .contact-name {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 0.1rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .contact-role {
-            font-size: 0.72rem;
-            color: var(--teal);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-        .contact-link {
+        .contact-name { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.1rem; }
+        .contact-role { font-size: 0.72rem; color: var(--teal); font-weight: 500; margin-bottom: 0.5rem; }
+        .contact-persona { font-size: 0.8rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem; }
+        .btn-outline {
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            font-size: 0.76rem;
-            color: var(--teal);
+            border: 1px solid var(--dark);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--dark);
             text-decoration: none;
             font-weight: 500;
-            transition: opacity 0.15s;
+            transition: background 0.15s, color 0.15s;
         }
-        .contact-link:hover { opacity: 0.7; }
+        .btn-outline:hover { background: var(--dark); color: var(--dark-text); }
 
         /* ── FOOTER ── */
         footer {
-            background: var(--bg);
-            border-top: 1px solid var(--border);
-            padding: 1.75rem 2rem;
+            background: var(--dark);
+            color: rgba(247,246,243,0.6);
+            padding: 40px 64px;
         }
-        .footer-inner {
-            max-width: 1080px;
-            margin: 0 auto;
+        .footer-top {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.75rem;
+            margin-bottom: 1.5rem;
         }
-        .footer-logo { font-size: 1rem; font-weight: 700; color: var(--teal); }
-        .footer-copy { font-size: 0.76rem; color: var(--muted); }
+        .footer-logo { font-size: 1rem; font-weight: 700; color: var(--dark-text); }
+        .footer-nav { display: flex; gap: 1.5rem; list-style: none; }
+        .footer-nav a { font-size: 0.8rem; color: rgba(247,246,243,0.5); text-decoration: none; transition: color 0.15s; }
+        .footer-nav a:hover { color: var(--dark-text); }
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid rgba(247,246,243,0.1);
+            padding-top: 1.25rem;
+        }
+        .footer-copy { font-size: 0.76rem; }
+        .footer-badges { font-size: 11px; font-family: monospace; color: rgba(247,246,243,0.5); letter-spacing: 0.05em; }
 
         /* ── HAMBURGER ── */
         .nav-hamburger {
@@ -675,11 +668,10 @@
         .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .nav-hamburger.open span:nth-child(2) { opacity: 0; }
         .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
         .mobile-menu {
             display: none;
             position: fixed;
-            top: 56px;
+            top: 60px;
             left: 0;
             right: 0;
             background: rgba(249,250,251,0.97);
@@ -688,17 +680,9 @@
             padding: 1rem 1.5rem 1.5rem;
             z-index: 99;
             flex-direction: column;
-            gap: 0;
         }
         .mobile-menu.open { display: flex; }
-        .mobile-menu a {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text);
-            text-decoration: none;
-            padding: 0.85rem 0;
-            border-bottom: 1px solid var(--border);
-        }
+        .mobile-menu a { font-size: 1rem; font-weight: 500; color: var(--text); text-decoration: none; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
         .mobile-menu a:last-child { border-bottom: none; }
         .mobile-menu a:hover { color: var(--teal); }
 
@@ -706,32 +690,35 @@
         @media (max-width: 900px) {
             .products-launch-grid { grid-template-columns: 1fr; }
             .founder-grid { grid-template-columns: 1fr; }
-            .traction-grid { grid-template-columns: 1fr; }
-            .contact-row { grid-template-columns: 1fr; }
-            .contact-person { border-right: none; border-bottom: 1px solid var(--border); }
-            .contact-person:last-child { border-bottom: none; }
+            .traction-metrics { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: 1fr; }
+            .advisors-list { grid-template-columns: 1fr; }
             .nav-links { display: none; }
-            .nav-cta { display: none; }
+            .btn-primary { display: none; }
             .nav-hamburger { display: flex; }
-            .hero-title { font-size: 2rem; }
+            .hero-title { font-size: 2.5rem; }
             section { padding: 56px 1.25rem; }
             #hero { padding: 72px 1.25rem 56px; }
+            footer { padding: 32px 24px; }
+            .footer-top { flex-direction: column; gap: 1rem; align-items: flex-start; }
+            .footer-bottom { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
+<nav id="main-nav">
     <div class="nav-inner">
         <a href="#hero" class="nav-logo">AyuVinc</a>
         <ul class="nav-links">
             <li><a href="#team">Our Story</a></li>
             <li><a href="#products">Products</a></li>
+            <li><a href="#traction">Traction</a></li>
             <li><a href="#contact">Contact Us</a></li>
         </ul>
-        <a href="#contact" class="nav-cta">Request a Demo</a>
+        <a href="#contact" class="btn-primary">Request a Demo</a>
         <button class="nav-hamburger" id="hamburger" aria-label="Menu">
             <span></span><span></span><span></span>
         </button>
@@ -748,7 +735,7 @@
 <!-- HERO -->
 <section id="hero">
     <div class="hero-inner">
-        <span class="hero-badge">AyuVinc Healthcare Systems</span>
+        <span class="hero-badge">Live Beta · ABDM-native · India</span>
         <h1 class="hero-title">Every patient. <span>One record.</span> Every doctor.</h1>
         <div class="hero-sub">
             <p class="hero-feature">The record follows the patient — not the clinic.</p>
@@ -760,13 +747,19 @@
             </svg>
             Request a Demo
         </a>
-        <p class="hero-microcopy">No commitment · 15-minute call · We respond within 24 hours</p>
-        <div class="hero-trust">
-            <span class="hero-trust-label">Advisor Network</span>
-            <div class="hero-trust-items">
-                <span class="hero-trust-pill">Dr. Vipin Koushal</span>
-                <span class="hero-trust-pill">Dr. Madhav Kumar</span>
-                <span class="hero-trust-pill">Lotika Khajuria</span>
+        <div class="hero-microcopy">
+            <span><span class="check">✓</span> No commitment</span>
+            <span><span class="check">✓</span> 15-minute call</span>
+            <span><span class="check">✓</span> We respond within 24 hours</span>
+        </div>
+        <div class="trust-strip">
+            <p class="trust-label">Advisor Network</p>
+            <div class="trust-names">
+                <span class="trust-name">Dr. Vipin Koushal</span>
+                <span class="trust-divider" aria-hidden="true"></span>
+                <span class="trust-name">Dr. Madhav Kumar</span>
+                <span class="trust-divider" aria-hidden="true"></span>
+                <span class="trust-name">Lotika Khajuria</span>
             </div>
         </div>
     </div>
@@ -776,26 +769,27 @@
 <section id="problem">
     <div class="container">
         <p class="section-label">The Problem</p>
-        <h2 class="section-title">Healthcare treats visits.<br>Not patients.</h2>
+        <h2 class="section-title"><span class="h2-soft">Healthcare treats visits.</span><br><span class="h2-strong">Not patients.</span></h2>
         <p class="section-sub">Every time a patient changes doctor, clinic, or city — their medical history stays behind. Every new doctor starts from zero. India's healthcare system has no memory.</p>
 
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number">600K+</div>
-                <div class="stat-label">Independent clinics in India, each owning their own data silo — disconnected from each other and from the patient.</div>
+                <div class="stat-num">600K+</div>
+                <p class="stat-label">Independent clinics in India, each owning their own data silo — disconnected from each other and from the patient.</p>
             </div>
             <div class="stat-card">
-                <div class="stat-number">3B+</div>
-                <div class="stat-label">Prescriptions written every year in India — nearly all on paper, with no audit trail, no continuity, no intelligence.</div>
+                <div class="stat-num">3B+</div>
+                <p class="stat-label">Prescriptions written every year in India — nearly all on paper, with no audit trail, no continuity, no intelligence.</p>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">Zero</div>
-                <div class="stat-label">Longitudinal patient records across India's independent clinic network. Every new appointment starts from scratch.</div>
+            <div class="stat-card stat-critical">
+                <div class="stat-num">Zero</div>
+                <p class="stat-label">Longitudinal patient records across India's independent clinic network. Every new appointment starts from scratch.</p>
             </div>
         </div>
 
         <div class="problem-quote">
-            <p>"At 17, my kidneys failed. My father gave me his. But my records didn't follow me — they came in hundreds of loose papers, scattered across clinics, carried in bags, stuffed into folders, recalled from memory at every new appointment. For 17 years, I was my own medical record system."<br><br>— Aditya Kaushal, Founder &amp; CEO</p>
+            <p>"For 17 years, I was my own medical record system."</p>
+            <cite>— Aditya Kaushal, Founder &amp; CEO</cite>
         </div>
     </div>
 </section>
@@ -804,52 +798,61 @@
 <section id="products">
     <div class="container">
         <p class="section-label">What We're Building</p>
-        <h2 class="section-title">Three products.<br>One architecture.</h2>
+        <h2 class="section-title"><span class="h2-soft">Three products.</span><br><span class="h2-strong">One architecture.</span></h2>
         <p class="section-sub">Patient-owned from day one. Built on ABDM rails. Designed so no competitor can retrofit the moat.</p>
 
         <p class="products-launch-label">Launch Products</p>
         <div class="products-launch-grid">
 
             <!-- DHARA -->
-            <div class="product-card featured">
+            <article class="product-card featured">
                 <span class="product-badge badge-live">Live Beta</span>
-                <div class="product-name">Dhara <span style="font-size:0.9rem; color:var(--muted); font-weight:400;">धारा</span></div>
+                <div class="product-name">Dhara <span style="font-size:1rem; color:var(--muted); font-family:'Inter',sans-serif; font-weight:400;">धारा</span></div>
                 <div class="product-hindi">"flow" — AI Clinical OS for India's independent doctors</div>
+                <hr class="product-divider">
                 <p class="product-desc">The patient owns their record — not the clinic. Every consultation, prescription, and diagnosis follows the patient for life, across every doctor and every city. Built ABDM-native from day one — consent tokens issued per patient, not per institution.</p>
-                <div class="product-detail">
-                    ABDM-native · ABHA consent tokens · ₹199/month
+                <div class="product-tags">
+                    <span class="product-tag">ABDM-native</span>
+                    <span class="product-tag">ABHA consent tokens</span>
+                    <span class="product-tag">₹199/month</span>
                 </div>
-            </div>
+                <div class="moat-callout">Competitors cannot retrofit this — it is the moat.</div>
+            </article>
 
             <!-- VAANI -->
-            <div class="product-card featured">
+            <article class="product-card featured">
                 <span class="product-badge badge-live">Live Beta</span>
-                <div class="product-name">Vaani <span style="font-size:0.85rem; color:var(--muted); font-weight:400;">वाणी</span> <span class="by-tag">by Dhara</span></div>
+                <div class="product-name">Vaani <span style="font-size:0.85rem; color:var(--muted); font-family:'Inter',sans-serif; font-weight:400;">वाणी</span> <span class="by-tag">by Dhara</span></div>
                 <div class="product-hindi">"voice" — Real-time AI clinical scribe</div>
+                <hr class="product-divider">
                 <p class="product-desc">Transcribes the live consultation, generates a structured clinical summary, and waits for the doctor's sign-off before saving anything. The Doctor Approval Gate is non-negotiable — every AI output is a suggestion, nothing more.</p>
-                <div class="product-detail">
-                    Powered by Sarvam AI · Sold standalone and with Dhara
+                <div class="product-tags">
+                    <span class="product-tag">Sarvam AI</span>
+                    <span class="product-tag">Doctor Approval Gate</span>
                 </div>
-            </div>
+            </article>
 
             <!-- SETU -->
-            <div class="product-card featured">
+            <article class="product-card featured">
                 <span class="product-badge badge-demo">Demo · Pilot Stage</span>
-                <div class="product-name">Setu <span style="font-size:0.85rem; color:var(--muted); font-weight:400;">सेतु</span></div>
+                <div class="product-name">Setu <span style="font-size:0.85rem; color:var(--muted); font-family:'Inter',sans-serif; font-weight:400;">सेतु</span></div>
                 <div class="product-hindi">"bridge" — Transplant coordination platform</div>
+                <hr class="product-divider">
                 <p class="product-desc">Replaces paper forms and WhatsApp chains with structured, auditable workflows for NOTTO-registered hospitals — waitlist management, donor workup, cold ischemia timers, and compliance reporting.</p>
-                <div class="product-detail">
-                    THOTA-aligned · No automated allocation · 10-year audit trail · Target: 250+ NOTTO centres
+                <div class="product-tags">
+                    <span class="product-tag">THOTA-aligned</span>
+                    <span class="product-tag">10-year audit trail</span>
+                    <span class="product-tag">250+ NOTTO centres</span>
                 </div>
-            </div>
+            </article>
 
         </div>
 
-        <p class="products-next-label">Coming Next</p>
-        <div class="product-card next-phase">
-            <span class="product-badge badge-phase2" style="flex-shrink:0;">Phase 2</span>
+        <p class="products-next-label">On the Roadmap</p>
+        <div class="product-card product-card--roadmap">
+            <span class="product-badge badge-phase2" style="flex-shrink:0;">Coming Next</span>
             <div class="next-phase-body">
-                <div class="product-name">Haath <span style="font-size:0.85rem; color:var(--muted); font-weight:400;">हाथ</span></div>
+                <div class="product-name">Haath <span style="font-size:0.85rem; font-family:'Inter',sans-serif; font-weight:400;">हाथ</span></div>
                 <div class="product-hindi">Hospital navigation for patients and families</div>
                 <p class="product-desc" style="margin-bottom:0;">When someone is admitted, their family doesn't know the system. Haath connects families with vetted hospital social-service agents in real time.</p>
             </div>
@@ -858,11 +861,11 @@
     </div>
 </section>
 
-<!-- STORY + TEAM (merged) -->
+<!-- STORY + TEAM -->
 <section id="team">
     <div class="container">
         <p class="section-label">Who We Are</p>
-        <h2 class="section-title">Three founders.<br>Three failures of the same system.</h2>
+        <h2 class="section-title"><span class="h2-soft">Three founders.</span><br><span class="h2-strong">Three failures of the same system.</span></h2>
         <p class="section-sub">We didn't find this problem in a market report. We lived it. A CFE, an enterprise architect, and a clinician — each with a personal reason to build this.</p>
 
         <div class="founder-grid">
@@ -872,7 +875,11 @@
                 <div class="founder-name">Aditya Kaushal</div>
                 <div class="founder-role">Founder &amp; CEO</div>
                 <p class="founder-bio">CFE · 13+ years forensic investigations at Deloitte, PwC, Optum. Patient Zero of Dhara.</p>
-                <p class="founder-story">"At 17, my kidneys failed. My father gave me his. That kidney failed. I was alone in a Tunisian ICU in 2022 — my records were in India, on paper. My mother gave me her kidney in 2024 after an 11-month wait. For 17 years, I was my own medical record system. I built this because I lived every failure it fixes."</p>
+                <div class="founder-story">
+                    <span class="quote-short">"I built this because I lived every failure it fixes."</span>
+                    <span class="quote-full">"At 17, my kidneys failed. My father gave me his. That kidney failed. I was alone in a Tunisian ICU in 2022 — my records were in India, on paper. My mother gave me her kidney in 2024 after an 11-month wait. For 17 years, I was my own medical record system. I built this because I lived every failure it fixes."</span>
+                    <button class="quote-toggle">Read more</button>
+                </div>
             </div>
 
             <div class="founder-card">
@@ -880,7 +887,11 @@
                 <div class="founder-name">Raghu Raja Sharma</div>
                 <div class="founder-role">Co-Founder &amp; CTO</div>
                 <p class="founder-bio">Enterprise architect · 14+ years across 7 countries · JP Morgan, Cigna, HSBC · TOGAF certified.</p>
-                <p class="founder-story">"On the day my son was born, my mother had a stroke. I had built enterprise systems that moved billions across 7 countries. I had never felt more helpless than navigating a hospital with no map, no record, no system."</p>
+                <div class="founder-story">
+                    <span class="quote-short">"I had built enterprise systems that moved billions across 7 countries. I had never felt more helpless than navigating a hospital with no map."</span>
+                    <span class="quote-full">"On the day my son was born, my mother had a stroke. I had built enterprise systems that moved billions across 7 countries. I had never felt more helpless than navigating a hospital with no map, no record, no system."</span>
+                    <button class="quote-toggle">Read more</button>
+                </div>
             </div>
 
             <div class="founder-card">
@@ -888,7 +899,11 @@
                 <div class="founder-name">Dr. Komal Sharma</div>
                 <div class="founder-role">Co-Founder &amp; Chief Clinical Officer</div>
                 <p class="founder-bio">MD Dermatology · Medanta Fellowship · Consultant, Healing Hospital Chandigarh.</p>
-                <p class="founder-story">"Every day in clinic, my patients bring years of history in plastic bags — photographs of old prescriptions, half-remembered diagnoses. They have seen seven doctors and none of them knew what the others said. The Doctor Approval Gate is my clinical principle: AI is a tool, not a decision-maker."</p>
+                <div class="founder-story">
+                    <span class="quote-short">"AI is a tool, not a decision-maker."</span>
+                    <span class="quote-full">"Every day in clinic, my patients bring years of history in plastic bags — photographs of old prescriptions, half-remembered diagnoses. They have seen seven doctors and none of them knew what the others said. The Doctor Approval Gate is my clinical principle: AI is a tool, not a decision-maker."</span>
+                    <button class="quote-toggle">Read more</button>
+                </div>
             </div>
 
         </div>
@@ -897,26 +912,26 @@
             <p>"We are not building an EMR. We are building the layer that connects India's 600,000 clinics around the patient."</p>
         </div>
 
-        <div class="advisors-row">
+        <div class="advisors-section">
             <p class="advisors-label">Advisors</p>
             <div class="advisors-list">
                 <div class="advisor-item">
-                    <img src="images/vipin.jpg" alt="Dr. Vipin Koushal" class="advisor-photo" style="width: 48px; height: 48px; object-position: center 40%;">
+                    <img src="images/vipin.jpg" alt="Dr. Vipin Koushal" class="advisor-photo" style="object-position: center 40%;">
                     <h5>Dr. Vipin Koushal</h5>
                     <span class="advisor-institution">PGI Chandigarh</span>
-                    <p>Former Medical Superintendent, PGI Chandigarh. Clinical anchor for Setu — institutional relationships and deep knowledge of India's transplant infrastructure are central to the PGI pilot and national rollout.</p>
+                    <p>Former Medical Superintendent, PGI Chandigarh. Clinical anchor for Setu — institutional relationships and deep knowledge of India's transplant infrastructure.</p>
                 </div>
                 <div class="advisor-item">
                     <img src="images/lotika.jpg" alt="Lotika Khajuria" class="advisor-photo">
                     <h5>Lotika Khajuria</h5>
                     <span class="advisor-institution">Former Drug Controller, J&amp;K</span>
-                    <p>Advising on regulatory architecture for pharmacy and prescription compliance, NMC alignment, and state-level regulatory strategy across India's healthcare system.</p>
+                    <p>Advising on regulatory architecture for pharmacy and prescription compliance, NMC alignment, and state-level regulatory strategy.</p>
                 </div>
                 <div class="advisor-item">
                     <img src="images/madhav.png" alt="Dr. Madhav Kumar" class="advisor-photo">
                     <h5>Dr. Madhav Kumar</h5>
                     <span class="advisor-institution">Harvard Business School · MIT</span>
-                    <p>Assistant Professor, Harvard Business School · PhD, MIT. Advising on platform design, AI marketplace strategy, network effects, and global scale — India to GCC and Southeast Asia.</p>
+                    <p>Assistant Professor, Harvard Business School · PhD, MIT. Advising on platform design, AI marketplace strategy, and global scale.</p>
                 </div>
             </div>
         </div>
@@ -927,31 +942,24 @@
 <section id="traction">
     <div class="container">
         <p class="section-label">Traction</p>
-        <h2 class="section-title">Early proof.<br>Real momentum.</h2>
+        <h2 class="section-title"><span class="h2-soft">Early proof.</span><br><span class="h2-strong">Real momentum.</span></h2>
 
-        <div class="traction-grid">
+        <div class="pgi-highlight">
+            <h3>PGI Chandigarh — Institutional Engagement</h3>
+            <p>In active discussion with the Nephrology Department of PGI Chandigarh — one of India's foremost government medical institutions. Invited to present to the clinical team in June 2026.</p>
+        </div>
 
+        <div class="traction-metrics">
             <div class="traction-card">
                 <div class="traction-number">25</div>
                 <div class="traction-label">Design Partner Clinics</div>
                 <p class="traction-detail">Founder-led direct sales. Each clinic actively shapes the product — their feedback is built into every release.</p>
             </div>
-
-            <div class="traction-card highlight">
-                <div class="pgi-block">
-                    <div class="pgi-icon">🏛️</div>
-                    <div class="pgi-text">
-                        <h4>PGI Chandigarh — Institutional Engagement</h4>
-                        <p>In active discussion with the Nephrology Department of PGI Chandigarh — one of India's foremost government medical institutions. We have been invited to present to the clinical team in June 2026.</p>
-                        <div class="pgi-modules">
-                            <span class="pgi-module-tag">Dhara</span>
-                            <span class="pgi-module-tag">Vaani</span>
-                            <span class="pgi-module-tag">Setu</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="traction-card">
+                <div class="traction-number">3</div>
+                <div class="traction-label">Products in Active Beta or Pilot</div>
+                <p class="traction-detail">Dhara, Vaani, and Setu — all in market, all generating clinical feedback in real time.</p>
             </div>
-
         </div>
     </div>
 </section>
@@ -961,49 +969,57 @@
     <div class="container">
         <p class="section-label">Get in Touch</p>
         <h2 class="section-title">Talk to us directly.</h2>
-        <p class="section-sub">We're in active conversations with hospitals, clinicians, and investors. Reach the right person directly — we respond within 24 hours.</p>
+        <p class="section-sub">We respond within 24 hours. Talk to the right person directly.</p>
 
-        <div class="contact-strip">
-            <div class="contact-row">
+        <div class="contact-grid">
 
-                <a href="mailto:aditya@ayuvinc.com" class="contact-person">
-                    <div class="contact-info">
-                        <div class="contact-name">Aditya Kaushal</div>
-                        <div class="contact-role">Founder &amp; CEO</div>
-                        <span class="contact-link">aditya@ayuvinc.com</span>
-                    </div>
-                </a>
-
-                <a href="mailto:raghu@ayuvinc.com" class="contact-person">
-                    <div class="contact-info">
-                        <div class="contact-name">Raghu Raja Sharma</div>
-                        <div class="contact-role">Co-Founder &amp; CTO</div>
-                        <span class="contact-link">raghu@ayuvinc.com</span>
-                    </div>
-                </a>
-
-                <a href="mailto:komal@ayuvinc.com" class="contact-person">
-                    <div class="contact-info">
-                        <div class="contact-name">Dr. Komal Sharma</div>
-                        <div class="contact-role">Co-Founder &amp; CCO</div>
-                        <span class="contact-link">komal@ayuvinc.com</span>
-                    </div>
-                </a>
-
+            <div class="contact-card">
+                <img src="images/aditya.png" alt="Aditya Kaushal" class="contact-photo">
+                <div class="contact-name">Aditya Kaushal</div>
+                <div class="contact-role">Founder &amp; CEO</div>
+                <p class="contact-persona">For partnerships, investment conversations, and media.</p>
+                <a href="mailto:aditya@ayuvinc.com" class="btn-outline">Email directly</a>
             </div>
+
+            <div class="contact-card">
+                <img src="images/raghu.png" alt="Raghu Raja Sharma" class="contact-photo">
+                <div class="contact-name">Raghu Raja Sharma</div>
+                <div class="contact-role">Co-Founder &amp; CTO</div>
+                <p class="contact-persona">For technical integrations, ABDM, and API discussions.</p>
+                <a href="mailto:raghu@ayuvinc.com" class="btn-outline">Email directly</a>
+            </div>
+
+            <div class="contact-card">
+                <img src="images/komal.png" alt="Dr. Komal Sharma" class="contact-photo">
+                <div class="contact-name">Dr. Komal Sharma</div>
+                <div class="contact-role">Co-Founder &amp; CCO</div>
+                <p class="contact-persona">For clinical questions, demos, and doctor onboarding.</p>
+                <a href="mailto:komal@ayuvinc.com" class="btn-outline">Email directly</a>
+            </div>
+
         </div>
     </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-    <div class="footer-inner">
+    <div class="footer-top">
         <span class="footer-logo">AyuVinc</span>
-        <span class="footer-copy">AyuVinc Healthcare Systems · © 2026 · www.ayuvinc.com</span>
+        <ul class="footer-nav">
+            <li><a href="#team">Our Story</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#traction">Traction</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </div>
+    <div class="footer-bottom">
+        <span class="footer-copy">© 2026 AyuVinc Healthcare Systems · www.ayuvinc.com</span>
+        <span class="footer-badges">ABDM-compliant · THOTA-aligned · Built in India</span>
     </div>
 </footer>
 
 <script>
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
             const target = document.querySelector(a.getAttribute('href'));
@@ -1014,6 +1030,11 @@
         });
     });
 
+    // Nav scroll class
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20));
+
+    // Hamburger
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
     hamburger.addEventListener('click', () => {
@@ -1024,6 +1045,16 @@
         a.addEventListener('click', () => {
             hamburger.classList.remove('open');
             mobileMenu.classList.remove('open');
+        });
+    });
+
+    // Quote toggles
+    document.querySelectorAll('.quote-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const full = btn.previousElementSibling;
+            const isHidden = full.style.display !== 'inline';
+            full.style.display = isHidden ? 'inline' : 'none';
+            btn.textContent = isHidden ? 'Show less' : 'Read more';
         });
     });
 </script>
