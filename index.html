@@ -653,6 +653,55 @@
         .footer-logo { font-size: 1rem; font-weight: 700; color: var(--teal); }
         .footer-copy { font-size: 0.76rem; color: var(--muted); }
 
+        /* ── HAMBURGER ── */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+        .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 56px;
+            left: 0;
+            right: 0;
+            background: rgba(249,250,251,0.97);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 1.5rem 1.5rem;
+            z-index: 99;
+            flex-direction: column;
+            gap: 0;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.85rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .mobile-menu a:last-child { border-bottom: none; }
+        .mobile-menu a:hover { color: var(--teal); }
+
         /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
             .products-launch-grid { grid-template-columns: 1fr; }
@@ -663,6 +712,8 @@
             .contact-person:last-child { border-bottom: none; }
             .stats-grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
+            .nav-cta { display: none; }
+            .nav-hamburger { display: flex; }
             .hero-title { font-size: 2rem; }
             section { padding: 56px 1.25rem; }
             #hero { padding: 72px 1.25rem 56px; }
@@ -681,8 +732,18 @@
             <li><a href="#contact">Contact Us</a></li>
         </ul>
         <a href="#contact" class="nav-cta">Request a Demo</a>
+        <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
     </div>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+    <a href="#team" class="mobile-link">Our Story</a>
+    <a href="#products" class="mobile-link">Products</a>
+    <a href="#traction" class="mobile-link">Traction</a>
+    <a href="#contact" class="mobile-link">Contact Us</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -951,6 +1012,19 @@
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+        });
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
         });
     });
 </script>
