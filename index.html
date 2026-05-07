@@ -70,6 +70,23 @@
             transition: color 0.15s;
         }
         .nav-links a:hover { color: var(--teal); }
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            background: var(--teal);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.45rem 1.1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s;
+            white-space: nowrap;
+        }
+        .nav-cta:hover { background: var(--teal-dark); transform: translateY(-1px); }
+        @media (max-width: 900px) {
+            .nav-cta { font-size: 0.78rem; padding: 0.4rem 0.9rem; }
+        }
 
         /* ── SHARED ── */
         section { padding: 80px 2rem; }
@@ -156,6 +173,39 @@
             background: var(--teal-dark);
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(0,128,128,0.25);
+        }
+        .hero-microcopy {
+            margin-top: 0.75rem;
+            font-size: 0.76rem;
+            color: var(--muted);
+        }
+        .hero-trust {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            margin-top: 2.5rem;
+            align-items: center;
+        }
+        .hero-trust-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        .hero-trust-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        .hero-trust-pill {
+            font-size: 0.74rem;
+            font-weight: 500;
+            color: var(--teal-dark);
+            background: var(--teal-light);
+            border: 1px solid rgba(0,128,128,0.15);
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
         }
 
         /* ── PROBLEM ── */
@@ -408,7 +458,17 @@
             font-size: 0.85rem;
             font-weight: 700;
             color: var(--text);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.25rem;
+        }
+        .advisor-institution {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--teal-dark);
+            background: var(--teal-light);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
         }
         .advisor-item p {
             font-size: 0.78rem;
@@ -423,7 +483,7 @@
         #traction { background: var(--bg); border-bottom: 1px solid var(--border); }
         .traction-grid {
             display: grid;
-            grid-template-columns: 1fr 2fr;
+            grid-template-columns: 1fr 1fr 2fr;
             gap: 1.5rem;
             margin-top: 3rem;
         }
@@ -607,6 +667,7 @@
             <li><a href="#traction">Traction</a></li>
             <li><a href="#contact">Contact Us</a></li>
         </ul>
+        <a href="#contact" class="nav-cta">Request a Demo</a>
     </div>
 </nav>
 
@@ -616,16 +677,25 @@
         <span class="hero-badge">AyuVinc Healthcare Systems</span>
         <h1 class="hero-title">Building the <span>OS for healthcare</span> in India.</h1>
         <div class="hero-sub">
-            <p class="hero-feature">Patient-owned records · AI documentation · Transplant coordination.</p>
             <p>India has 600,000 independent clinics and 1.7% EMR adoption.</p>
-            <p>We're fixing the infrastructure.</p>
+            <p class="hero-feature" style="margin-top:0.5rem;">Patient-owned records · AI clinical scribe · Transplant coordination.</p>
+            <p style="margin-top:0.35rem;">We're fixing the infrastructure.</p>
         </div>
         <a href="#contact" class="hero-cta">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
             </svg>
-            Get in touch
+            Request a Demo
         </a>
+        <p class="hero-microcopy">No commitment · 15-minute call · We respond within 24 hours</p>
+        <div class="hero-trust">
+            <span class="hero-trust-label">Trusted by</span>
+            <div class="hero-trust-items">
+                <span class="hero-trust-pill">PGI Chandigarh</span>
+                <span class="hero-trust-pill">Harvard Business School</span>
+                <span class="hero-trust-pill">Former Drug Controller, J&amp;K</span>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -757,15 +827,18 @@
             <div class="advisors-list">
                 <div class="advisor-item">
                     <h5>Dr. Vipin Koushal</h5>
-                    <p>Former Medical Superintendent, PGI Chandigarh. Our clinical anchor for Setu — his institutional relationships and deep knowledge of India's transplant infrastructure are central to the PGI pilot and our national rollout strategy.</p>
+                    <span class="advisor-institution">PGI Chandigarh</span>
+                    <p>Former Medical Superintendent, PGI Chandigarh. Clinical anchor for Setu — institutional relationships and deep knowledge of India's transplant infrastructure are central to the PGI pilot and national rollout.</p>
                 </div>
                 <div class="advisor-item">
                     <h5>Lotika Khajuria</h5>
-                    <p>Former Drug Controller, Jammu &amp; Kashmir. Advising on regulatory architecture for pharmacy and prescription compliance, NMC alignment, and state-level regulatory strategy across India's healthcare system.</p>
+                    <span class="advisor-institution">Former Drug Controller, J&amp;K</span>
+                    <p>Advising on regulatory architecture for pharmacy and prescription compliance, NMC alignment, and state-level regulatory strategy across India's healthcare system.</p>
                 </div>
                 <div class="advisor-item">
                     <h5>Dr. Madhav Kumar</h5>
-                    <p>Assistant Professor, Harvard Business School · PhD, MIT. Advising on platform design, AI marketplace strategy, network effects, commercial architecture, and global scale — specifically our path from India to GCC and Southeast Asia.</p>
+                    <span class="advisor-institution">Harvard Business School · MIT</span>
+                    <p>Assistant Professor, Harvard Business School · PhD, MIT. Advising on platform design, AI marketplace strategy, network effects, and global scale — India to GCC and Southeast Asia.</p>
                 </div>
             </div>
         </div>
@@ -783,7 +856,13 @@
             <div class="traction-card">
                 <div class="traction-number">25</div>
                 <div class="traction-label">Clinics in Pipeline</div>
-                <p class="traction-detail">Twenty-five clinics in the onboarding pipeline. Founder-led direct sales. Each clinic is a design partner — their feedback shapes the product in real time.</p>
+                <p class="traction-detail">Founder-led direct sales. Each clinic is a design partner — their feedback shapes the product in real time.</p>
+            </div>
+
+            <div class="traction-card">
+                <div class="traction-number">73.3%</div>
+                <div class="traction-label">Gross Margin — Vaani</div>
+                <p class="traction-detail">AI clinical scribe at ₹199/month. Average consultation: 2.1 minutes. Built to scale with near-zero marginal cost per additional clinic.</p>
             </div>
 
             <div class="traction-card highlight">
@@ -810,7 +889,7 @@
     <div class="container">
         <p class="section-label">Get in Touch</p>
         <h2 class="section-title">Talk to us directly.</h2>
-        <p class="section-sub">We're in active conversations with hospitals, clinicians, and investors. Reach the right person directly.</p>
+        <p class="section-sub">We're in active conversations with hospitals, clinicians, and investors. Reach the right person directly — we respond within 24 hours.</p>
 
         <div class="contact-strip">
             <div class="contact-row">
