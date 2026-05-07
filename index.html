@@ -87,8 +87,8 @@
         .btn-primary {
             display: inline-flex;
             align-items: center;
-            background: var(--dark);
-            color: var(--dark-text);
+            background: var(--teal);
+            color: white;
             font-size: 13px;
             font-weight: 500;
             padding: 10px 20px;
@@ -97,7 +97,7 @@
             transition: background 0.15s;
             white-space: nowrap;
         }
-        .btn-primary:hover { background: #333; }
+        .btn-primary:hover { background: var(--teal-dark); }
 
         /* ── SHARED ── */
         section { padding: 80px 24px; }
@@ -177,8 +177,8 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: var(--dark);
-            color: var(--dark-text);
+            background: var(--teal);
+            color: white;
             text-decoration: none;
             font-size: 0.875rem;
             font-weight: 600;
@@ -186,7 +186,7 @@
             border-radius: 8px;
             transition: background 0.2s;
         }
-        .hero-cta:hover { background: #333; }
+        .hero-cta:hover { background: var(--teal-dark); }
         .hero-microcopy {
             margin-top: 0.75rem;
             font-size: 12px;
@@ -455,20 +455,6 @@
             padding-top: 1rem;
             border-top: 1px solid var(--border);
         }
-        .quote-full { display: none; }
-        .quote-toggle {
-            background: none;
-            border: none;
-            color: var(--teal);
-            font-size: 0.76rem;
-            font-weight: 600;
-            cursor: pointer;
-            padding: 0;
-            margin-top: 0.5rem;
-            display: block;
-            font-style: normal;
-        }
-        .quote-toggle:hover { opacity: 0.7; }
 
         .mission-bar {
             margin-top: 3rem;
@@ -609,16 +595,16 @@
         .btn-outline {
             display: inline-flex;
             align-items: center;
-            border: 1px solid var(--dark);
+            border: 1px solid var(--teal);
             padding: 8px 16px;
             border-radius: 6px;
             font-size: 13px;
-            color: var(--dark);
+            color: var(--teal);
             text-decoration: none;
             font-weight: 500;
             transition: background 0.15s, color 0.15s;
         }
-        .btn-outline:hover { background: var(--dark); color: var(--dark-text); }
+        .btn-outline:hover { background: var(--teal); color: white; }
 
         /* ── FOOTER ── */
         footer {
@@ -876,9 +862,7 @@
                 <div class="founder-role">Founder &amp; CEO</div>
                 <p class="founder-bio">CFE · 13+ years forensic investigations at Deloitte, PwC, Optum. Patient Zero of Dhara.</p>
                 <div class="founder-story">
-                    <span class="quote-short">"I built this because I lived every failure it fixes."</span>
-                    <span class="quote-full">"At 17, my kidneys failed. My father gave me his. That kidney failed. I was alone in a Tunisian ICU in 2022 — my records were in India, on paper. My mother gave me her kidney in 2024 after an 11-month wait. For 17 years, I was my own medical record system. I built this because I lived every failure it fixes."</span>
-                    <button class="quote-toggle">Read more</button>
+                    "At 17, my kidneys failed. My father gave me his. That kidney failed. I was alone in a Tunisian ICU in 2022 — my records were in India, on paper. My mother gave me her kidney in 2024 after an 11-month wait. For 17 years, I was my own medical record system. I built this because I lived every failure it fixes."
                 </div>
             </div>
 
@@ -888,9 +872,7 @@
                 <div class="founder-role">Co-Founder &amp; CTO</div>
                 <p class="founder-bio">Enterprise architect · 14+ years across 7 countries · JP Morgan, Cigna, HSBC · TOGAF certified.</p>
                 <div class="founder-story">
-                    <span class="quote-short">"I had built enterprise systems that moved billions across 7 countries. I had never felt more helpless than navigating a hospital with no map."</span>
-                    <span class="quote-full">"On the day my son was born, my mother had a stroke. I had built enterprise systems that moved billions across 7 countries. I had never felt more helpless than navigating a hospital with no map, no record, no system."</span>
-                    <button class="quote-toggle">Read more</button>
+                    "On the day my son was born, my mother had a stroke. I had built enterprise systems that moved billions across 7 countries. I had never felt more helpless than navigating a hospital with no map, no record, no system."
                 </div>
             </div>
 
@@ -900,9 +882,7 @@
                 <div class="founder-role">Co-Founder &amp; Chief Clinical Officer</div>
                 <p class="founder-bio">MD Dermatology · Medanta Fellowship · Consultant, Healing Hospital Chandigarh.</p>
                 <div class="founder-story">
-                    <span class="quote-short">"AI is a tool, not a decision-maker."</span>
-                    <span class="quote-full">"Every day in clinic, my patients bring years of history in plastic bags — photographs of old prescriptions, half-remembered diagnoses. They have seen seven doctors and none of them knew what the others said. The Doctor Approval Gate is my clinical principle: AI is a tool, not a decision-maker."</span>
-                    <button class="quote-toggle">Read more</button>
+                    "Every day in clinic, my patients bring years of history in plastic bags — photographs of old prescriptions, half-remembered diagnoses. They have seen seven doctors and none of them knew what the others said. The Doctor Approval Gate is my clinical principle: AI is a tool, not a decision-maker."
                 </div>
             </div>
 
@@ -1048,15 +1028,6 @@
         });
     });
 
-    // Quote toggles
-    document.querySelectorAll('.quote-toggle').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const full = btn.previousElementSibling;
-            const isHidden = full.style.display !== 'inline';
-            full.style.display = isHidden ? 'inline' : 'none';
-            btn.textContent = isHidden ? 'Show less' : 'Read more';
-        });
-    });
 </script>
 
 </body>
