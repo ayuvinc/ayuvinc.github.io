@@ -1023,8 +1023,8 @@
         const canvas = document.getElementById('neural-bg');
         const ctx    = canvas.getContext('2d');
         const CLR    = '0,118,118';
-        const N      = 22;
-        const AXON_D = 300;
+        const N      = 26;
+        const AXON_D = 280;
         let neurons = [], pulses = [], W, H;
 
         function resize() {
@@ -1032,41 +1032,61 @@
             H = canvas.height = window.innerHeight;
         }
 
-        function makeNeuron() {
+        function makeNeuron(idx) {
             const arms = 3 + Math.floor(Math.random() * 4);
             return {
+                idx,
                 x:  Math.random() * W,
                 y:  Math.random() * H,
-                vx: (Math.random() - 0.5) * 0.12,
-                vy: (Math.random() - 0.5) * 0.12,
                 r:  3.5 + Math.random() * 2.5,
+                activation: 0,
                 dendrites: Array.from({length: arms}, () => ({
                     a:   Math.random() * Math.PI * 2,
-                    len: 24 + Math.random() * 44,
+                    len: 20 + Math.random() * 40,
                     fork: Math.random() > 0.45
                 }))
             };
         }
 
         function init() {
-            neurons = Array.from({length: N}, makeNeuron);
+            neurons = Array.from({length: N}, (_, i) => makeNeuron(i));
             pulses  = [];
         }
 
+        function spawnPulse(fromIdx) {
+            const candidates = [];
+            for (let j = 0; j < N; j++) {
+                if (j === fromIdx) continue;
+                const dx = neurons[j].x - neurons[fromIdx].x;
+                const dy = neurons[j].y - neurons[fromIdx].y;
+                if (Math.sqrt(dx*dx + dy*dy) < AXON_D) candidates.push(j);
+            }
+            if (!candidates.length) return;
+            const toIdx = candidates[Math.floor(Math.random() * candidates.length)];
+            pulses.push({ fromIdx, toIdx,
+                from: neurons[fromIdx], to: neurons[toIdx],
+                t: 0, spd: 0.007 + Math.random() * 0.007 });
+        }
+
         function drawNeuron(n) {
-            const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
-            g.addColorStop(0, `rgba(${CLR},0.22)`);
-            g.addColorStop(1, `rgba(${CLR},0)`);
+            const act = n.activation;
+            // Soma glow — expands on activation
+            const glowR = n.r * (4 + act * 5);
+            const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowR);
+            g.addColorStop(0,   `rgba(${CLR},${(0.16 + act * 0.42).toFixed(2)})`);
+            g.addColorStop(0.5, `rgba(${CLR},${(0.06 + act * 0.15).toFixed(2)})`);
+            g.addColorStop(1,   `rgba(${CLR},0)`);
             ctx.beginPath();
-            ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
+            ctx.arc(n.x, n.y, glowR, 0, Math.PI * 2);
             ctx.fillStyle = g;
             ctx.fill();
-
+            // Soma body
             ctx.beginPath();
-            ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${CLR},0.38)`;
+            ctx.arc(n.x, n.y, n.r * (1 + act * 0.5), 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${CLR},${(0.28 + act * 0.50).toFixed(2)})`;
             ctx.fill();
-
+            // Dendrites — pulse brighter on activation
+            const da = 0.18 + act * 0.25;
             n.dendrites.forEach(d => {
                 const ex = n.x + Math.cos(d.a) * d.len;
                 const ey = n.y + Math.sin(d.a) * d.len;
@@ -1075,86 +1095,96 @@
                 ctx.beginPath();
                 ctx.moveTo(n.x, n.y);
                 ctx.quadraticCurveTo(cx, cy, ex, ey);
-                ctx.strokeStyle = `rgba(${CLR},0.22)`;
-                ctx.lineWidth = 0.9;
+                ctx.strokeStyle = `rgba(${CLR},${da.toFixed(2)})`;
+                ctx.lineWidth = 0.9 + act * 0.6;
                 ctx.stroke();
                 if (d.fork) {
                     ctx.beginPath();
                     ctx.moveTo(ex, ey);
                     ctx.lineTo(ex + Math.cos(d.a - 0.7) * d.len * 0.38,
                                ey + Math.sin(d.a - 0.7) * d.len * 0.38);
-                    ctx.strokeStyle = `rgba(${CLR},0.14)`;
-                    ctx.lineWidth = 0.55;
+                    ctx.strokeStyle = `rgba(${CLR},${(0.11 + act * 0.12).toFixed(2)})`;
+                    ctx.lineWidth = 0.5;
                     ctx.stroke();
                     ctx.beginPath();
                     ctx.moveTo(ex, ey);
                     ctx.lineTo(ex + Math.cos(d.a + 0.5) * d.len * 0.30,
                                ey + Math.sin(d.a + 0.5) * d.len * 0.30);
-                    ctx.strokeStyle = `rgba(${CLR},0.10)`;
-                    ctx.lineWidth = 0.45;
+                    ctx.strokeStyle = `rgba(${CLR},${(0.08 + act * 0.08).toFixed(2)})`;
+                    ctx.lineWidth = 0.4;
                     ctx.stroke();
                 }
             });
+            // Decay
+            if (act > 0) n.activation = Math.max(0, act - 0.022);
         }
 
-        function drawAxon(a, b) {
+        function drawAxon(i, j, lit) {
+            const a = neurons[i], b = neurons[j];
             const dx = b.x - a.x, dy = b.y - a.y;
-            const d  = Math.sqrt(dx * dx + dy * dy);
-            if (d > AXON_D) return false;
-            const op = 0.18 * (1 - d / AXON_D);
-            const mx = (a.x + b.x) / 2 + dy * 0.22;
-            const my = (a.y + b.y) / 2 - dx * 0.22;
+            const d  = Math.sqrt(dx*dx + dy*dy);
+            if (d > AXON_D) return;
+            const base = 0.14 * (1 - d / AXON_D);
+            const op   = lit ? Math.min(base + 0.22, 0.38) : base;
+            const mx   = (a.x + b.x) / 2 + dy * 0.22;
+            const my   = (a.y + b.y) / 2 - dx * 0.22;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.quadraticCurveTo(mx, my, b.x, b.y);
             ctx.strokeStyle = `rgba(${CLR},${op.toFixed(3)})`;
-            ctx.lineWidth   = 0.75;
+            ctx.lineWidth   = lit ? 1.2 : 0.75;
             ctx.stroke();
-            return true;
-        }
-
-        function spawnPulse() {
-            if (Math.random() > 0.025) return;
-            const i = Math.floor(Math.random() * N);
-            const j = Math.floor(Math.random() * N);
-            if (i === j) return;
-            const dx = neurons[j].x - neurons[i].x;
-            const dy = neurons[j].y - neurons[i].y;
-            if (Math.sqrt(dx*dx + dy*dy) < AXON_D)
-                pulses.push({ from: neurons[i], to: neurons[j], t: 0, spd: 0.003 + Math.random() * 0.004 });
         }
 
         function drawPulse(p) {
-            const mx = (p.from.x + p.to.x) / 2 + (p.to.y - p.from.y) * 0.22;
-            const my = (p.from.y + p.to.y) / 2 - (p.to.x - p.from.x) * 0.22;
+            const mx = (p.from.x + p.to.x)/2 + (p.to.y - p.from.y)*0.22;
+            const my = (p.from.y + p.to.y)/2 - (p.to.x - p.from.x)*0.22;
             const t  = p.t;
             const px = (1-t)*(1-t)*p.from.x + 2*(1-t)*t*mx + t*t*p.to.x;
             const py = (1-t)*(1-t)*p.from.y + 2*(1-t)*t*my + t*t*p.to.y;
-            const pg = ctx.createRadialGradient(px, py, 0, px, py, 5);
-            pg.addColorStop(0, `rgba(${CLR},0.85)`);
-            pg.addColorStop(1, `rgba(${CLR},0)`);
+            // Outer halo
+            const pg = ctx.createRadialGradient(px, py, 0, px, py, 9);
+            pg.addColorStop(0,   `rgba(${CLR},0.92)`);
+            pg.addColorStop(0.35,`rgba(${CLR},0.48)`);
+            pg.addColorStop(1,   `rgba(${CLR},0)`);
             ctx.beginPath();
-            ctx.arc(px, py, 5, 0, Math.PI * 2);
+            ctx.arc(px, py, 9, 0, Math.PI * 2);
             ctx.fillStyle = pg;
+            ctx.fill();
+            // Bright core
+            ctx.beginPath();
+            ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${CLR},1)`;
             ctx.fill();
         }
 
         function tick() {
             ctx.clearRect(0, 0, W, H);
-            neurons.forEach(n => {
-                n.x += n.vx; n.y += n.vy;
-                if (n.x < 0 || n.x > W) n.vx *= -1;
-                if (n.y < 0 || n.y > H) n.vy *= -1;
+            // Active axon pairs
+            const lit = new Set();
+            pulses.forEach(p => {
+                lit.add(`${Math.min(p.fromIdx,p.toIdx)}-${Math.max(p.fromIdx,p.toIdx)}`);
             });
+            // Draw axons
             for (let i = 0; i < N; i++)
-                for (let j = i + 1; j < N; j++)
-                    drawAxon(neurons[i], neurons[j]);
+                for (let j = i+1; j < N; j++)
+                    drawAxon(i, j, lit.has(`${i}-${j}`));
+            // Draw neurons
             neurons.forEach(drawNeuron);
-            spawnPulse();
+            // Spontaneous firing
+            if (Math.random() < 0.045) spawnPulse(Math.floor(Math.random() * N));
+            // Update pulses
             pulses = pulses.filter(p => {
                 p.t += p.spd;
-                if (p.t < 1) { drawPulse(p); return true; }
-                return false;
+                if (p.t >= 1) {
+                    // Activate destination soma
+                    p.to.activation = Math.min(1, p.to.activation + 0.88);
+                    // Cascade: 38% chance to propagate further
+                    if (Math.random() < 0.38) spawnPulse(p.toIdx);
+                    return false;
+                }
+                drawPulse(p);
+                return true;
             });
             requestAnimationFrame(tick);
         }
