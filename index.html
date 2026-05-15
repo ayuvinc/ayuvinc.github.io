@@ -1023,8 +1023,8 @@
         const canvas = document.getElementById('neural-bg');
         const ctx    = canvas.getContext('2d');
         const CLR    = '0,118,118';
-        const N      = 26;
-        const AXON_D = 280;
+        const N      = 18;
+        const AXON_D = 240;
         let neurons = [], pulses = [], W, H;
 
         function resize() {
@@ -1065,7 +1065,7 @@
             const toIdx = candidates[Math.floor(Math.random() * candidates.length)];
             pulses.push({ fromIdx, toIdx,
                 from: neurons[fromIdx], to: neurons[toIdx],
-                t: 0, spd: 0.007 + Math.random() * 0.007 });
+                t: 0, spd: 0.003 + Math.random() * 0.003 });
         }
 
         function drawNeuron(n) {
@@ -1172,7 +1172,7 @@
             // Draw neurons
             neurons.forEach(drawNeuron);
             // Spontaneous firing
-            if (Math.random() < 0.045) spawnPulse(Math.floor(Math.random() * N));
+            if (Math.random() < 0.018) spawnPulse(Math.floor(Math.random() * N));
             // Update pulses
             pulses = pulses.filter(p => {
                 p.t += p.spd;
@@ -1180,7 +1180,7 @@
                     // Activate destination soma
                     p.to.activation = Math.min(1, p.to.activation + 0.88);
                     // Cascade: 38% chance to propagate further
-                    if (Math.random() < 0.38) spawnPulse(p.toIdx);
+                    if (Math.random() < 0.20) spawnPulse(p.toIdx);
                     return false;
                 }
                 drawPulse(p);
