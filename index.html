@@ -633,6 +633,19 @@
         .footer-copy { font-size: 0.76rem; }
         .footer-badges { font-size: 11px; font-family: 'DM Sans', sans-serif; color: rgba(247,246,243,0.5); letter-spacing: 0.05em; }
 
+        /* ── NEURAL BACKGROUND ── */
+        #neural-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        section, footer, nav, .mobile-menu {
+            position: relative;
+            z-index: 1;
+        }
+
         /* ── HAMBURGER ── */
         .nav-hamburger {
             display: none;
@@ -694,6 +707,8 @@
     </style>
 </head>
 <body>
+
+<canvas id="neural-bg"></canvas>
 
 <!-- NAV -->
 <nav id="main-nav">
@@ -1000,6 +1015,85 @@
 </footer>
 
 <script>
+    // ── NEURAL NETWORK BACKGROUND ──
+    (function () {
+        const canvas = document.getElementById('neural-bg');
+        const ctx = canvas.getContext('2d');
+
+        const TOTAL      = 72;
+        const CLUSTERS   = 6;
+        const MAX_DIST   = 165;
+        const SPEED      = 0.28;
+        const LINE_ALPHA = 0.07;   // max line opacity
+        const DOT_ALPHA  = 0.14;   // regular dot opacity
+        const CLR        = '0,120,120';  // teal RGB
+
+        let nodes = [], W, H;
+
+        function resize() {
+            W = canvas.width  = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+
+        function init() {
+            nodes = [];
+            for (let i = 0; i < TOTAL; i++) {
+                const cluster = i < CLUSTERS;
+                nodes.push({
+                    x:  Math.random() * W,
+                    y:  Math.random() * H,
+                    vx: (Math.random() - 0.5) * SPEED * (cluster ? 0.6 : 1),
+                    vy: (Math.random() - 0.5) * SPEED * (cluster ? 0.6 : 1),
+                    r:  cluster ? 2.8 : 1.4,
+                    cluster
+                });
+            }
+        }
+
+        function tick() {
+            ctx.clearRect(0, 0, W, H);
+
+            // move
+            nodes.forEach(n => {
+                n.x += n.vx;
+                n.y += n.vy;
+                if (n.x < 0 || n.x > W) n.vx *= -1;
+                if (n.y < 0 || n.y > H) n.vy *= -1;
+            });
+
+            // lines
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const d  = Math.sqrt(dx * dx + dy * dy);
+                    if (d < MAX_DIST) {
+                        const a = LINE_ALPHA * (1 - d / MAX_DIST);
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.strokeStyle = `rgba(${CLR},${a.toFixed(3)})`;
+                        ctx.lineWidth = 0.65;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // dots
+            nodes.forEach(n => {
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${CLR},${n.cluster ? 0.22 : DOT_ALPHA})`;
+                ctx.fill();
+            });
+
+            requestAnimationFrame(tick);
+        }
+
+        window.addEventListener('resize', () => { resize(); init(); });
+        resize(); init(); tick();
+    })();
+
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
