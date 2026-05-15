@@ -638,9 +638,22 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 50;
+            z-index: 0;
             pointer-events: none;
         }
+        /* let neural network show through section and card backgrounds */
+        section { background: transparent !important; }
+        .product-card, .problem-card, .team-card, .advisor-card,
+        .traction-card, .contact-card {
+            background: rgba(255,255,255,0.72) !important;
+            backdrop-filter: blur(4px);
+        }
+        #hero    { background: rgba(242,250,250,0.55) !important; }
+        #problem { background: rgba(249,250,251,0.5) !important; }
+        #products{ background: rgba(255,255,255,0.5) !important; }
+        #team    { background: rgba(242,250,250,0.5) !important; }
+        #traction{ background: rgba(249,250,251,0.5) !important; }
+        #contact { background: rgba(255,255,255,0.5) !important; }
 
         /* ── HAMBURGER ── */
         .nav-hamburger {
@@ -1016,12 +1029,12 @@
         const canvas = document.getElementById('neural-bg');
         const ctx = canvas.getContext('2d');
 
-        const TOTAL      = 72;
-        const CLUSTERS   = 6;
-        const MAX_DIST   = 165;
+        const TOTAL      = 90;
+        const CLUSTERS   = 8;
+        const MAX_DIST   = 180;
         const SPEED      = 0.28;
-        const LINE_ALPHA = 0.12;
-        const DOT_ALPHA  = 0.22;
+        const LINE_ALPHA = 0.18;
+        const DOT_ALPHA  = 0.32;
         const CLR        = '0,120,120';
 
         let nodes = [], W, H;
