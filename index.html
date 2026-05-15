@@ -638,22 +638,16 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 0;
+            z-index: 2;
             pointer-events: none;
         }
-        /* let neural network show through section and card backgrounds */
-        section { background: transparent !important; }
-        .product-card, .problem-card, .team-card, .advisor-card,
-        .traction-card, .contact-card {
-            background: rgba(255,255,255,0.72) !important;
-            backdrop-filter: blur(4px);
+        /* All page-level elements sit above the canvas */
+        body > *:not(#neural-bg) {
+            position: relative;
+            z-index: 3;
         }
-        #hero    { background: rgba(242,250,250,0.55) !important; }
-        #problem { background: rgba(249,250,251,0.5) !important; }
-        #products{ background: rgba(255,255,255,0.5) !important; }
-        #team    { background: rgba(242,250,250,0.5) !important; }
-        #traction{ background: rgba(249,250,251,0.5) !important; }
-        #contact { background: rgba(255,255,255,0.5) !important; }
+        /* Sections transparent so network is visible in open space */
+        section { background: transparent !important; }
 
         /* ── HAMBURGER ── */
         .nav-hamburger {
@@ -1024,78 +1018,144 @@
 </footer>
 
 <script>
-    // ── NEURAL NETWORK BACKGROUND ──
+    // ── NERVOUS SYSTEM BACKGROUND ──
     (function () {
         const canvas = document.getElementById('neural-bg');
-        const ctx = canvas.getContext('2d');
-
-        const TOTAL      = 90;
-        const CLUSTERS   = 8;
-        const MAX_DIST   = 180;
-        const SPEED      = 0.28;
-        const LINE_ALPHA = 0.18;
-        const DOT_ALPHA  = 0.32;
-        const CLR        = '0,120,120';
-
-        let nodes = [], W, H;
+        const ctx    = canvas.getContext('2d');
+        const CLR    = '0,118,118';
+        const N      = 22;
+        const AXON_D = 300;
+        let neurons = [], pulses = [], W, H;
 
         function resize() {
             W = canvas.width  = window.innerWidth;
             H = canvas.height = window.innerHeight;
         }
 
+        function makeNeuron() {
+            const arms = 3 + Math.floor(Math.random() * 4);
+            return {
+                x:  Math.random() * W,
+                y:  Math.random() * H,
+                vx: (Math.random() - 0.5) * 0.12,
+                vy: (Math.random() - 0.5) * 0.12,
+                r:  3.5 + Math.random() * 2.5,
+                dendrites: Array.from({length: arms}, () => ({
+                    a:   Math.random() * Math.PI * 2,
+                    len: 24 + Math.random() * 44,
+                    fork: Math.random() > 0.45
+                }))
+            };
+        }
+
         function init() {
-            nodes = [];
-            for (let i = 0; i < TOTAL; i++) {
-                const cluster = i < CLUSTERS;
-                nodes.push({
-                    x:  Math.random() * W,
-                    y:  Math.random() * H,
-                    vx: (Math.random() - 0.5) * SPEED * (cluster ? 0.6 : 1),
-                    vy: (Math.random() - 0.5) * SPEED * (cluster ? 0.6 : 1),
-                    r:  cluster ? 2.8 : 1.4,
-                    cluster
-                });
-            }
+            neurons = Array.from({length: N}, makeNeuron);
+            pulses  = [];
+        }
+
+        function drawNeuron(n) {
+            const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
+            g.addColorStop(0, `rgba(${CLR},0.22)`);
+            g.addColorStop(1, `rgba(${CLR},0)`);
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
+            ctx.fillStyle = g;
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${CLR},0.38)`;
+            ctx.fill();
+
+            n.dendrites.forEach(d => {
+                const ex = n.x + Math.cos(d.a) * d.len;
+                const ey = n.y + Math.sin(d.a) * d.len;
+                const cx = n.x + Math.cos(d.a + 0.35) * d.len * 0.55;
+                const cy = n.y + Math.sin(d.a + 0.35) * d.len * 0.55;
+                ctx.beginPath();
+                ctx.moveTo(n.x, n.y);
+                ctx.quadraticCurveTo(cx, cy, ex, ey);
+                ctx.strokeStyle = `rgba(${CLR},0.22)`;
+                ctx.lineWidth = 0.9;
+                ctx.stroke();
+                if (d.fork) {
+                    ctx.beginPath();
+                    ctx.moveTo(ex, ey);
+                    ctx.lineTo(ex + Math.cos(d.a - 0.7) * d.len * 0.38,
+                               ey + Math.sin(d.a - 0.7) * d.len * 0.38);
+                    ctx.strokeStyle = `rgba(${CLR},0.14)`;
+                    ctx.lineWidth = 0.55;
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(ex, ey);
+                    ctx.lineTo(ex + Math.cos(d.a + 0.5) * d.len * 0.30,
+                               ey + Math.sin(d.a + 0.5) * d.len * 0.30);
+                    ctx.strokeStyle = `rgba(${CLR},0.10)`;
+                    ctx.lineWidth = 0.45;
+                    ctx.stroke();
+                }
+            });
+        }
+
+        function drawAxon(a, b) {
+            const dx = b.x - a.x, dy = b.y - a.y;
+            const d  = Math.sqrt(dx * dx + dy * dy);
+            if (d > AXON_D) return false;
+            const op = 0.18 * (1 - d / AXON_D);
+            const mx = (a.x + b.x) / 2 + dy * 0.22;
+            const my = (a.y + b.y) / 2 - dx * 0.22;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.quadraticCurveTo(mx, my, b.x, b.y);
+            ctx.strokeStyle = `rgba(${CLR},${op.toFixed(3)})`;
+            ctx.lineWidth   = 0.75;
+            ctx.stroke();
+            return true;
+        }
+
+        function spawnPulse() {
+            if (Math.random() > 0.025) return;
+            const i = Math.floor(Math.random() * N);
+            const j = Math.floor(Math.random() * N);
+            if (i === j) return;
+            const dx = neurons[j].x - neurons[i].x;
+            const dy = neurons[j].y - neurons[i].y;
+            if (Math.sqrt(dx*dx + dy*dy) < AXON_D)
+                pulses.push({ from: neurons[i], to: neurons[j], t: 0, spd: 0.003 + Math.random() * 0.004 });
+        }
+
+        function drawPulse(p) {
+            const mx = (p.from.x + p.to.x) / 2 + (p.to.y - p.from.y) * 0.22;
+            const my = (p.from.y + p.to.y) / 2 - (p.to.x - p.from.x) * 0.22;
+            const t  = p.t;
+            const px = (1-t)*(1-t)*p.from.x + 2*(1-t)*t*mx + t*t*p.to.x;
+            const py = (1-t)*(1-t)*p.from.y + 2*(1-t)*t*my + t*t*p.to.y;
+            const pg = ctx.createRadialGradient(px, py, 0, px, py, 5);
+            pg.addColorStop(0, `rgba(${CLR},0.85)`);
+            pg.addColorStop(1, `rgba(${CLR},0)`);
+            ctx.beginPath();
+            ctx.arc(px, py, 5, 0, Math.PI * 2);
+            ctx.fillStyle = pg;
+            ctx.fill();
         }
 
         function tick() {
             ctx.clearRect(0, 0, W, H);
-
-            // move
-            nodes.forEach(n => {
-                n.x += n.vx;
-                n.y += n.vy;
+            neurons.forEach(n => {
+                n.x += n.vx; n.y += n.vy;
                 if (n.x < 0 || n.x > W) n.vx *= -1;
                 if (n.y < 0 || n.y > H) n.vy *= -1;
             });
-
-            // lines
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const dx = nodes[i].x - nodes[j].x;
-                    const dy = nodes[i].y - nodes[j].y;
-                    const d  = Math.sqrt(dx * dx + dy * dy);
-                    if (d < MAX_DIST) {
-                        const a = LINE_ALPHA * (1 - d / MAX_DIST);
-                        ctx.beginPath();
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.strokeStyle = `rgba(${CLR},${a.toFixed(3)})`;
-                        ctx.lineWidth = 0.65;
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            // dots
-            nodes.forEach(n => {
-                ctx.beginPath();
-                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${CLR},${n.cluster ? 0.22 : DOT_ALPHA})`;
-                ctx.fill();
+            for (let i = 0; i < N; i++)
+                for (let j = i + 1; j < N; j++)
+                    drawAxon(neurons[i], neurons[j]);
+            neurons.forEach(drawNeuron);
+            spawnPulse();
+            pulses = pulses.filter(p => {
+                p.t += p.spd;
+                if (p.t < 1) { drawPulse(p); return true; }
+                return false;
             });
-
             requestAnimationFrame(tick);
         }
 
