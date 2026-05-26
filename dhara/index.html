@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
 <title>AyuVinc — Dhara · Detailed Business Plan · Seed Round 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -150,6 +151,49 @@
 </style>
 </head>
 <body>
+
+<!-- ── PASSWORD GATE ── -->
+<div id="gate" style="position:fixed;inset:0;background:#0f172a;z-index:9999;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;">
+  <div style="text-align:center;padding:48px 40px;max-width:400px;width:100%;">
+    <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#008080;margin-bottom:14px;">CONFIDENTIAL</div>
+    <div style="font-size:26px;font-weight:700;color:#ffffff;margin-bottom:6px;">AyuVinc · Dhara</div>
+    <div style="font-size:14px;color:#64748b;margin-bottom:36px;">Seed Round 2026 · Authorised access only</div>
+    <input id="pw" type="password" placeholder="Access code" autocomplete="off"
+      style="width:100%;padding:14px 16px;background:#1e293b;border:1px solid #334155;border-radius:8px;color:#ffffff;font-size:15px;outline:none;margin-bottom:10px;text-align:center;letter-spacing:0.06em;font-family:'Inter',sans-serif;">
+    <button onclick="checkPw()"
+      style="width:100%;padding:14px;background:#008080;border:none;border-radius:8px;color:#ffffff;font-size:15px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;">
+      Access Document
+    </button>
+    <div id="gate-err" style="font-size:13px;color:#ef4444;margin-top:12px;min-height:20px;opacity:0;transition:opacity 0.2s;">Incorrect access code</div>
+  </div>
+</div>
+<script>
+  (function() {
+    var PW = 'dhara2026';
+    var KEY = 'ayuvinc_dhara_v1';
+    if (sessionStorage.getItem(KEY) === PW) {
+      document.getElementById('gate').style.display = 'none';
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      var input = document.getElementById('pw');
+      if (input) input.addEventListener('keydown', function(e) { if (e.key === 'Enter') checkPw(); });
+    });
+  })();
+  function checkPw() {
+    var PW = 'dhara2026';
+    var KEY = 'ayuvinc_dhara_v1';
+    var val = document.getElementById('pw').value;
+    if (val === PW) {
+      sessionStorage.setItem(KEY, PW);
+      document.getElementById('gate').style.display = 'none';
+    } else {
+      var err = document.getElementById('gate-err');
+      err.style.opacity = '1';
+      document.getElementById('pw').value = '';
+      setTimeout(function() { err.style.opacity = '0'; }, 2500);
+    }
+  }
+</script>
 
 <!-- ── HEADER ── -->
 <div class="doc-header">
