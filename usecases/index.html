@@ -251,9 +251,14 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
 }
 
 /* ════════════════════════════════════ */
-/* BEAT 3 — SUCCESS (dark until grant) */
+/* BEAT 3 — LOCKED RECORDS (copy)      */
 /* ════════════════════════════════════ */
-#b2{background:var(--dark);position:relative;}
+#b2{background:var(--dark);display:flex;flex-direction:column;}
+
+/* ════════════════════════════════════ */
+/* BEAT 4 — SUCCESS (dark until grant) */
+/* ════════════════════════════════════ */
+#b3{background:var(--dark);position:relative;}
 
 .b2-head{
   padding:16px 48px 14px;
@@ -558,8 +563,33 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
 
   </div>
 
-  <!-- ══ BEAT 3: DHARA ══ -->
+  <!-- ══ BEAT 3: LOCKED RECORDS (copy) ══ -->
   <div class="scene" id="b2">
+
+    <div class="b2-cascade-head">
+      <div class="btag">Failure · Records Locked. Hospitals Closed.</div>
+      <div class="cascade-stmt">His records locked.<br>Seven hospitals. Seven closed doors.</div>
+    </div>
+
+    <div class="hgrid" style="margin:40px 48px 0;">
+      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Tunisia<br>ICU</div><div class="hcls">Closed</div></div>
+      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">North Med<br>Institute</div><div class="hcls">Closed</div></div>
+      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Infectious<br>Disease Unit</div><div class="hcls">Closed</div></div>
+      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Surgical<br>Unit</div><div class="hcls">Closed</div></div>
+      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Dialysis<br>Centre</div><div class="hcls">Closed</div></div>
+      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Cardiac<br>Unit</div><div class="hcls">Closed</div></div>
+      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Transplant<br>Unit</div><div class="hcls">Closed</div></div>
+    </div>
+
+    <div class="fstrip" style="margin:28px 48px 0;flex:1;display:flex;flex-direction:column;justify-content:flex-end;">
+      <div class="fkick">Why this matters</div>
+      <div class="fbody">In May 2022, a patient arrived in Tunisia with a failing kidney transplant, able to communicate only through gestures. That eighteen-month sequence—seven care episodes across seven separate systems—never connected. Every team saw a fragment. Only the patient held the whole. And even the patient couldn't remember it all. Dhara exists because no one should have to recite their medical history from memory in an emergency.</div>
+    </div>
+
+  </div>
+
+  <!-- ══ BEAT 4: DHARA ══ -->
+  <div class="scene" id="b3">
 
     <div class="b2-head">
       <div class="stag">With Dhara</div>
@@ -634,7 +664,7 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
 </div>
 
 <script>
-const BEATS = ['b0','b1','b2'];
+const BEATS = ['b0','b1','b2','b3'];
 let cur = 0, granted = false, declined = false;
 
 const DATA = [
@@ -662,7 +692,7 @@ function showBeat(){
 
 function renderDots(){
   const w=document.getElementById('ndots');w.innerHTML='';
-  const isDark=cur!==2||(cur===2&&!granted);
+  const isDark=cur!==3||(cur===3&&!granted);
   BEATS.forEach((_,i)=>{
     const d=document.createElement('button');
     d.className='ndot'+(i===cur?' active':'');
@@ -735,7 +765,7 @@ document.addEventListener('touchend',e=>{
   if(Math.abs(d)>50)nav(d>0?1:-1);
 });
 function toggleFS(){!document.fullscreenElement?document.documentElement.requestFullscreen().catch(()=>{}):document.exitFullscreen();}
-function loadUC(i){if(i===0){cur=0;granted=false;declined=false;showBeat();}}
+function loadUC(i){if(i===0){cur=0;granted=false;declined=false;showBeat();renderDots();updateNav();}}
 
 function checkPwd(){
   const v=document.getElementById('pwdinput').value;
