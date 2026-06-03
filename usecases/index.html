@@ -422,7 +422,7 @@ svg .ln{fill:none;stroke:var(--rose);stroke-width:2.4;stroke-linecap:round;strok
       <a class="cv-cta-btn" href="mailto:aditya.irctc.1@gmail.com?subject=Dhara%20%E2%80%94%20request%20a%20walkthrough">Talk to us →</a>
       <a class="cv-cta-btn ghost" href="https://www.ayuvinc.com" target="_blank" rel="noopener">About Dhara</a>
     </div>
-    <div class="cv-foot">🔒 every use case has its own access code · read-only demo · tap a card to begin</div>
+    <div class="cv-foot">🔒 access code required · read-only demo · tap a card to begin</div>
   </div>
 
   <!-- ======================= UC (data-uc 1=Emergency 2=Transplant 3=Rx 4=Vaani 5=Consent 6=Data→Intel) ======================= -->
@@ -940,8 +940,8 @@ svg .ln{fill:none;stroke:var(--rose);stroke-width:2.4;stroke-linecap:round;strok
 <div class="gate-modal" id="gateModal">
   <div class="gm-card">
     <div class="gm-lock">🔒</div>
-    <div class="gm-t">Unlock <span id="gmName">this use case</span></div>
-    <div class="gm-s">Each use case has its own access code. Enter the code for this one to continue.</div>
+    <div class="gm-t">Protected demo</div>
+    <div class="gm-s">Enter the access code to view the use cases.</div>
     <input type="password" class="gm-input" id="gmInput" placeholder="Access code" autocomplete="off">
     <div class="gm-err" id="gmErr">Incorrect code — try again.</div>
     <div class="gm-btns"><button class="btn-ghost" onclick="gmClose()">Back</button><button class="btn-primary" onclick="gmSubmit()">Enter →</button></div>
@@ -951,9 +951,9 @@ svg .ln{fill:none;stroke:var(--rose);stroke-width:2.4;stroke-linecap:round;strok
 <script>
 const $=id=>document.getElementById(id);
 const UCNAMES=['Emergency','Transplant · Setu','Prescription','Vaani','Consent','Data → Intelligence'];
-/* every use case individually gated — its own access code, unlocked independently */
-const PW={0:'dhara-emergency',1:'dhara-setu',2:'dhara-rx',3:'dhara-vaani',4:'dhara-consent',5:'dhara-data'};
-let curUC=0,curBeat=0,ucScenes=[],unlocked={},gateTarget=null;
+/* every use case gated behind one shared access code */
+const PW='dhara2026';
+let curUC=0,curBeat=0,ucScenes=[],unlocked=false,gateTarget=null;
 
 /* tabs */
 const tabsWrap=$('uctabs');
@@ -966,7 +966,7 @@ for(let u=0;u<6;u++)ucScenes[u]=[...document.querySelectorAll('.scene[data-uc="'
 
 const dotsWrap=$('dots');
 function loadUC(u){
-  if(!unlocked[u]){showGate(u);return;}
+  if(!unlocked){showGate(u);return;}
   curUC=u;curBeat=0;
   $('cover').classList.remove('active');
   [...tabsWrap.children].forEach((t,k)=>t.classList.toggle('active',k===u));
@@ -1075,9 +1075,9 @@ const CARDS=[
 const cvMenu=$('cvMenu');
 CARDS.forEach((c,i)=>{const el=document.createElement('div');el.className='cv-card';el.onclick=()=>loadUC(i);el.innerHTML='<div class="cv-num">'+String(i+1).padStart(2,'0')+'</div><span class="cv-lock" id="cvlock-'+i+'" title="Access code required">🔒</span><div class="cv-nm">'+c.n+'</div><div class="cv-ds">'+c.d+'</div>';cvMenu.appendChild(el);});
 /* per-use-case gate */
-function showGate(u){gateTarget=u;$('gmErr').classList.remove('show');$('gmInput').value='';$('gmName').textContent=UCNAMES[u].split(' · ')[0];$('gateModal').classList.add('show');setTimeout(()=>$('gmInput').focus(),60);}
+function showGate(u){gateTarget=u;$('gmErr').classList.remove('show');$('gmInput').value='';$('gateModal').classList.add('show');setTimeout(()=>$('gmInput').focus(),60);}
 function gmClose(){$('gateModal').classList.remove('show');gateTarget=null;}
-function gmSubmit(){const t=gateTarget;if(t!=null&&$('gmInput').value.trim().toLowerCase()===PW[t]){unlocked[t]=true;$('gateModal').classList.remove('show');const cl=$('cvlock-'+t),tl=$('tablock-'+t);if(cl)cl.style.display='none';if(tl)tl.style.display='none';gateTarget=null;loadUC(t);}else{$('gmErr').classList.add('show');$('gmInput').value='';$('gmInput').focus();}}
+function gmSubmit(){if($('gmInput').value.trim().toLowerCase()===PW){unlocked=true;$('gateModal').classList.remove('show');document.querySelectorAll('.cv-lock,.tab-lock').forEach(e=>e.style.display='none');const t=gateTarget;gateTarget=null;if(t!=null)loadUC(t);}else{$('gmErr').classList.add('show');$('gmInput').value='';$('gmInput').focus();}}
 $('gmInput').addEventListener('keydown',e=>{if(e.key==='Enter')gmSubmit();});
 function showCover(){curUC=-1;document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));$('cover').classList.add('active');[...tabsWrap.children].forEach(t=>t.classList.remove('active'));dotsWrap.innerHTML='';$('pb').disabled=true;$('nb').disabled=true;$('nctr').textContent='Cover';}
 
