@@ -257,7 +257,7 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
 
 .b2-head{
   padding:16px 48px 14px;
-  border-bottom:1px solid #1e1d1b;
+  border-bottom:1px solid rgba(155,150,145,0.14);
   flex-shrink:0;
   background:var(--dark2);
   position:relative;z-index:2;
@@ -270,17 +270,17 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
 /* Phone + context row */
 .b2-phone-row{
   padding:16px 48px;
-  border-bottom:1px solid #1e1d1b;
+  border-bottom:1px solid rgba(155,150,145,0.14);
   flex-shrink:0;
-  display:flex;align-items:flex-start;gap:36px;
+  display:flex;align-items:flex-start;gap:40px;
   position:relative;z-index:2;
   background:var(--dark2);
 }
 .pcard{
-  background:#1a1917;border:1px solid #2a2825;
+  background:#161e30;border:1px solid rgba(155,150,145,0.20);
   border-radius:10px;padding:16px;
   width:260px;min-width:260px;
-  box-shadow:0 0 40px rgba(0,0,0,0.5);
+  box-shadow:0 8px 40px rgba(0,0,0,0.4);
 }
 .pctop{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
 .pcico{width:26px;height:26px;background:var(--white);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;font-weight:bold;color:var(--dark);}
@@ -337,9 +337,9 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
 .precon:hover{border-color:#666;color:var(--white);}
 .precon.show{display:block;}
 
-.pctx{flex:1;}
-.pctxl{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--grey2);margin-bottom:8px;}
-.pctxt{font-size:15px;line-height:1.6;color:var(--grey);}
+.pctx{flex:1;padding-top:4px;}
+.pctxl{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(155,150,145,0.45);margin-bottom:12px;}
+.pctxt{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;line-height:2;color:rgba(155,150,145,0.65);}
 
 /* Dark overlay on fields until grant */
 .b2-content{
@@ -356,8 +356,8 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
 }
 .dark-overlay.gone{opacity:0;}
 .overlay-hint{
-  font-family:var(--mono);font-size:11px;letter-spacing:0.14em;
-  text-transform:uppercase;color:#333;
+  font-family:var(--mono);font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:rgba(155,150,145,0.35);
   text-align:center;
 }
 
@@ -498,7 +498,7 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
   <div class="scene" id="b0">
     <div class="b0-head">
       <div class="btag">Failure · Emergency Admission</div>
-      <div class="hospline">City General Hospital · Emergency Ward · India · 2:47 AM</div>
+      <div class="hospline">PGIMER Chandigarh · Emergency Ward · India · 2:47 AM</div>
       <div class="pname">A. Kaushal, 35M</div>
       <div class="pres">Acute breathlessness &nbsp;·&nbsp; Cannot lie flat &nbsp;·&nbsp; Creatinine rising</div>
     </div>
@@ -563,7 +563,7 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
 
     <div class="b2-head">
       <div class="stag">With Dhara</div>
-      <div class="hospline" style="color:var(--grey2);">City General Hospital · Emergency Ward · India · 2:47 AM</div>
+      <div class="hospline" style="color:var(--grey2);">PGIMER Chandigarh · Emergency Ward · India · 2:47 AM</div>
       <div class="shl">One tap. Everything the doctor needs.</div>
       <div class="ssl">Patient grants emergency access. The record illuminates. The system remembers.</div>
     </div>
@@ -572,7 +572,7 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
       <div class="pcard">
         <div class="pctop"><div class="pcico">D</div><span class="pcnm">DHARA</span></div>
         <div class="pcmsg">Dr. Sharma requests access to your health record</div>
-        <div class="pcsub">City General Hospital · Emergency · Nephrology</div>
+        <div class="pcsub">PGIMER Chandigarh · Emergency · Nephrology</div>
         <div class="pcdur"><span class="pcdl">Duration</span><span class="pcdv">24 HOURS</span></div>
         <div class="pcact" id="pcact">
           <button class="bgrant" onclick="grantAccess()">Grant Access</button>
@@ -583,8 +583,11 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
         <button class="precon" id="reconBtn" onclick="resetCard()">↩ &nbsp;Reconsider</button>
       </div>
       <div class="pctx">
-        <div class="pctxl">What this button does</div>
-        <div class="pctxt">Patient grants scoped, time-limited access. Doctor sees what they need. Patient retains full control. Every access is logged. Revocable at any time.</div>
+        <div class="pctxl">Access request scope</div>
+        <div class="pctxt">Requesting: Dr. Sharma · PGIMER Chandigarh</div>
+        <div class="pctxt">Department: Emergency — Nephrology</div>
+        <div class="pctxt">Duration: 24 hours · Active consultation only</div>
+        <div class="pctxt">Audit logged · Revocable at any time</div>
       </div>
     </div>
 
@@ -614,7 +617,7 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
         <div class="dab">Patient on active immunosuppressant protocol. <strong>Gentamicin / Tobramycin contraindicated.</strong> Recommended: <strong>Meropenem or Pip-Taz</strong> for infection management.</div>
       </div>
       <div class="afooter" id="afooter">
-        Access: Dr. Sharma · Emergency · 24hr · Expires 02:47 tomorrow · Patient retains full control · Revocable at any time · Audit trail logged
+        Access: Dr. Sharma · PGIMER Chandigarh · Emergency · 24hr · Expires 02:47 tomorrow · Patient retains full control · Revocable · Audit trail logged
       </div>
     </div>
 
