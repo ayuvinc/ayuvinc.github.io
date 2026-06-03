@@ -18,10 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Prepare clean site dir (exclude .git/.github)
+      - name: Prepare clean site dir (exclude .git/.github + internal docs)
         run: |
           mkdir -p _site
-          rsync -a --exclude='.git' --exclude='.github' --exclude='_site' ./ _site/
+          rsync -a --exclude='.git' --exclude='.github' --exclude='_site' \
+                --exclude='*.md' --exclude='CLAUDE.md' --exclude='README.md' ./ _site/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
