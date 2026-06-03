@@ -232,6 +232,34 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
 .dab strong{color:#090d18;font-weight:normal;}
 .afooter{display:none;padding:8px 48px;background:#ece9e3;border-top:1px solid rgba(9,13,24,0.10);flex-shrink:0;font-family:var(--mono);font-size:10px;color:rgba(9,13,24,0.45);letter-spacing:0.04em;}
 .afooter.show{display:block;}
+/* ── UC08 · THE INFRASTRUCTURE ── */
+.inf-wrap{flex:1;padding:26px 48px;display:flex;flex-direction:column;overflow:hidden;}
+.inf-stmt{font-size:30px;font-weight:400;letter-spacing:-0.02em;line-height:1.2;margin-bottom:6px;}
+.inf-sub{font-family:var(--mono);font-size:11px;color:var(--grey2);letter-spacing:0.04em;line-height:1.5;margin-bottom:16px;max-width:680px;}
+.inf-grid{display:grid;grid-template-columns:repeat(28,1fr);gap:5px;margin:6px 0 14px;}
+.cnode{aspect-ratio:1;border-radius:50%;background:rgba(155,150,145,0.14);opacity:0.5;animation:nodeOn .5s ease forwards;}
+@keyframes nodeOn{to{background:var(--teal);opacity:1;}}
+.inf-anchor{display:flex;align-items:baseline;gap:14px;margin-top:auto;padding-top:8px;}
+.inf-num{font-size:40px;font-weight:300;letter-spacing:-0.03em;color:var(--white);line-height:1;white-space:nowrap;}
+.inf-numlbl{font-family:var(--mono);font-size:11px;color:var(--grey2);letter-spacing:0.04em;line-height:1.5;}
+.inf-flow{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
+.inf-converge{font-family:var(--mono);font-size:10px;color:var(--grey2);letter-spacing:0.16em;text-transform:uppercase;}
+.inf-arrowdown{color:rgba(155,150,145,0.30);font-size:14px;padding:4px 0;text-align:center;}
+.data-layer{width:100%;max-width:680px;border:1px solid rgba(100,175,195,0.40);background:rgba(100,175,195,0.06);border-radius:6px;padding:16px 24px;text-align:center;animation:layerIn .7s ease;}
+@keyframes layerIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.dl-title{font-size:18px;color:var(--teal);letter-spacing:0.02em;margin-bottom:5px;}
+.dl-meta{font-family:var(--mono);font-size:10px;color:var(--grey2);letter-spacing:0.07em;}
+.inf-outs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;}
+.inf-out{border:1px solid var(--rule);border-top:2px solid var(--teal);background:var(--dark2);border-radius:0 0 4px 4px;padding:13px 15px;animation:layerIn .6s ease backwards;}
+.inf-out:nth-child(1){animation-delay:.10s;}
+.inf-out:nth-child(2){animation-delay:.30s;}
+.inf-out:nth-child(3){animation-delay:.50s;}
+.io-k{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;}
+.io-v{font-size:13px;line-height:1.5;color:var(--grey);}
+.io-v strong{color:var(--white);font-weight:400;}
+.inf-final{margin-top:auto;padding-top:16px;border-top:1px solid var(--rule);}
+.inf-final-l{font-size:16px;line-height:1.7;color:var(--white);font-weight:300;letter-spacing:-0.01em;}
+.inf-final-l .dim{color:var(--grey2);}
 </style>
 </head>
 <body>
@@ -268,6 +296,7 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
     <button class="ucb" onclick="loadUC(4)">05 Vaani</button>
     <button class="ucb" onclick="loadUC(5)">06 Data</button>
     <button class="ucb" onclick="loadUC(6)">07 Thesis</button>
+    <button class="ucb" onclick="loadUC(7)">08 Infrastructure</button>
   </div>
   <button class="fsb" onclick="toggleFS()">⛶ Full</button>
 </div>
@@ -820,6 +849,60 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
   </div>
 </div>
 
+<!-- UC08 · Beat 1: Continuity compounds -->
+<div class="scene" id="uc7b0">
+  <div class="inf-wrap">
+    <div class="stag">The Infrastructure</div>
+    <div class="inf-stmt">One patient's memory is a record.<br>A million of them is infrastructure.</div>
+    <div class="inf-sub">Each dot is a clinic. Each clinic, thousands of patients. Each patient, one continuous record — owned by them, not trapped in a building.</div>
+    <div class="inf-grid" id="infraGrid"></div>
+    <div class="inf-anchor">
+      <div class="inf-num">50,000&nbsp;→&nbsp;200,000</div>
+      <div class="inf-numlbl">clinics on Dhara · Year 5 to Year 10 (projection)<br>every record the same shape: consented · FHIR R4 · longitudinal</div>
+    </div>
+  </div>
+</div>
+
+<!-- UC08 · Beat 2: The data layer forms -->
+<div class="scene" id="uc7b1">
+  <div class="inf-wrap">
+    <div class="stag">The layer no one else can build</div>
+    <div class="inf-stmt">Every consented record flows into one layer.</div>
+    <div class="inf-sub">Patient-owned. Consent-governed. Structured the same way, everywhere.</div>
+    <div class="inf-flow">
+      <div class="inf-converge">Millions of patient-owned records</div>
+      <div class="inf-arrowdown">↓ &nbsp; converging &nbsp; ↓</div>
+      <div class="data-layer">
+        <div class="dl-title">India's consent-governed clinical memory</div>
+        <div class="dl-meta">FHIR R4 · ICD-10 · longitudinal · patient-owned · consented per purpose</div>
+      </div>
+    </div>
+    <div class="inf-final">
+      <div class="inf-final-l">The layer SAHI asked for. The data BODH needs. <span class="dim">No one else can build it without rebuilding on consent they never had.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- UC08 · Beat 3: Intelligence emerges -->
+<div class="scene" id="uc7b2">
+  <div class="inf-wrap">
+    <div class="stag">What memory makes possible</div>
+    <div class="data-layer" style="margin-top:6px;">
+      <div class="dl-title">Consent-governed clinical memory</div>
+      <div class="dl-meta">the same layer — now put to work</div>
+    </div>
+    <div class="inf-arrowdown">↓</div>
+    <div class="inf-outs">
+      <div class="inf-out"><div class="io-k">Complex cases</div><div class="io-v">The <strong>2:47 AM transplant patient</strong> — resolved in seconds, in any hospital, not only where his file happened to be.</div></div>
+      <div class="inf-out"><div class="io-k">Population signal</div><div class="io-v">A dangerous drug interaction caught across <strong>a million records</strong> before it reaches the next patient.</div></div>
+      <div class="inf-out"><div class="io-k">Indian clinical AI</div><div class="io-v">A model that knows <strong>Indian drugs, Indian disease, Indian languages</strong> — BODH-validated, consent-trained.</div></div>
+    </div>
+    <div class="inf-final">
+      <div class="inf-final-l">India has healthcare identity. <span class="dim">It still lacks healthcare memory.</span><br>The intelligence layer is downstream of continuity.<br><strong style="font-weight:400;">Healthcare intelligence is not where we start. It is what naturally emerges once healthcare finally remembers.</strong></div>
+    </div>
+  </div>
+</div>
+
 </div><!-- /scenes -->
 
 <!-- BOTTOM NAV -->
@@ -839,6 +922,7 @@ const UCS = [
   {beats:['uc4b0','uc4b1','uc4b2']},
   {beats:['uc5b0','uc5b1','uc5b2']},
   {beats:['uc6b0','uc6b1','uc6b2']},
+  {beats:['uc7b0','uc7b1','uc7b2']},
 ];
 
 const SF_DATA = [
@@ -960,10 +1044,23 @@ function resetGrantUI(){
   }
 }
 
+function buildInfraGrid(){
+  const g=document.getElementById('infraGrid');
+  if(!g||g.childElementCount)return;
+  const N=28*8;
+  for(let i=0;i<N;i++){
+    const d=document.createElement('div');
+    d.className='cnode';
+    d.style.animationDelay=(i*7)+'ms';
+    g.appendChild(d);
+  }
+}
+
 function checkPwd(){
   const v=document.getElementById('pwdinput').value;
   if(v==='dhara2026'){
     document.getElementById('lockscreen').style.display='none';
+    buildInfraGrid();
     init();
   } else {
     document.getElementById('pwderr').style.display='block';
