@@ -147,13 +147,13 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
 .tl-stmt{font-size:32px;font-weight:normal;letter-spacing:-0.02em;line-height:1.2;margin-bottom:6px;}
 .tl-sub{font-size:14px;color:var(--grey);font-style:italic;margin-bottom:28px;}
 
-.hgrid{display:flex;gap:0;border:1px solid #1e1d1b;border-radius:3px;overflow:hidden;margin-bottom:24px;}
-.hisl{flex:1;border-right:1px solid #1e1d1b;padding:14px 10px;display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--dark2);}
+.hgrid{display:flex;gap:0;border:1px solid rgba(155,150,145,0.12);border-radius:3px;overflow:hidden;}
+.hisl{flex:1;border-right:1px solid rgba(155,150,145,0.12);padding:20px 8px 16px;display:flex;flex-direction:column;align-items:center;gap:5px;background:var(--dark2);}
 .hisl:last-child{border-right:none;}
-.hyr{font-family:var(--mono);font-size:10px;letter-spacing:0.04em;color:var(--grey2);}
-.hfol{font-size:20px;opacity:0.25;}
-.hnm{font-family:var(--mono);font-size:9px;letter-spacing:0.04em;color:#3a3835;text-align:center;line-height:1.4;}
-.hcls{font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--red-mid);}
+.hfol{font-size:11px;opacity:0.12;}   /* ghost folder — barely visible */
+.hlck{font-size:22px;margin-top:-2px;} /* lock is the primary visual */
+.hnm{font-family:var(--mono);font-size:9px;letter-spacing:0.04em;color:rgba(155,150,145,0.50);text-align:center;line-height:1.4;margin-top:4px;}
+.hcls{font-family:var(--mono);font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--red-mid);margin-top:2px;}
 
 .pisland{
   border:1px solid #2a2825;border-radius:3px;
@@ -540,14 +540,14 @@ html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(-
     </div>
 
     <!-- Locked folders grid -->
-    <div class="hgrid" style="margin:48px 48px 0;">
-      <div class="hisl"><div class="hfol">📁</div><div class="hnm">Tunisia<br>ICU</div><div class="hcls">Closed</div></div>
-      <div class="hisl"><div class="hfol">📁</div><div class="hnm">North Med<br>Institute</div><div class="hcls">Closed</div></div>
-      <div class="hisl"><div class="hfol">📁</div><div class="hnm">Infectious<br>Disease Unit</div><div class="hcls">Closed</div></div>
-      <div class="hisl"><div class="hfol">📁</div><div class="hnm">Surgical<br>Unit</div><div class="hcls">Closed</div></div>
-      <div class="hisl"><div class="hfol">📁</div><div class="hnm">Dialysis<br>Centre</div><div class="hcls">Closed</div></div>
-      <div class="hisl"><div class="hfol">📁</div><div class="hnm">Cardiac<br>Unit</div><div class="hcls">Closed</div></div>
-      <div class="hisl"><div class="hfol">📁</div><div class="hnm">Transplant<br>Unit</div><div class="hcls">Closed</div></div>
+    <div class="hgrid" style="margin:40px 48px 0;">
+      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Tunisia<br>ICU</div><div class="hcls">Closed</div></div>
+      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">North Med<br>Institute</div><div class="hcls">Closed</div></div>
+      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Infectious<br>Disease Unit</div><div class="hcls">Closed</div></div>
+      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Surgical<br>Unit</div><div class="hcls">Closed</div></div>
+      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Dialysis<br>Centre</div><div class="hcls">Closed</div></div>
+      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Cardiac<br>Unit</div><div class="hcls">Closed</div></div>
+      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Transplant<br>Unit</div><div class="hcls">Closed</div></div>
     </div>
 
     <!-- Founder story -->
