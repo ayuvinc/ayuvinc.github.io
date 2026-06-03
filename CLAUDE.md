@@ -64,7 +64,7 @@ Font: **Inter** (Google Fonts) — weights 300, 400, 500, 600, 700.
 
 ## Key decisions made (do not undo without reason)
 
-- **No strategic/financial data on the landing page.** Gross margins, session pricing, cost per hour, EBITDA targets — all of that lives in the pitch deck (`ayuvinc/Dhara_PitchDeck`), not here. Landing page audience is clinicians, hospitals, and partners — not investors reading unit economics.
+- **No strategic/financial data on the landing page.** Gross margins, session pricing, cost per hour, EBITDA targets — all of that lives in the password-gated investor deck (`ayuvinc.com/introduction`), not here. Landing page audience is clinicians, hospitals, and partners — not investors reading unit economics.
 - **Nav order:** Our Story → Products → Contact Us. This is intentional — story before product.
 - **Contact section has no photos.** Founders appear once in the Team section. The contact grid is email-only to avoid duplication.
 - **Haath card has no English translation of the name.** "Haath" (हाथ) is the product name — do not add "hand" as a literal translation.
@@ -77,7 +77,7 @@ Font: **Inter** (Google Fonts) — weights 300, 400, 500, 600, 700.
 
 | Repo | Purpose |
 |---|---|
-| `ayuvinc/Dhara_PitchDeck` | Investor pitch deck — live at ayuvinc.com/Dhara_PitchDeck. Source of truth for all financial metrics and product facts. Read this before adding any numbers to the landing page. |
+| (this repo) `introduction/` | Investor introduction deck — password-gated at ayuvinc.com/introduction (AES-encrypted). Source of truth for financial metrics and product facts. Read this before adding any numbers to the landing page. |
 | `ayuvinc/akcoach` | akcoach fitness coaching app (separate product, different domain) |
 | `ayuvinc/Pharma-Base` | Drug interactions database for Dhara |
 | `ayuvinc/Transplant-workflow` | AI-assisted transplant workflow automation — Setu |
