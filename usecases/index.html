@@ -3,1096 +3,1084 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dhara · AyuVinc</title>
+<title>Dhara · Use Cases (light) — full</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400&family=DM+Sans:wght@400&family=Noto+Sans+Devanagari:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Sans:wght@400;500&family=Noto+Sans+Devanagari:wght@300;400&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --dark:#090d18;--dark2:#0f1626;--dark3:#141c2e;
-  --red:#c0392b;--red-dim:#2a0e0b;--red-mid:#6b1a15;
-  --white:#f5f4f0;--grey:#9b9691;--grey2:rgba(155,150,145,0.55);
-  --teal:oklch(62% 0.10 195);--amber:oklch(72% 0.18 68);
-  --rule:rgba(155,150,145,0.14);
-  --font:'Space Grotesk',sans-serif;
-  --mono:'DM Sans',sans-serif;
-  --dv:'Noto Sans Devanagari',sans-serif;
-  --topbar:52px;--botbar:52px;
-  --avail:calc(100vh - var(--topbar) - var(--botbar));
+  --ink:#0d1426; --ink-2:rgba(13,20,38,0.62); --ink-3:rgba(13,20,38,0.40);
+  --paper:#f3f1ec; --paper-2:#e9e6df; --card:#ffffff;
+  --teal:oklch(56% 0.11 195); --teal-deep:oklch(46% 0.11 195); --teal-soft:oklch(95% 0.03 195);
+  --amber:oklch(66% 0.16 68); --amber-soft:oklch(95% 0.05 75); --amber-deep:oklch(52% 0.14 60);
+  --rose:oklch(56% 0.17 25); --rose-soft:oklch(95% 0.04 25); --rose-line:rgba(180,70,60,0.22);
+  --line:rgba(13,20,38,0.10);
+  --font:'Space Grotesk',sans-serif; --mono:'DM Sans',sans-serif; --dv:'Noto Sans Devanagari',sans-serif; --serif:'Cormorant Garamond',serif; --hand:'Caveat',cursive;
+  --shadow:0 18px 50px -20px rgba(13,20,38,0.30), 0 2px 6px rgba(13,20,38,0.04);
 }
-html,body{height:100%;font-family:var(--font);background:var(--dark);color:var(--white);-webkit-font-smoothing:antialiased;overflow:hidden;}
+html,body{height:100%;}
+body{font-family:var(--font);color:var(--ink);overflow:hidden;
+  background:radial-gradient(1100px 600px at 78% -8%, var(--teal-soft), transparent 60%),
+    radial-gradient(900px 600px at -5% 110%, var(--amber-soft), transparent 55%),
+    linear-gradient(160deg, var(--paper), var(--paper-2));-webkit-font-smoothing:antialiased;}
 
-/* ── LOCK SCREEN ── */
-#lockscreen{position:fixed;inset:0;z-index:9999;background:var(--dark);display:flex;align-items:center;justify-content:center;}
-.ls-center{text-align:center;max-width:340px;width:100%;padding:0 24px;}
-.ls-brand{display:flex;flex-direction:row;align-items:flex-start;justify-content:center;gap:16px;margin-bottom:44px;}
-.ls-num{font-family:var(--mono);font-size:9px;letter-spacing:0.20em;text-transform:uppercase;color:var(--teal);padding-top:5px;line-height:1;}
-.ls-names{text-align:left;}
-.ls-en{font-family:'Space Grotesk',sans-serif;font-weight:300;font-size:36px;letter-spacing:0.04em;color:var(--white);line-height:1;}
-.ls-dv{font-family:var(--dv);font-weight:300;font-size:34px;color:var(--white);line-height:1.22;margin-bottom:12px;}
-.ls-rule{width:100%;height:1px;background:rgba(245,244,240,0.12);margin-bottom:10px;display:block;}
-.ls-desc{font-family:var(--mono);font-size:8px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(245,244,240,0.30);line-height:1.65;}
-.ls-parent{color:rgba(245,244,240,0.18);}
-.ls-title{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(245,244,240,0.45);margin-bottom:24px;}
-.ls-form{display:flex;gap:8px;}
-.ls-input{flex:1;background:var(--dark2);border:1px solid var(--rule);border-radius:3px;padding:11px 14px;font-family:var(--mono);font-size:12px;color:var(--white);letter-spacing:0.08em;outline:none;}
-.ls-input:focus{border-color:rgba(155,150,145,0.40);}
-.ls-btn{background:var(--white);color:var(--dark);border:none;border-radius:3px;padding:11px 20px;font-family:var(--mono);font-size:11px;letter-spacing:0.06em;cursor:pointer;}
-.ls-err{display:none;font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:0.08em;margin-top:12px;}
+.bar{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;border-bottom:1px solid var(--line);}
+.wm{display:flex;align-items:baseline;gap:8px;flex-shrink:0;}
+.wm-en{font-weight:400;font-size:20px;letter-spacing:0.03em;}
+.wm-dv{font-family:var(--dv);font-weight:300;font-size:16px;color:var(--ink-3);}
+.uctabs{display:flex;gap:3px;}
+.uctab{font-family:var(--mono);font-size:10.5px;letter-spacing:0.02em;color:var(--ink-3);background:none;border:none;padding:6px 9px;border-radius:7px;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.uctab:hover{color:var(--ink-2);background:rgba(13,20,38,0.04);}
+.uctab.active{color:#fff;background:linear-gradient(135deg,var(--teal),var(--teal-deep));box-shadow:0 6px 16px -8px rgba(40,120,140,0.6);}
+.uctab b{font-weight:500;}
+.ro-pill{font-family:var(--mono);font-size:9.5px;letter-spacing:0.10em;text-transform:uppercase;color:var(--teal-deep);background:var(--teal-soft);border:1px solid rgba(40,120,140,0.20);padding:5px 10px;border-radius:20px;flex-shrink:0;}
 
-/* ── TOPBAR ── */
-.topbar{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--topbar);background:rgba(9,13,24,0.97);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 24px;backdrop-filter:blur(8px);}
-.brand{display:flex;align-items:baseline;gap:8px;}
-.bname-en{font-family:'Space Grotesk',sans-serif;font-weight:300;font-size:18px;letter-spacing:0.04em;color:var(--white);line-height:1;}
-.bname-dv{font-family:var(--dv);font-weight:300;font-size:15px;color:rgba(245,244,240,0.35);line-height:1;}
-.ucnav{display:flex;gap:1px;}
-.ucb{font-family:var(--mono);font-size:10px;letter-spacing:0.05em;padding:4px 11px;border:none;background:none;cursor:pointer;color:#3a3835;border-radius:3px;transition:all 0.15s;text-transform:uppercase;}
-.ucb:hover{color:var(--grey);background:var(--dark3);}
-.ucb.active{color:var(--white);background:var(--dark3);}
-.fsb{font-family:var(--mono);font-size:10px;color:var(--grey2);background:none;border:1px solid var(--rule);padding:4px 9px;border-radius:3px;cursor:pointer;}
-.fsb:hover{color:var(--white);}
+.scenes{height:calc(100% - 56px - 52px);position:relative;}
+.scene{position:absolute;inset:0;display:none;padding:28px 54px 16px;}
+.scene.active{display:block;}
+.two{display:grid;grid-template-columns:1fr 1.08fr;gap:44px;height:100%;align-items:center;}
 
-/* ── SCENES ── */
-.scenes{position:fixed;top:var(--topbar);left:0;right:0;height:var(--avail);overflow:hidden;}
-.scene{display:none;height:100%;flex-direction:column;}
-.scene.active{display:flex;}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.eyebrow::before{content:'';width:26px;height:1px;background:var(--teal);}
+.eyebrow.warn::before{background:var(--rose);}
+.chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:7px 14px;border-radius:24px;margin-bottom:15px;}
+.chip.teal{color:#fff;background:linear-gradient(135deg,var(--teal),var(--teal-deep));box-shadow:0 8px 20px -8px rgba(40,120,140,0.6);}
+.chip.rose{color:var(--rose);background:var(--rose-soft);border:1px solid var(--rose-line);}
+.chip.amber{color:var(--amber-deep);background:var(--amber-soft);border:1px solid rgba(180,120,30,0.22);}
+h1{font-weight:400;font-size:39px;line-height:1.09;letter-spacing:-0.025em;margin-bottom:14px;}
+h1 .accent{color:var(--teal-deep);} h1 .bad{color:var(--rose);}
+.lede{font-size:15.5px;line-height:1.6;color:var(--ink-2);max-width:460px;margin-bottom:18px;}
+.lede b{color:var(--ink);font-weight:500;}
+.teach{font-family:var(--mono);font-size:12px;line-height:1.5;color:var(--ink-2);background:var(--card);border:1px solid var(--line);border-left:2px solid var(--teal);border-radius:9px;padding:11px 14px;max-width:440px;}
+.teach b{color:var(--ink);font-weight:500;} .teach.warn{border-left-color:var(--rose);}
 
-/* ── BOTTOM NAV ── */
-.botnav{position:fixed;bottom:0;left:0;right:0;z-index:200;height:var(--botbar);background:rgba(9,13,24,0.97);border-top:1px solid var(--rule);display:flex;align-items:center;justify-content:center;gap:18px;}
-.narr{width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--rule);border-radius:3px;cursor:pointer;color:var(--grey2);font-size:13px;transition:all 0.15s;}
-.narr:hover{border-color:#555;color:var(--white);}
-.narr:disabled{opacity:0.2;cursor:default;}
-.ndots{display:flex;gap:7px;align-items:center;}
-.ndot{width:6px;height:6px;border-radius:50%;background:var(--rule);border:none;cursor:pointer;transition:all 0.2s;}
-.ndot.active{background:var(--white);transform:scale(1.3);}
-.ndot.light-active{background:var(--dark);}
-.nctr{font-family:var(--mono);font-size:10px;color:#3a3835;letter-spacing:0.08em;min-width:36px;text-align:center;}
+.cta-row{display:flex;align-items:center;gap:12px;margin:6px 0 12px;flex-wrap:wrap;}
+.btn-primary{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:0.02em;color:#fff;background:linear-gradient(135deg,var(--teal),var(--teal-deep));border:none;border-radius:12px;padding:13px 22px;cursor:pointer;box-shadow:0 14px 30px -12px rgba(40,120,140,0.7);transition:transform .15s,box-shadow .15s;display:flex;align-items:center;gap:10px;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 36px -12px rgba(40,120,140,0.85);}
+.btn-primary:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none;}
+.btn-primary.rose{background:linear-gradient(135deg,var(--rose),oklch(48% 0.17 25));box-shadow:0 14px 30px -12px rgba(180,70,60,0.6);}
+.btn-primary .arrow{transition:transform .2s;} .btn-primary:hover .arrow{transform:translateX(4px);}
+.btn-ghost{font-family:var(--mono);font-size:14px;color:var(--ink-2);background:none;border:1px solid var(--line);border-radius:12px;padding:13px 20px;cursor:pointer;transition:all .15s;}
+.btn-ghost:hover{border-color:var(--rose);color:var(--rose);}
+.relink{font-family:var(--mono);font-size:12px;color:var(--ink-2);background:none;border:1px solid var(--line);border-radius:9px;padding:7px 14px;cursor:pointer;}
+.relink:hover{border-color:var(--ink-3);color:var(--ink);}
+.shield{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11.5px;letter-spacing:0.02em;color:var(--teal-deep);background:var(--teal-soft);border:1px solid rgba(40,120,140,0.20);border-radius:10px;padding:9px 13px;margin-top:10px;max-width:fit-content;}
+.shield .s-ic{font-size:13px;} .shield b{font-weight:500;}
+.status-line{display:none;align-items:center;gap:9px;font-family:var(--mono);font-size:13px;font-weight:500;margin-bottom:6px;}
+.status-line.show{display:flex;}
+.status-line.granted{color:var(--teal-deep);} .status-line.declined{color:var(--rose);}
+.status-line .badge{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;}
+.granted .badge{background:var(--teal);} .declined .badge{background:var(--rose);}
+.cta-note{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:0.02em;display:flex;align-items:center;gap:8px;}
+.cta-note .dot{width:5px;height:5px;border-radius:50%;background:var(--teal);}
 
-/* ── SHARED: FAILURE TAG + HEADER ── */
-.btag{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;color:var(--red);text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-.btag::before{content:'';width:20px;height:1px;background:var(--red);}
-.stag{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;color:var(--teal);text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.stag::before{content:'';width:20px;height:1px;background:var(--teal);}
-.hospline{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;color:var(--grey2);margin-bottom:4px;}
-.pname{font-size:32px;font-weight:400;letter-spacing:-0.02em;line-height:1.1;margin-bottom:4px;}
-.pres{font-size:13px;color:var(--grey);font-style:italic;}
-.big-stmt{font-size:32px;font-weight:400;letter-spacing:-0.02em;line-height:1.2;margin-bottom:6px;}
-.big-sub{font-family:var(--mono);font-size:11px;color:var(--grey2);letter-spacing:0.04em;}
-
-/* ── SHARED: SECTIONS WITH SIDE PADDING ── */
-.fhd{padding:20px 48px 16px;border-bottom:1px solid rgba(155,150,145,0.10);flex-shrink:0;}
-.lk-wrap{flex:1;padding:28px 48px;display:flex;flex-direction:column;overflow:hidden;}
-.stat-wrap{flex:1;padding:32px 48px;display:flex;flex-direction:column;overflow:hidden;}
-.res-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-.rh{padding:20px 48px 16px;border-bottom:1px solid var(--rule);flex-shrink:0;background:var(--dark2);}
-.rb{flex:1;padding:28px 48px;display:flex;flex-direction:column;gap:16px;overflow:hidden;}
-
-/* ── UC01 BEAT 1 ── */
-.b0-dialog{padding:16px 48px;border-bottom:1px solid rgba(155,150,145,0.08);flex-shrink:0;display:flex;flex-direction:column;gap:10px;}
-.dex{display:grid;grid-template-columns:80px 1fr;gap:0;}
-.spk{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey2);padding-top:3px;}
-.spt{font-size:17px;line-height:1.4;color:var(--white);border-left:2px solid var(--dark3);padding-left:16px;}
-.spt.pt{color:var(--grey);font-size:15px;border-left-color:var(--red-mid);}
-.b0-fields{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-.frow{flex:1;display:grid;grid-template-columns:170px 1fr;border-bottom:1px solid rgba(155,150,145,0.07);min-height:0;}
+/* card shell */
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;}
+.card.fail{border-color:var(--rose-line);}
+.card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff,#fbfaf8);}
+.rec-badge{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--teal-deep);}
+.rec-badge.fail{color:var(--rose);}
+.rec-badge .tick{width:18px;height:18px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;}
+.rec-badge.fail .tick{background:var(--rose);}
+.rec-id{font-family:var(--mono);font-size:12px;color:var(--ink-2);}
+.card-body{position:relative;}
+.rec-fields{padding:4px 20px;}
+.frow{display:grid;grid-template-columns:140px 1fr;gap:14px;align-items:start;padding:10px 0;border-bottom:1px solid rgba(13,20,38,0.05);}
 .frow:last-child{border-bottom:none;}
-.flbl{font-family:var(--mono);font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:rgba(155,150,145,0.40);padding:0 16px;border-right:1px solid rgba(155,150,145,0.08);display:flex;align-items:center;}
-.fval{padding:0 20px;display:flex;align-items:center;}
-.unk{display:flex;align-items:center;gap:10px;}
-.ubar{width:80px;height:2px;background:var(--red-dim);border-radius:1px;}
-.utxt{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;color:var(--red-mid);text-transform:uppercase;}
-.b0-rx{padding:10px 48px;border-top:1px solid rgba(155,150,145,0.10);background:var(--dark2);display:flex;align-items:center;gap:12px;flex-shrink:0;}
-.rxtag{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--grey2);text-transform:uppercase;}
-.rxdrug{font-size:15px;}
-.rxnote{font-size:12px;color:var(--grey2);font-style:italic;}
-.b0-alert{padding:12px 48px;background:var(--red-dim);border-top:1px solid var(--red-mid);border-left:3px solid var(--red);flex-shrink:0;}
-.alth{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:5px;display:flex;align-items:center;gap:6px;}
-.altb{font-size:13px;line-height:1.6;color:#c9b8b5;}
-.altb strong{color:var(--white);font-weight:normal;}
+.fl{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-3);padding-top:3px;}
+.fv{font-size:14px;line-height:1.4;color:var(--ink);min-height:20px;}
+.unk{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:0.10em;text-transform:uppercase;color:rgba(180,70,60,0.65);}
+.ubar{width:54px;height:3px;border-radius:2px;background:rgba(180,70,60,0.22);}
+.fill{display:block;animation:fillIn .4s ease;}
+.fill .sub{display:block;font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:3px;}
+@keyframes fillIn{from{opacity:0;transform:translateX(-7px);}to{opacity:1;transform:translateX(0);}}
+.rx-line{display:flex;align-items:center;gap:10px;padding:11px 20px;border-top:1px solid var(--line);background:#fbfaf8;font-family:var(--mono);font-size:12px;color:var(--ink-2);}
+.rx-line b{color:var(--ink);font-weight:500;}
+.card-alert{display:none;gap:13px;align-items:flex-start;margin:4px 18px 16px;padding:13px 15px;background:var(--rose-soft);border:1px solid var(--rose-line);border-radius:12px;}
+.card-alert.show,.card-alert.static{display:flex;}
+.card-alert.show{animation:rise .45s ease;}
+@keyframes rise{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.ca-ic{width:22px;height:22px;border-radius:50%;background:var(--rose);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.ca-tx{font-size:13px;line-height:1.5;color:var(--ink);} .ca-tx b{color:var(--rose);font-weight:500;}
+.veil{position:absolute;inset:0;background:rgba(247,246,243,0.74);backdrop-filter:blur(3px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;z-index:5;transition:opacity .8s ease;}
+.veil.gone{opacity:0;pointer-events:none;}
+.veil .lock{width:38px;height:38px;border-radius:11px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:var(--shadow);}
+.veil .vt{font-family:var(--mono);font-size:12px;letter-spacing:0.10em;text-transform:uppercase;color:var(--ink-2);}
+.veil .vs{font-family:var(--mono);font-size:11px;color:var(--ink-3);}
+.decline-ov{position:absolute;inset:0;background:var(--rose-soft);display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:30px;z-index:6;}
+.decline-ov.show{display:flex;animation:rise .4s ease;}
+.do-t{font-size:20px;} .do-rx{font-family:var(--mono);font-size:13px;color:var(--rose);} .do-n{font-size:13px;line-height:1.6;color:var(--ink-2);max-width:360px;}
 
-/* ── LOCKED RECORDS ── */
-.hgrid{display:flex;gap:0;border:1px solid rgba(155,150,145,0.12);border-radius:3px;overflow:hidden;flex-shrink:0;}
-.hisl{flex:1;border-right:1px solid rgba(155,150,145,0.12);padding:20px 8px 16px;display:flex;flex-direction:column;align-items:center;gap:5px;background:var(--dark2);}
-.hisl:last-child{border-right:none;}
-.hfol{font-size:11px;opacity:0.12;}
-.hlck{font-size:22px;margin-top:-2px;}
-.hnm{font-family:var(--mono);font-size:9px;letter-spacing:0.04em;color:rgba(155,150,145,0.50);text-align:center;line-height:1.4;margin-top:4px;}
-.hcls{font-family:var(--mono);font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--red-mid);margin-top:2px;}
-.fstrip{padding-top:16px;border-top:1px solid rgba(155,150,145,0.12);}
-.fkick{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey2);margin-bottom:6px;}
-.fbody{font-size:13px;line-height:1.7;color:var(--grey);max-width:620px;}
-.fbody strong{color:var(--white);font-weight:normal;}
+/* dialogue */
+.dlg{display:flex;flex-direction:column;gap:12px;margin-bottom:8px;}
+.dline .who{font-family:var(--mono);font-size:10px;letter-spacing:0.10em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px;}
+.dline .said{font-size:15px;line-height:1.45;color:var(--ink);border-left:2px solid var(--line);padding-left:14px;}
+.dline.pt .said{color:var(--ink-2);border-left-color:var(--rose-line);font-style:italic;}
 
-/* ── STAT NUMBERS ── */
-.stat-big{font-size:80px;font-weight:300;letter-spacing:-0.04em;color:rgba(155,150,145,0.15);line-height:1;margin-bottom:-10px;}
-.stat-label{font-size:20px;font-weight:400;letter-spacing:-0.01em;line-height:1.3;margin-bottom:8px;}
-.stat-sub{font-size:13px;color:var(--grey);line-height:1.6;max-width:520px;}
-.stat-row{display:flex;gap:32px;align-items:flex-start;}
-.stat-item{flex:1;}
-.si-num{font-size:40px;font-weight:300;letter-spacing:-0.03em;color:rgba(155,150,145,0.30);line-height:1;margin-bottom:4px;}
-.si-label{font-family:var(--mono);font-size:10px;letter-spacing:0.10em;color:var(--grey2);text-transform:uppercase;margin-bottom:2px;}
-.si-val{font-size:13px;color:var(--grey);}
-.stat-alert{margin-top:auto;padding:12px 0;border-top:1px solid rgba(155,150,145,0.12);}
-.sa-txt{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--red-mid);text-transform:uppercase;}
+/* bars (shared) */
+.bars{display:flex;gap:7px;margin-top:9px;}
+.bar{flex:1;}
+.bar .bl{font-family:var(--mono);font-size:8.5px;letter-spacing:0.03em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px;}
+.bar .bt{height:6px;border-radius:4px;background:var(--paper-2);overflow:hidden;}
+.bar .bf{height:100%;width:0;border-radius:4px;background:var(--amber);transition:width .9s ease .2s;}
 
-/* ── CARD GRID ── */
-.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-.ccard{background:var(--dark2);border:1px solid var(--rule);border-radius:4px;padding:16px;}
-.cc-l{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--grey2);margin-bottom:6px;}
-.cc-v{font-size:15px;line-height:1.4;margin-bottom:3px;}
-.cc-s{font-size:11px;color:var(--grey2);}
-.cc-red{border-color:var(--red-mid);background:rgba(42,14,11,0.5);}
-.cc-teal{border-color:rgba(100,175,195,0.25);background:rgba(100,175,195,0.04);}
-.cc-amber{border-color:rgba(200,140,40,0.25);background:rgba(200,140,0,0.04);}
+/* founder + story (beat 2 emergency) */
+.story{max-width:880px;margin:0 auto;height:100%;display:flex;flex-direction:column;justify-content:center;}
+.story h1{font-size:38px;margin-bottom:13px;}
+.story-quote{font-family:var(--serif);font-style:italic;font-size:25px;line-height:1.4;color:var(--ink);max-width:760px;margin:6px 0 24px;}
+.story-quote .hl{color:var(--teal-deep);font-style:normal;}
+.band{position:relative;display:flex;align-items:center;gap:20px;background:linear-gradient(180deg,#fff,#f7f5f1);border:1px solid var(--line);border-radius:14px;padding:16px 26px;box-shadow:var(--shadow);max-width:600px;margin:4px 0 12px;}
+.band::before,.band::after{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:var(--paper);border:1px solid var(--line);top:50%;transform:translateY(-50%);}
+.band::before{left:-9px;} .band::after{right:-9px;}
+.band-barcode{width:42px;height:42px;border-radius:8px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 5px);opacity:.78;flex-shrink:0;}
+.band-name{font-family:var(--mono);font-size:16px;font-weight:500;letter-spacing:0.05em;color:var(--ink);}
+.band-dx{font-family:var(--mono);font-size:12px;letter-spacing:0.12em;color:var(--rose);margin-top:5px;}
+.band-loc{font-family:var(--mono);font-size:10px;letter-spacing:0.05em;color:var(--ink-3);text-align:right;line-height:1.6;flex-shrink:0;margin-left:auto;}
+.band-cap{font-family:var(--mono);font-size:12px;color:var(--ink-2);margin-bottom:14px;} .band-cap b{color:var(--ink);font-weight:500;}
+.im-row{display:flex;gap:14px;margin:8px 0 14px;max-width:700px;}
+.im{flex:1;border-radius:12px;padding:12px 16px;border:1px solid var(--line);background:#fff;}
+.im-id{border-color:rgba(40,120,140,0.30);} .im-mem{border-color:var(--rose-line);background:var(--rose-soft);}
+.im-k{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;}
+.im-id .im-k{color:var(--teal-deep);} .im-mem .im-k{color:var(--rose);}
+.im-v{font-size:13px;line-height:1.45;color:var(--ink);}
 
-/* ── TOGGLE LIST (UC02 Beat 3) ── */
-.tlist{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule);border-radius:4px;overflow:hidden;max-width:560px;}
-.titem{display:flex;align-items:center;gap:16px;padding:13px 18px;border-bottom:1px solid rgba(155,150,145,0.08);}
-.titem:last-child{border-bottom:none;}
-.tname{flex:1;font-size:14px;}
-.tsub{font-family:var(--mono);font-size:10px;color:var(--grey2);margin-top:2px;}
-.ton{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);}
-.toff{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(155,150,145,0.35);}
+/* ===== TRANSPLANT specifics ===== */
+.maze{position:relative;height:100%;display:flex;align-items:center;justify-content:center;}
+.maze-inner{position:relative;width:560px;height:430px;}
+.patient-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;background:linear-gradient(135deg,#fff,#f7f5f1);border:1px solid var(--rose-line);box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:3;}
+.patient-core .pc-t{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--rose);}
+.patient-core .pc-n{font-size:14px;font-weight:500;margin-top:3px;}
+.patient-core .pc-s{font-family:var(--mono);font-size:9px;color:var(--ink-3);margin-top:2px;}
+.island{position:absolute;width:128px;background:var(--card);border:1px dashed rgba(180,70,60,0.30);border-radius:11px;padding:9px 11px;box-shadow:0 8px 20px -14px rgba(13,20,38,0.4);transform:translate(-50%,-50%);opacity:0;}
+.scene.active .island{animation:popIn .5s ease forwards;}
+@keyframes popIn{from{opacity:0;transform:translate(-50%,-50%) scale(.8);}to{opacity:1;transform:translate(-50%,-50%) scale(1);}}
+.island .is-ic{font-size:13px;opacity:.6;}
+.island .is-l{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink);line-height:1.3;margin-top:3px;}
+.island .is-tag{font-family:var(--mono);font-size:8.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);margin-top:4px;}
+.island .is-tag::before{content:'📄';font-size:8px;margin-right:5px;}
+.island.fail{border-color:var(--rose);background:var(--rose-soft);} .island.fail .is-l{color:var(--rose);}
+.i1{left:70px;top:215px;animation-delay:.05s;} .i2{left:132px;top:92px;animation-delay:.11s;}
+.i3{left:280px;top:44px;animation-delay:.17s;} .i4{left:428px;top:92px;animation-delay:.23s;}
+.i5{left:490px;top:215px;animation-delay:.29s;} .i6{left:428px;top:338px;animation-delay:.35s;}
+.i7{left:280px;top:386px;animation-delay:.41s;} .i8{left:132px;top:338px;animation-delay:.47s;}
+.counter-strip{display:flex;gap:26px;margin-top:16px;}
+.cs-item .cs-n{font-size:29px;font-weight:300;color:var(--rose);line-height:1;font-variant-numeric:tabular-nums;}
+.cs-item .cs-l{font-family:var(--mono);font-size:10.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink-3);margin-top:5px;}
+.curve-card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:18px 22px 14px;}
+.cc-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px;}
+.cc-ttl{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-2);}
+.cc-sub{font-family:var(--mono);font-size:10px;color:var(--ink-3);}
+svg .area{fill:url(#rg);opacity:.5;}
+svg .ln{fill:none;stroke:var(--rose);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:600;stroke-dashoffset:600;}
+.scene.active svg .ln{animation:draw 1.6s ease forwards .2s;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+.axis-l{font-family:var(--mono);font-size:9.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-3);}
+.gap-row{display:flex;gap:14px;margin-top:14px;}
+.gap-bar{flex:1;background:#fbfaf8;border:1px solid var(--line);border-radius:11px;padding:11px 13px;}
+.gap-bar .gb-k{font-family:var(--mono);font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px;}
+.gb-track{height:9px;border-radius:5px;background:var(--paper-2);overflow:hidden;}
+.gb-fill{height:100%;border-radius:5px;width:0;transition:width 1.1s cubic-bezier(.5,0,.2,1) .4s;}
+.gb-need .gb-fill{background:var(--ink-3);} .gb-tx .gb-fill{background:var(--teal);}
+.scene.active .gb-need .gb-fill{width:100%;} .scene.active .gb-tx .gb-fill{width:8%;}
+.gap-bar .gb-c{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:7px;}
+.founder-note{display:flex;align-items:center;gap:11px;margin-top:14px;font-family:var(--serif);font-style:italic;font-size:17px;color:var(--ink);}
+.founder-note .fn-ic{font-family:var(--mono);font-style:normal;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-deep);background:var(--teal-soft);border:1px solid rgba(40,120,140,0.2);border-radius:20px;padding:4px 10px;flex-shrink:0;}
+.gate{display:flex;align-items:center;gap:10px;margin:0 20px;padding:10px 0;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--ink-2);}
+.gate b{color:var(--ink);font-weight:500;} .gate .gck{color:var(--teal-deep);}
+.wl{padding:8px 16px 6px;display:flex;flex-direction:column;gap:6px;}
+.wl-row{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fbfaf8;font-size:12.5px;transition:all .35s;}
+.wl-row .wl-n{font-weight:500;color:var(--ink);min-width:88px;}
+.bgp{font-family:var(--mono);font-size:10px;color:var(--teal-deep);background:var(--teal-soft);border:1px solid rgba(40,120,140,.18);border-radius:14px;padding:2px 8px;}
+.wl-row .wl-meta{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-left:auto;}
+.wl-row .ptag{display:none;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-deep);background:var(--amber-soft);border:1px solid rgba(180,120,30,.3);border-radius:14px;padding:3px 7px;}
+.wl-row.paired{border-color:rgba(180,120,30,.45);background:linear-gradient(180deg,#fff,var(--amber-soft));}
+.wl-row.paired .ptag{display:inline-block;}
+.swap-result{display:none;margin:4px 16px 14px;border:1px solid rgba(180,120,30,.35);border-radius:12px;background:linear-gradient(180deg,#fff,var(--amber-soft));padding:12px 15px;}
+.swap-result.show{display:block;animation:rise .5s ease;}
+.sr-h{display:flex;align-items:center;justify-content:space-between;}
+.sr-t{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--amber-deep);}
+.sr-score{font-family:var(--mono);font-size:11px;color:var(--ink-2);} .sr-score b{font-size:15px;color:var(--amber-deep);}
+.sr-d{font-size:12.5px;color:var(--ink);margin:7px 0 2px;line-height:1.45;}
+.swap-result.show .bf{width:var(--w);}
+.pipe{display:flex;align-items:center;margin:0 20px 2px;padding:12px 0;}
+.pstep{flex:1;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-3);position:relative;}
+.pstep .pd{width:13px;height:13px;border-radius:50%;background:var(--paper-2);border:2px solid var(--line);margin:0 auto 6px;transition:all .4s;}
+.pstep.on{color:var(--teal-deep);} .pstep.on .pd{background:var(--teal);border-color:var(--teal);}
+.pstep:not(:last-child)::after{content:'';position:absolute;top:6px;left:60%;width:80%;height:2px;background:var(--line);}
+.pstep.on:not(:last-child)::after{background:var(--teal);}
+.packet{padding:2px 20px 4px;}
+.prow{display:flex;align-items:center;gap:11px;padding:7px 0;border-bottom:1px solid rgba(13,20,38,0.05);font-size:12.5px;color:var(--ink);opacity:.32;transition:opacity .3s;}
+.prow:last-child{border-bottom:none;} .prow.in{opacity:1;}
+.prow .pck{width:18px;height:18px;border-radius:50%;background:var(--paper-2);color:var(--ink-3);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all .3s;}
+.prow.in .pck{background:var(--teal);color:#fff;}
+.prow .popen{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--teal-deep);border:1px solid rgba(40,120,140,.22);border-radius:14px;padding:3px 9px;opacity:0;transition:opacity .3s;}
+.prow.in .popen{opacity:1;}
+.committee{display:none;margin:2px 18px 6px;border-top:1px solid var(--line);padding-top:8px;}
+.committee.show{display:block;animation:rise .45s ease;}
+.cm-h{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px;}
+.cm-row{display:flex;align-items:center;gap:10px;padding:6px 2px;font-size:12.5px;}
+.cm-av{width:23px;height:23px;border-radius:50%;background:var(--paper-2);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--ink-2);flex-shrink:0;transition:all .3s;}
+.cm-nm{color:var(--ink);} .cm-role{font-family:var(--mono);font-size:9.5px;color:var(--ink-3);}
+.cm-status{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--amber-deep);text-align:right;}
+.cm-row.appr .cm-status{color:var(--teal-deep);} .cm-row.appr .cm-av{background:var(--teal);color:#fff;}
+.cm-status .rev{display:block;font-size:8.5px;color:var(--ink-3);} .cm-row.appr .cm-status .rev{color:var(--teal-deep);}
+.locked-bar{display:none;align-items:center;gap:11px;margin:4px 18px 14px;padding:12px 15px;background:var(--teal-soft);border:1px solid rgba(40,120,140,0.22);border-radius:12px;}
+.locked-bar.show{display:flex;animation:rise .5s ease;}
+.locked-bar .lk{width:24px;height:24px;border-radius:7px;background:var(--teal-deep);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.locked-bar .lt{font-size:12px;line-height:1.5;color:var(--ink);} .locked-bar .lt b{color:var(--teal-deep);font-weight:500;}
 
-/* ── LIABILITY STACK (UC03 Beat 2) ── */
-.lstack{display:flex;flex-direction:column;gap:0;max-width:520px;}
-.li-row{display:flex;align-items:stretch;gap:0;border:1px solid rgba(155,150,145,0.12);border-bottom:none;}
-.li-row:first-child{border-radius:4px 4px 0 0;}
-.li-row:last-child{border-bottom:1px solid rgba(155,150,145,0.12);border-radius:0 0 4px 4px;}
-.li-num{width:40px;min-width:40px;background:var(--red-dim);border-right:1px solid var(--red-mid);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;letter-spacing:0.12em;color:var(--red-mid);}
-.li-body{padding:12px 16px;flex:1;}
-.li-act{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--red-mid);margin-bottom:4px;}
-.li-desc{font-size:13px;color:var(--grey);}
-.li-pen{font-family:var(--mono);font-size:11px;color:var(--white);margin-top:2px;}
+/* payoff (shared) */
+.payoff{max-width:920px;margin:0 auto;height:100%;display:flex;flex-direction:column;justify-content:center;}
+.po-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:22px;align-items:center;margin:6px 0 20px;}
+.po-col{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 22px;box-shadow:0 10px 30px -18px rgba(13,20,38,0.3);}
+.po-col.then{border-color:var(--rose-line);} .po-col.now{border-color:rgba(40,120,140,0.3);}
+.po-k{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:12px;}
+.po-col.then .po-k{color:var(--rose);} .po-col.now .po-k{color:var(--teal-deep);}
+.po-li{display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.4;color:var(--ink);padding:6px 0;}
+.po-li .pli-ic{flex-shrink:0;font-size:12px;margin-top:1px;}
+.po-col.then .pli-ic{color:var(--rose);} .po-col.now .pli-ic{color:var(--teal-deep);}
+.po-arrow{font-size:26px;color:var(--teal-deep);}
+.po-metric{display:flex;gap:30px;justify-content:center;margin-bottom:16px;}
+.pm .pm-n{font-size:25px;font-weight:300;color:var(--teal-deep);line-height:1;text-align:center;}
+.pm .pm-l{font-family:var(--mono);font-size:10px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-3);margin-top:6px;text-align:center;}
+.thesis{text-align:center;font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.4;color:var(--ink);max-width:740px;margin:0 auto;}
+.thesis .hl{color:var(--teal-deep);font-style:normal;}
+.honest{text-align:center;font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:12px;letter-spacing:0.02em;}
 
-/* ── STACK DIAGRAM (UC07) ── */
-.arch-stack{display:flex;flex-direction:column;gap:0;max-width:480px;}
-.arch-layer{padding:14px 20px;border:1px solid var(--rule);border-bottom:none;display:flex;align-items:center;gap:16px;}
-.arch-layer:first-child{border-radius:4px 4px 0 0;}
-.arch-layer:last-child{border-bottom:1px solid var(--rule);border-radius:0 0 4px 4px;}
-.al-num{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey2);min-width:32px;}
-.al-name{font-size:16px;flex:1;}
-.al-tag{font-family:var(--mono);font-size:9px;letter-spacing:0.10em;color:var(--grey2);}
-.al-teal{background:rgba(100,175,195,0.06);border-color:rgba(100,175,195,0.25) !important;}
-.al-miss{background:rgba(42,14,11,0.5);border-color:var(--red-mid) !important;}
-.arch-arrow{font-family:var(--mono);font-size:10px;color:rgba(155,150,145,0.25);padding:3px 20px;}
+/* ===== PRESCRIPTION specifics ===== */
+.script{font-family:var(--hand);}
+.hand-rx{padding:18px 22px;}
+.hand-h{display:flex;justify-content:space-between;font-family:var(--hand);font-size:22px;color:var(--ink);border-bottom:1px dashed var(--line);padding-bottom:8px;margin-bottom:10px;}
+.hand-line{font-family:var(--hand);font-weight:600;font-size:27px;color:#22344f;line-height:1.4;letter-spacing:-0.035em;white-space:nowrap;}
+.hand-line.blur{filter:blur(1.4px);opacity:.58;transform:skewX(-13deg) rotate(-1.8deg);transform-origin:left center;}
+.hand-line.blur:nth-of-type(even){transform:skewX(-6deg) rotate(1.4deg);opacity:.48;}
+.hand-line.blur:nth-of-type(3n){transform:skewX(-16deg) rotate(-0.6deg);opacity:.52;}
+.hand-foot{font-family:var(--hand);font-size:20px;color:var(--ink-3);margin-top:12px;text-align:right;}
+.checks{padding:6px 18px 10px;display:flex;flex-direction:column;gap:7px;min-height:188px;}
+.chk{display:flex;align-items:center;gap:11px;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:12.5px;background:#fbfaf8;opacity:0;transform:translateY(8px);}
+.chk.show{animation:rise .4s ease forwards;}
+.chk .ck-ic{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;flex-shrink:0;}
+.chk .ck-l{color:var(--ink);} .chk .ck-l b{font-weight:500;}
+.chk .ck-v{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;}
+.chk.ok .ck-ic{background:var(--teal);} .chk.ok .ck-v{color:var(--teal-deep);}
+.chk.warn .ck-ic{background:var(--amber);} .chk.warn .ck-v{color:var(--amber-deep);}
+.chk.crit{border-color:var(--rose-line);background:var(--rose-soft);} .chk.crit .ck-ic{background:var(--rose);} .chk.crit .ck-v{color:var(--rose);}
+.verdict{display:none;margin:2px 18px 14px;padding:12px 15px;border-radius:12px;font-size:13px;line-height:1.5;}
+.verdict.show{display:block;animation:rise .4s ease;}
+.verdict.block{background:var(--rose-soft);border:1px solid var(--rose-line);color:var(--ink);} .verdict.block b{color:var(--rose);}
+.verdict.pass{background:var(--teal-soft);border:1px solid rgba(40,120,140,.22);color:var(--ink);} .verdict.pass b{color:var(--teal-deep);}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:4px 0 8px;}
+.dcol{background:var(--card);border:1px solid rgba(40,120,140,0.28);border-radius:14px;padding:16px 18px;box-shadow:0 10px 28px -18px rgba(13,20,38,.3);}
+.dcol .dh{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:11px;}
+.dcol .dh .dh-ic{width:26px;height:26px;border-radius:8px;background:var(--teal-soft);display:flex;align-items:center;justify-content:center;font-size:14px;}
+.dli{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;line-height:1.4;color:var(--ink);padding:5px 0;}
+.dli .dci{color:var(--teal-deep);flex-shrink:0;margin-top:1px;}
+.flowmid{display:flex;flex-direction:column;align-items:center;gap:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);}
 
-/* ── UC01 BEAT 3: DHARA INTERACTIVE ── */
-.s-head{padding:16px 48px 14px;border-bottom:1px solid var(--rule);flex-shrink:0;background:var(--dark2);}
-.shl{font-size:32px;font-weight:400;letter-spacing:-0.02em;line-height:1.1;}
-.s-phone-row{padding:16px 48px;border-bottom:1px solid var(--rule);flex-shrink:0;display:flex;align-items:flex-start;gap:40px;background:var(--dark2);}
-.pcard{background:#161e30;border:1px solid rgba(155,150,145,0.20);border-radius:10px;padding:16px;width:260px;min-width:260px;box-shadow:0 8px 40px rgba(0,0,0,0.4);}
-.pctop{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-.pcico{width:26px;height:26px;background:var(--white);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;font-weight:bold;color:var(--dark);}
-.pcnm{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--white);}
-.pcmsg{font-size:13px;color:var(--white);line-height:1.4;margin-bottom:3px;}
-.pcsub{font-family:var(--mono);font-size:10px;color:var(--grey);margin-bottom:12px;}
-.pcdur{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
-.pcdl{font-family:var(--mono);font-size:9px;color:var(--grey2);letter-spacing:0.08em;text-transform:uppercase;}
-.pcdv{font-family:var(--mono);font-size:10px;color:var(--white);border:1px solid rgba(155,150,145,0.25);padding:2px 8px;border-radius:2px;}
-.pcact{display:flex;gap:7px;}
-.bgrant{flex:1;padding:10px;background:var(--white);color:var(--dark);border:none;border-radius:6px;font-family:var(--mono);font-size:11px;letter-spacing:0.06em;cursor:pointer;transition:all 0.2s;}
-.bgrant:hover{background:#e8e6e2;transform:translateY(-1px);}
-.bdecline{flex:1;padding:10px;background:none;border:1px solid rgba(155,150,145,0.25);border-radius:6px;color:var(--grey);font-family:var(--mono);font-size:11px;cursor:pointer;transition:all 0.15s;}
-.bdecline:hover{border-color:#666;color:var(--white);}
-.pgrant-line{display:none;font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:0.06em;margin-top:10px;align-items:center;gap:5px;}
-.pgrant-line.show{display:flex;}
-.pdecline-state{display:none;font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:0.06em;margin-top:10px;align-items:center;gap:5px;}
-.pdecline-state.show{display:flex;}
-.precon{display:none;width:100%;margin-top:8px;padding:8px;background:none;border:1px solid rgba(155,150,145,0.25);border-radius:6px;color:var(--grey2);font-family:var(--mono);font-size:10px;cursor:pointer;transition:all 0.15s;letter-spacing:0.04em;}
-.precon.show{display:block;}
-.s-scope{flex:1;padding-top:4px;}
-.scope-label{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(155,150,145,0.45);margin-bottom:12px;}
-.scope-line{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;line-height:2;color:rgba(155,150,145,0.65);}
-.s-content{flex:1;position:relative;overflow:hidden;display:flex;flex-direction:column;}
-.dark-overlay{position:absolute;inset:0;z-index:10;background:rgba(9,13,24,0.92);transition:opacity 0.9s ease;pointer-events:none;display:flex;align-items:center;justify-content:center;}
-.dark-overlay.gone{opacity:0;}
-.overlay-hint{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(155,150,145,0.35);text-align:center;}
-.decline-overlay{position:absolute;inset:0;z-index:10;background:rgba(42,14,11,0.94);display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px;}
-.decline-overlay.show{display:flex;}
-.do-title{font-size:22px;color:var(--white);}
-.do-rx{font-family:var(--mono);font-size:13px;color:var(--red);letter-spacing:0.04em;}
-.do-note{font-size:13px;color:rgba(245,244,240,0.55);text-align:center;line-height:1.6;max-width:380px;}
-.sfields{flex:1;display:flex;flex-direction:column;background:#f5f4f0;overflow:hidden;}
-.sfrow{flex:1;display:grid;grid-template-columns:170px 1fr;border-bottom:1px solid rgba(9,13,24,0.10);min-height:0;}
-.sfrow:last-child{border-bottom:none;}
-.sflbl{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(9,13,24,0.45);padding:0 14px;border-right:1px solid rgba(9,13,24,0.10);display:flex;align-items:center;}
-.sfval{padding:0 18px;display:flex;flex-direction:column;justify-content:center;}
-.sfempty{display:flex;align-items:center;gap:10px;}
-.sfbar{width:80px;height:2px;background:rgba(9,13,24,0.10);border-radius:1px;}
-.sfunk{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;color:rgba(9,13,24,0.22);text-transform:uppercase;}
-.sffill{font-size:13px;color:#090d18;line-height:1.4;animation:fillIn 0.35s ease;}
-.sfsub{font-size:11px;color:rgba(9,13,24,0.45);font-style:italic;margin-top:1px;}
-@keyframes fillIn{from{opacity:0;transform:translateX(-6px);}to{opacity:1;transform:translateX(0);}}
-.dalert{display:none;padding:11px 48px;background:oklch(98% 0.04 80);border-top:1px solid oklch(88% 0.08 75);flex-shrink:0;}
-.dalert.show{display:block;animation:aUp 0.4s ease;}
-@keyframes aUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-.dah{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--amber);margin-bottom:5px;display:flex;align-items:center;gap:6px;}
-.dab{font-size:13px;line-height:1.6;color:rgba(9,13,24,0.65);}
-.dab strong{color:#090d18;font-weight:normal;}
-.afooter{display:none;padding:8px 48px;background:#ece9e3;border-top:1px solid rgba(9,13,24,0.10);flex-shrink:0;font-family:var(--mono);font-size:10px;color:rgba(9,13,24,0.45);letter-spacing:0.04em;}
-.afooter.show{display:block;}
-/* ── UC08 · THE INFRASTRUCTURE ── */
-.inf-wrap{flex:1;padding:26px 48px;display:flex;flex-direction:column;overflow:hidden;}
-.inf-stmt{font-size:30px;font-weight:400;letter-spacing:-0.02em;line-height:1.2;margin-bottom:6px;}
-.inf-sub{font-family:var(--mono);font-size:11px;color:var(--grey2);letter-spacing:0.04em;line-height:1.5;margin-bottom:16px;max-width:680px;}
-.inf-grid{display:grid;grid-template-columns:repeat(28,1fr);gap:5px;margin:6px 0 14px;}
-.cnode{aspect-ratio:1;border-radius:50%;background:rgba(155,150,145,0.14);opacity:0.5;animation:nodeOn .5s ease forwards;}
-@keyframes nodeOn{to{background:var(--teal);opacity:1;}}
-.inf-anchor{display:flex;align-items:baseline;gap:14px;margin-top:auto;padding-top:8px;}
-.inf-num{font-size:40px;font-weight:300;letter-spacing:-0.03em;color:var(--white);line-height:1;white-space:nowrap;}
-.inf-numlbl{font-family:var(--mono);font-size:11px;color:var(--grey2);letter-spacing:0.04em;line-height:1.5;}
-.inf-flow{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
-.inf-converge{font-family:var(--mono);font-size:10px;color:var(--grey2);letter-spacing:0.16em;text-transform:uppercase;}
-.inf-arrowdown{color:rgba(155,150,145,0.30);font-size:14px;padding:4px 0;text-align:center;}
-.data-layer{width:100%;max-width:680px;border:1px solid rgba(100,175,195,0.40);background:rgba(100,175,195,0.06);border-radius:6px;padding:16px 24px;text-align:center;animation:layerIn .7s ease;}
-@keyframes layerIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-.dl-title{font-size:18px;color:var(--teal);letter-spacing:0.02em;margin-bottom:5px;}
-.dl-meta{font-family:var(--mono);font-size:10px;color:var(--grey2);letter-spacing:0.07em;}
-.inf-outs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;}
-.inf-out{border:1px solid var(--rule);border-top:2px solid var(--teal);background:var(--dark2);border-radius:0 0 4px 4px;padding:13px 15px;animation:layerIn .6s ease backwards;}
-.inf-out:nth-child(1){animation-delay:.10s;}
-.inf-out:nth-child(2){animation-delay:.30s;}
-.inf-out:nth-child(3){animation-delay:.50s;}
-.io-k{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;}
-.io-v{font-size:13px;line-height:1.5;color:var(--grey);}
-.io-v strong{color:var(--white);font-weight:400;}
-.inf-final{margin-top:auto;padding-top:16px;border-top:1px solid var(--rule);}
-.inf-final-l{font-size:16px;line-height:1.7;color:var(--white);font-weight:300;letter-spacing:-0.01em;}
-.inf-final-l .dim{color:var(--grey2);}
+/* ===== CONSENT specifics ===== */
+.spray{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;}
+.tickbox{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 20px;box-shadow:var(--shadow);font-size:14px;color:var(--ink);z-index:2;}
+.tickbox .tb{width:24px;height:24px;border-radius:6px;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.spray-targets{display:flex;gap:10px;margin-top:34px;position:relative;}
+.spray-targets::before{content:'';position:absolute;top:-30px;left:50%;width:1px;height:30px;background:var(--rose-line);}
+.starget{background:var(--rose-soft);border:1px solid var(--rose-line);border-radius:10px;padding:10px 12px;text-align:center;font-family:var(--mono);font-size:10px;color:var(--rose);min-width:78px;opacity:0;animation:popIn .4s ease forwards;}
+.scene.active .starget{opacity:1;}
+.starget .st-ic{font-size:15px;display:block;margin-bottom:4px;opacity:.7;}
+.consent-panel{padding:14px 20px;display:flex;flex-direction:column;gap:10px;}
+.cfield{display:flex;align-items:center;gap:10px;font-size:13px;}
+.cfield .cf-l{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);min-width:96px;}
+.cpill{font-family:var(--mono);font-size:11px;color:var(--teal-deep);background:var(--teal-soft);border:1px solid rgba(40,120,140,.2);border-radius:16px;padding:4px 11px;}
+.cpill.alt{color:var(--ink-2);background:#fbfaf8;border-color:var(--line);}
+.ledger{margin:0 20px 14px;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+.ledger-h{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);padding:9px 14px;background:#fbfaf8;border-bottom:1px solid var(--line);}
+.led-body{padding:6px 14px;min-height:120px;}
+.led-row{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid rgba(13,20,38,0.05);font-size:12.5px;opacity:0;transform:translateX(-7px);}
+.led-row:last-child{border-bottom:none;}
+.led-row.show{animation:fillIn .4s ease forwards;}
+.led-ic{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;flex-shrink:0;}
+.led-row.grant .led-ic{background:var(--teal);} .led-row.revoke .led-ic{background:var(--rose);}
+.led-row.revoke{opacity:1;} .led-tx{color:var(--ink);} .led-tx b{font-weight:500;}
+.led-ts{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--ink-3);}
+.led-row.faded .led-tx{color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--rose-line);}
+
+/* ===== VAANI specifics ===== */
+.vconsult{padding:8px 8px 12px;}
+.vstream{padding:6px 14px;min-height:150px;display:flex;flex-direction:column;gap:9px;}
+.vline{display:flex;gap:10px;opacity:0;transform:translateY(7px);}
+.vline.show{animation:rise .4s ease forwards;}
+.vwho{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);min-width:54px;padding-top:3px;}
+.vsaid{font-size:14px;line-height:1.4;color:var(--ink);} .vsaid .dv{font-family:var(--dv);}
+.vline.dr .vsaid{color:var(--ink);} .vline.pt .vsaid{color:var(--ink-2);}
+.vsum{display:none;margin:4px 14px 12px;border:1px solid rgba(40,120,140,.22);border-radius:12px;background:var(--teal-soft);overflow:hidden;}
+.vsum.show{display:block;animation:rise .5s ease;}
+.vsum-h{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-deep);padding:9px 14px;border-bottom:1px solid rgba(40,120,140,.18);display:flex;justify-content:space-between;}
+.vsoap{padding:8px 14px;display:flex;flex-direction:column;gap:7px;}
+.vsrow{display:flex;gap:10px;align-items:baseline;font-size:12.5px;}
+.vk{font-family:var(--mono);font-size:10px;font-weight:500;color:var(--teal-deep);min-width:18px;}
+.vv{color:var(--ink);line-height:1.4;flex:1;} .vv .icd{font-family:var(--mono);font-size:10px;color:var(--amber-deep);background:var(--amber-soft);border-radius:10px;padding:1px 7px;margin-left:5px;}
+.vts{font-family:var(--mono);font-size:9px;color:var(--ink-3);flex-shrink:0;}
+.vsaved{display:none;align-items:center;gap:8px;margin:0 14px 12px;font-family:var(--mono);font-size:12px;color:var(--teal-deep);}
+.vsaved.show{display:flex;}
+
+/* ===== DATA specifics ===== */
+.gatebox{padding:14px 18px;}
+.records-col{display:flex;flex-direction:column;gap:8px;}
+.drec{display:flex;align-items:center;gap:11px;border:1px solid var(--line);border-radius:10px;padding:10px 13px;font-size:12.5px;background:#fbfaf8;transition:all .6s cubic-bezier(.5,0,.2,1);}
+.drec .dr-n{color:var(--ink);min-width:120px;}
+.dr-consent{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;margin-left:auto;padding:3px 9px;border-radius:14px;}
+.dr-consent.on{color:var(--teal-deep);background:var(--teal-soft);border:1px solid rgba(40,120,140,.2);}
+.dr-consent.off{color:var(--rose);background:var(--rose-soft);border:1px solid var(--rose-line);}
+.drec.admitted{border-color:rgba(40,120,140,.3);transform:translateX(18px);opacity:.9;}
+.drec.held{border-color:var(--rose-line);background:var(--rose-soft);}
+.intel-core{margin:12px 18px;border:1px dashed rgba(40,120,140,.4);border-radius:14px;padding:14px 16px;text-align:center;background:linear-gradient(180deg,#fff,var(--teal-soft));opacity:.5;transition:opacity .6s;}
+.intel-core.live{opacity:1;}
+.ic-t{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-deep);}
+.ic-n{font-size:16px;font-weight:400;margin-top:4px;}
+.tiers{display:flex;gap:8px;margin:8px 18px 0;}
+.tier{flex:1;border:1px solid var(--line);border-radius:10px;padding:9px 10px;text-align:center;background:#fff;}
+.tier .ti-p{font-size:13px;font-weight:500;color:var(--teal-deep);} .tier .ti-l{font-family:var(--mono);font-size:8.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);margin-top:3px;}
+
+/* ===== INFRASTRUCTURE specifics ===== */
+.infra{position:relative;height:100%;display:flex;align-items:center;justify-content:center;}
+.dotfield{display:grid;grid-template-columns:repeat(14,1fr);gap:11px;transition:all 1.1s cubic-bezier(.5,0,.2,1);}
+.dotfield .pt-dot{width:9px;height:9px;border-radius:50%;background:rgba(40,120,140,.32);transition:all 1.1s cubic-bezier(.5,0,.2,1);}
+.infra.converged .dotfield{opacity:0;transform:scale(.18);filter:blur(2px);}
+.core-reveal{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;opacity:0;pointer-events:none;transition:opacity .8s ease .5s;}
+.infra.converged .core-reveal{opacity:1;}
+.core-orb{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle at 40% 35%, oklch(70% 0.10 195), var(--teal-deep));box-shadow:0 0 60px -10px rgba(40,120,140,.7), inset 0 0 30px rgba(255,255,255,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;}
+.core-orb .co-t{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;opacity:.85;}
+.core-orb .co-n{font-size:18px;font-weight:400;margin-top:4px;line-height:1.1;}
+.emergent{display:flex;gap:12px;}
+.em{background:var(--card);border:1px solid rgba(40,120,140,.25);border-radius:12px;padding:11px 15px;text-align:center;box-shadow:0 8px 22px -14px rgba(13,20,38,.3);}
+.em .em-ic{font-size:16px;} .em .em-l{font-family:var(--mono);font-size:10px;color:var(--ink-2);margin-top:5px;line-height:1.3;}
+
+/* cover / home */
+.cover{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;padding:28px 54px;text-align:center;overflow:auto;}
+.cover.active{display:flex;}
+.cv-mark{display:flex;align-items:baseline;gap:11px;margin-bottom:16px;}
+.cv-mark .en{font-size:44px;font-weight:300;letter-spacing:.02em;}
+.cv-mark .dv{font-family:var(--dv);font-weight:300;font-size:32px;color:var(--ink-3);}
+.cv-thesis{font-size:29px;font-weight:300;line-height:1.28;max-width:720px;letter-spacing:-0.02em;margin-bottom:12px;}
+.cv-thesis .accent{color:var(--teal-deep);}
+.cv-sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);max-width:560px;line-height:1.6;margin-bottom:28px;}
+.cv-menu{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;max-width:880px;width:100%;}
+.cv-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 17px;text-align:left;cursor:pointer;transition:all .18s;box-shadow:0 8px 24px -18px rgba(13,20,38,.3);}
+.cv-card:hover{transform:translateY(-3px);border-color:rgba(40,120,140,.35);box-shadow:0 16px 34px -18px rgba(40,120,140,.4);}
+.cv-num{font-family:var(--mono);font-size:11px;color:var(--teal-deep);letter-spacing:.08em;}
+.cv-nm{font-size:16px;font-weight:400;margin:6px 0 5px;}
+.cv-ds{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);line-height:1.5;}
+.cv-foot{margin-top:18px;font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.04em;}
+.cv-cta{margin-top:22px;display:flex;gap:12px;}
+.cv-cta-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:14px;font-weight:500;color:#fff;background:linear-gradient(135deg,var(--teal),var(--teal-deep));text-decoration:none;border-radius:12px;padding:13px 24px;box-shadow:0 14px 30px -12px rgba(40,120,140,.7);transition:transform .15s;}
+.cv-cta-btn:hover{transform:translateY(-2px);}
+.cv-cta-btn.ghost{color:var(--ink-2);background:none;border:1px solid var(--line);box-shadow:none;}
+.cv-cta-btn.ghost:hover{border-color:var(--teal);color:var(--teal-deep);}
+.cv-card{position:relative;}
+.cv-lock{position:absolute;top:13px;right:14px;font-size:11px;opacity:.7;}
+.tab-lock{font-size:9px;opacity:.65;}
+/* gate modal */
+.gate-modal{position:fixed;inset:0;background:rgba(13,20,38,.42);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:50;}
+.gate-modal.show{display:flex;}
+.gm-card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:30px 34px;max-width:390px;text-align:center;}
+.gm-lock{font-size:28px;margin-bottom:10px;}
+.gm-t{font-size:20px;font-weight:400;margin-bottom:8px;}
+.gm-s{font-family:var(--mono);font-size:12px;color:var(--ink-2);line-height:1.55;margin-bottom:18px;}
+.gm-input{width:100%;font-family:var(--mono);font-size:14px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;text-align:center;letter-spacing:.12em;outline:none;}
+.gm-input:focus{border-color:var(--teal);}
+.gm-err{font-family:var(--mono);font-size:11px;color:var(--rose);height:15px;margin:8px 0;opacity:0;}
+.gm-err.show{opacity:1;}
+.gm-btns{display:flex;gap:10px;justify-content:center;margin-top:8px;}
+
+/* bottom nav */
+.botnav{height:52px;display:flex;align-items:center;justify-content:center;gap:18px;border-top:1px solid var(--line);background:rgba(243,241,236,0.7);backdrop-filter:blur(6px);}
+.nav-btn{width:33px;height:33px;border-radius:9px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:14px;color:var(--ink-2);transition:all .15s;}
+.nav-btn:hover{border-color:var(--ink-3);color:var(--ink);}
+.nav-btn:disabled{opacity:.3;cursor:default;}
+.dots{display:flex;gap:8px;}
+.ndot{width:8px;height:8px;border-radius:50%;background:rgba(13,20,38,0.16);border:none;cursor:pointer;transition:all .2s;}
+.ndot.active{background:var(--teal-deep);transform:scale(1.25);}
+.nctr{font-family:var(--mono);font-size:11px;color:var(--ink-3);min-width:130px;text-align:center;letter-spacing:0.03em;}
 </style>
 </head>
 <body>
 
-<!-- LOCK SCREEN -->
-<div id="lockscreen">
-  <div class="ls-center">
-    <div class="ls-brand">
-      <span class="ls-num">01</span>
-      <div class="ls-names">
-        <div class="ls-en">Dhara</div>
-        <div class="ls-dv">धारा</div>
-        <span class="ls-rule"></span>
-        <div class="ls-desc">Continuous Health Records<span class="ls-parent"> · AyuVinc</span></div>
-      </div>
-    </div>
-    <div class="ls-title">Investor Demonstration &nbsp;·&nbsp; Confidential</div>
-    <div class="ls-form">
-      <input id="pwdinput" type="password" placeholder="Access code" class="ls-input" autofocus onkeydown="if(event.key==='Enter')checkPwd()">
-      <button class="ls-btn" onclick="checkPwd()">Enter</button>
-    </div>
-    <div id="pwderr" class="ls-err">Incorrect access code</div>
-  </div>
+<div class="bar">
+  <div class="wm" onclick="showCover()" style="cursor:pointer" title="Home"><span class="wm-en">Dhara</span><span class="wm-dv">धारा</span></div>
+  <div class="uctabs" id="uctabs"></div>
+  <span class="ro-pill">Read-only</span>
 </div>
 
-<!-- TOPBAR -->
-<div class="topbar">
-  <div class="brand"><span class="bname-en">Dhara</span><span class="bname-dv">धारा</span></div>
-  <div class="ucnav" id="ucnav">
-    <button class="ucb active" onclick="loadUC(0)">01 Emergency</button>
-    <button class="ucb" onclick="loadUC(1)">02 Consent</button>
-    <button class="ucb" onclick="loadUC(2)">03 Pharmacy</button>
-    <button class="ucb" onclick="loadUC(3)">04 Setu</button>
-    <button class="ucb" onclick="loadUC(4)">05 Vaani</button>
-    <button class="ucb" onclick="loadUC(5)">06 Data</button>
-    <button class="ucb" onclick="loadUC(6)">07 Thesis</button>
-    <button class="ucb" onclick="loadUC(7)">08 Infrastructure</button>
-  </div>
-  <button class="fsb" onclick="toggleFS()">⛶ Full</button>
-</div>
+<div class="scenes" id="scenes">
 
-<!-- SCENES -->
-<div class="scenes">
+  <!-- ======================= COVER / HOME ======================= -->
+  <div class="cover" id="cover">
+    <div class="cv-mark"><span class="en">Dhara</span><span class="dv">धारा</span></div>
+    <div class="cv-thesis">India has healthcare <span class="accent">identity</span>.<br>It still lacks healthcare <span class="accent">memory</span>.</div>
+    <div class="cv-sub">Dhara is India's healthcare memory layer — patient-owned and consent-native. Intelligence is not where we start; it is what emerges once healthcare finally remembers.</div>
+    <div class="cv-menu" id="cvMenu"></div>
+    <div class="cv-cta">
+      <a class="cv-cta-btn" href="mailto:aditya.irctc.1@gmail.com?subject=Dhara%20%E2%80%94%20request%20a%20walkthrough">Talk to us →</a>
+      <a class="cv-cta-btn ghost" href="https://www.ayuvinc.com" target="_blank" rel="noopener">About Dhara</a>
+    </div>
+    <div class="cv-foot">🔒 marked cases need an access code · read-only demo · tap a card to begin</div>
+  </div>
 
-<!-- ═══════════════════════════════════════════
-     UC01 · EMERGENCY
-     ═══════════════════════════════════════════ -->
-
-<!-- UC01 · Beat 1: Blank Chart -->
-<div class="scene" id="uc0b0">
-  <div class="fhd">
-    <div class="btag">Failure · Emergency Admission</div>
-    <div class="hospline">PGIMER Chandigarh · Emergency Ward · 2:47 AM</div>
-    <div class="pname">A. Kaushal, 35M</div>
-    <div class="pres">Acute breathlessness &nbsp;·&nbsp; Cannot lie flat &nbsp;·&nbsp; Creatinine rising</div>
-  </div>
-  <div class="b0-dialog">
-    <div class="dex">
-      <div class="spk">Dr. Sharma</div>
-      <div class="spt">"What medications are you on?"</div>
-    </div>
-    <div class="dex">
-      <div class="spk">Patient</div>
-      <div class="spt pt">"I take... tablets... many... I don't know the names. I had a surgery... my kidneys... years ago... there was a machine..."</div>
-    </div>
-  </div>
-  <div class="b0-fields">
-    <div class="frow"><div class="flbl">Prior surgeries</div><div class="fval"><div class="unk"><div class="ubar"></div><div class="utxt">Unknown</div></div></div></div>
-    <div class="frow"><div class="flbl">Immunosuppressants</div><div class="fval"><div class="unk"><div class="ubar"></div><div class="utxt">Unknown</div></div></div></div>
-    <div class="frow"><div class="flbl">Cardiac history</div><div class="fval"><div class="unk"><div class="ubar"></div><div class="utxt">Unknown</div></div></div></div>
-    <div class="frow"><div class="flbl">Kidney baseline</div><div class="fval"><div class="unk"><div class="ubar"></div><div class="utxt">Unknown</div></div></div></div>
-    <div class="frow"><div class="flbl">Current medications</div><div class="fval"><div class="unk"><div class="ubar"></div><div class="utxt">Unknown</div></div></div></div>
-    <div class="frow"><div class="flbl">Allergies</div><div class="fval"><div class="unk"><div class="ubar"></div><div class="utxt">Unknown</div></div></div></div>
-  </div>
-  <div class="b0-rx">
-    <span class="rxtag">Prescribed</span>
-    <span class="rxdrug">Gentamicin 240mg IV</span>
-    <span class="rxnote">— standard infection protocol</span>
-  </div>
-  <div class="b0-alert">
-    <div class="alth">✗ &nbsp;Critical miss</div>
-    <div class="altb">Patient is on active <strong>immunosuppressants</strong> post-transplant. Gentamicin is nephrotoxic in transplant patients. <strong>This prescription accelerates kidney failure.</strong> The doctor had no way of knowing.</div>
-  </div>
-</div>
-
-<!-- UC01 · Beat 2: Locked Records -->
-<div class="scene" id="uc0b1">
-  <div class="lk-wrap">
-    <div class="btag">Failure · Records Locked. Hospitals Closed.</div>
-    <div class="big-stmt">His records locked.<br>Seven hospitals. Seven closed doors.</div>
-    <div class="hgrid" style="margin-top:32px;">
-      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Tunisia<br>ICU</div><div class="hcls">Closed</div></div>
-      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">North Med<br>Institute</div><div class="hcls">Closed</div></div>
-      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Infectious<br>Disease Unit</div><div class="hcls">Closed</div></div>
-      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Surgical<br>Unit</div><div class="hcls">Closed</div></div>
-      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Dialysis<br>Centre</div><div class="hcls">Closed</div></div>
-      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Cardiac<br>Unit</div><div class="hcls">Closed</div></div>
-      <div class="hisl"><div class="hfol">📁</div><div class="hlck">🔒</div><div class="hnm">Transplant<br>Unit</div><div class="hcls">Closed</div></div>
-    </div>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding-top:20px;">
-      <div class="fstrip">
-        <div class="fkick">Why this matters</div>
-        <div class="fbody">In May 2022, the founder arrived in Tunisia with a failing kidney transplant, able to communicate only through gestures. That eighteen-month sequence — seven care episodes, seven separate systems — never connected. Every team saw a fragment. Only the patient held the whole. <strong>Dhara exists because no one should have to recite their medical history from memory in an emergency.</strong></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- UC01 · Beat 3: Dhara -->
-<div class="scene" id="uc0b2">
-  <div class="s-head">
-    <div class="stag">With Dhara</div>
-    <div class="hospline" style="color:var(--grey2);">PGIMER Chandigarh · Emergency Ward · 2:47 AM</div>
-    <div class="shl">One tap. Everything the doctor needs.</div>
-  </div>
-  <div class="s-phone-row">
-    <div class="pcard">
-      <div class="pctop"><div class="pcico">D</div><span class="pcnm">DHARA</span></div>
-      <div class="pcmsg">Dr. Sharma requests access to your health record</div>
-      <div class="pcsub">PGIMER Chandigarh · Emergency · Nephrology</div>
-      <div class="pcdur"><span class="pcdl">Duration</span><span class="pcdv">24 HOURS</span></div>
-      <div class="pcact" id="pcact">
-        <button class="bgrant" onclick="grantAccess()">Grant Access</button>
-        <button class="bdecline" onclick="declineAccess()">Decline</button>
-      </div>
-      <div class="pgrant-line" id="grantLine">✓ &nbsp;Access granted · Audit logged</div>
-      <div class="pdecline-state" id="declineLine">✗ &nbsp;Access declined</div>
-      <button class="precon" id="reconBtn" onclick="resetCard()">↩ &nbsp;Reconsider</button>
-    </div>
-    <div class="s-scope">
-      <div class="scope-label">Access request</div>
-      <div class="scope-line">Dr. Sharma · PGIMER Chandigarh</div>
-      <div class="scope-line">Department: Emergency — Nephrology</div>
-      <div class="scope-line">Duration: 24 hours · Active consultation only</div>
-      <div class="scope-line">Audit logged · Revocable at any time</div>
-    </div>
-  </div>
-  <div class="s-content">
-    <div class="dark-overlay" id="darkOverlay"><div class="overlay-hint">Grant access to illuminate</div></div>
-    <div class="decline-overlay" id="declineOverlay">
-      <div class="do-title">Access declined.</div>
-      <div class="do-rx">Gentamicin 240mg IV prescribed.</div>
-      <div class="do-note">Without the record, the doctor treats blind. The same prescription. The same missed interaction. The same outcome as before Dhara existed.</div>
-    </div>
-    <div class="sfields">
-      <div class="sfrow" id="sf0"><div class="sflbl">Prior surgeries</div><div class="sfval"><div class="sfempty"><div class="sfbar"></div><div class="sfunk">—</div></div></div></div>
-      <div class="sfrow" id="sf1"><div class="sflbl">Immunosuppressants</div><div class="sfval"><div class="sfempty"><div class="sfbar"></div><div class="sfunk">—</div></div></div></div>
-      <div class="sfrow" id="sf2"><div class="sflbl">Cardiac history</div><div class="sfval"><div class="sfempty"><div class="sfbar"></div><div class="sfunk">—</div></div></div></div>
-      <div class="sfrow" id="sf3"><div class="sflbl">Kidney baseline</div><div class="sfval"><div class="sfempty"><div class="sfbar"></div><div class="sfunk">—</div></div></div></div>
-      <div class="sfrow" id="sf4"><div class="sflbl">Current medications</div><div class="sfval"><div class="sfempty"><div class="sfbar"></div><div class="sfunk">—</div></div></div></div>
-      <div class="sfrow" id="sf5"><div class="sflbl">Allergies</div><div class="sfval"><div class="sfempty"><div class="sfbar"></div><div class="sfunk">—</div></div></div></div>
-    </div>
-    <div class="dalert" id="dalert">
-      <div class="dah">⚠ &nbsp;Drug interaction — caught before prescription</div>
-      <div class="dab">Patient on active immunosuppressant protocol. <strong>Gentamicin / Tobramycin contraindicated.</strong> Recommended: <strong>Meropenem or Pip-Taz</strong> for infection management.</div>
-    </div>
-    <div class="afooter" id="afooter">Access: Dr. Sharma · PGIMER Chandigarh · Emergency · 24hr · Patient retains full control · Revocable · Audit logged</div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     UC02 · CONSENT
-     ═══════════════════════════════════════════ -->
-
-<!-- UC02 · Beat 1: Consent form problem -->
-<div class="scene" id="uc1b0">
-  <div class="fhd">
-    <div class="btag">Failure · Consent Without Understanding</div>
-    <div class="hospline">Max Super Speciality Hospital · Admission Desk · New Delhi</div>
-    <div class="big-stmt" style="margin-top:10px;">Patient signs. Nobody reads.</div>
-    <div class="pres" style="margin-top:6px;">A four-page hospital consent form. 847 million outpatient visits per year. Every one begins with this form.</div>
-  </div>
-  <div style="flex:1;padding:24px 48px;display:flex;flex-direction:column;gap:14px;overflow:hidden;">
-    <div class="cgrid">
-      <div class="ccard cc-red"><div class="cc-l">Purpose</div><div class="cc-v">Unspecified</div><div class="cc-s">Form states "treatment and related purposes"</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Data recipients</div><div class="cc-v">Affiliates — undefined</div><div class="cc-s">"Shared with group companies and partners"</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Duration</div><div class="cc-v">Indefinite</div><div class="cc-s">No expiry. No revocation mechanism.</div></div>
-      <div class="ccard cc-red"><div class="cc-l">AI training</div><div class="cc-v">Not mentioned</div><div class="cc-s">Data used to train clinical models without disclosure</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Research sharing</div><div class="cc-v">Blanket authorisation</div><div class="cc-s">"May be used for medical research"</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Patient control</div><div class="cc-v">None</div><div class="cc-s">No portal. No revocation. No audit trail.</div></div>
-    </div>
-  </div>
-  <div class="b0-alert">
-    <div class="alth">✗ &nbsp;DPDP 2023 violation</div>
-    <div class="altb">Every one of these consent clauses fails Rule 3 (notice), Rule 6 (purpose limitation), and S.6 (specificity). Enforcement begins <strong>May 13, 2027.</strong> Exposure: ₹50–250 Crore per violation category.</div>
-  </div>
-</div>
-
-<!-- UC02 · Beat 2: Scale -->
-<div class="scene" id="uc1b1">
-  <div class="stat-wrap">
-    <div class="btag">Scale · The Consent Crisis</div>
-    <div class="stat-big">847M</div>
-    <div class="stat-label">Outpatient consultations per year in India.<br>Every one begins with an invalid consent form.</div>
-    <div class="stat-sub" style="margin-top:16px;">Under DPDP 2023, consent must be: purpose-specific, freely given, informed, and revocable. Generic hospital consent forms fail all four criteria. Every competitor platform — HealthPlix, EkaCare, Practo — routes data under these same forms.</div>
-    <div class="stat-row" style="margin-top:28px;">
-      <div class="stat-item"><div class="si-num">₹250Cr</div><div class="si-label">Max penalty per violation</div><div class="si-val">S.16 DPDP · per category · per incident</div></div>
-      <div class="stat-item"><div class="si-num">May 2027</div><div class="si-label">Enforcement begins</div><div class="si-val">Every platform must be compliant by this date</div></div>
-      <div class="stat-item"><div class="si-num">0</div><div class="si-label">Competitors with valid consent</div><div class="si-val">No Indian health platform has resolved this</div></div>
-    </div>
-    <div class="stat-alert">
-      <div class="sa-txt">The window to build consent-native architecture closes at enforcement. Retrofitting is not possible.</div>
-    </div>
-  </div>
-</div>
-
-<!-- UC02 · Beat 3: Dhara Consent -->
-<div class="scene" id="uc1b2">
-  <div class="rh">
-    <div class="stag">With Dhara</div>
-    <div class="hospline" style="color:var(--grey2);">Dhara ID Onboarding · Patient consent capture</div>
-    <div class="shl">Per purpose. Per recipient. Per duration.</div>
-  </div>
-  <div class="rb">
-    <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--grey2);margin-bottom:8px;">Your data. Your control. Each bucket is a separate consent.</div>
-    <div class="tlist">
-      <div class="titem"><div><div class="tname">Record storage</div><div class="tsub">Your health records stored securely in your Dhara ID</div></div><div class="ton">Active ✓</div></div>
-      <div class="titem"><div><div class="tname">Care ID access</div><div class="tsub">Your designated family member or caregiver</div></div><div class="ton">Active ✓</div></div>
-      <div class="titem"><div><div class="tname">Provider access</div><div class="tsub">Your primary doctor — revocable at any time</div></div><div class="ton">Active ✓</div></div>
-      <div class="titem"><div><div class="tname">Emergency access</div><div class="tsub">Time-limited, scoped, audit-logged per event</div></div><div class="ton">Active ✓</div></div>
-      <div class="titem"><div><div class="tname">AI model training</div><div class="tsub">Anonymised data to improve clinical AI models</div></div><div class="toff">Off ·</div></div>
-      <div class="titem"><div><div class="tname">Research sharing</div><div class="tsub">De-identified data for approved medical research</div></div><div class="toff">Off ·</div></div>
-    </div>
-    <div style="margin-top:auto;padding-top:16px;border-top:1px solid var(--rule);">
-      <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.10em;color:var(--teal);">Every toggle is an audit event. Every change is timestamped. DPDP-native by architecture, not by policy.</div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     UC03 · PHARMACY
-     ═══════════════════════════════════════════ -->
-
-<!-- UC03 · Beat 1: Dispensing error -->
-<div class="scene" id="uc2b0">
-  <div class="fhd">
-    <div class="btag">Failure · Dispensing Error</div>
-    <div class="hospline">Medicals shop · adjoining clinic · handwritten prescription</div>
-    <div class="big-stmt" style="margin-top:10px;">Metformin. Or Metoprolol.<br>The pharmacist couldn't tell.</div>
-    <div class="pres" style="margin-top:6px;">Diabetic patient. Cardiac drug dispensed. No interaction check. No verification. No record.</div>
-  </div>
-  <div style="flex:1;padding:24px 48px;display:flex;flex-direction:column;gap:14px;overflow:hidden;">
-    <div class="cgrid">
-      <div class="ccard cc-red"><div class="cc-l">Prescription</div><div class="cc-v">Handwritten</div><div class="cc-s">Doctor's script — no digital record</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Drug dispensed</div><div class="cc-v">Metoprolol 50mg</div><div class="cc-s">Prescribed: Metformin 500mg</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Interaction check</div><div class="cc-v">None performed</div><div class="cc-s">No system. No alert. No record.</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Patient identity</div><div class="cc-v">Verbal only</div><div class="cc-s">No verification of who is collecting</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Audit trail</div><div class="cc-v">None</div><div class="cc-s">If challenged: no evidence either way</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Liability holder</div><div class="cc-v">Pharmacist</div><div class="cc-s">Criminal + civil + DPDP exposure</div></div>
-    </div>
-  </div>
-  <div class="b0-alert">
-    <div class="alth">✗ &nbsp;Wrong drug. Right silence.</div>
-    <div class="altb">The pharmacist had no way to verify the prescription, the patient, or the interaction. <strong>In India, 1.2 million independent pharmacies operate this way every day.</strong></div>
-  </div>
-</div>
-
-<!-- UC03 · Beat 2: Legal exposure -->
-<div class="scene" id="uc2b1">
-  <div class="stat-wrap">
-    <div class="btag">Consequence · Four Layers of Liability</div>
-    <div class="big-stmt">Every handwritten prescription<br>is a liability event.</div>
-    <div class="big-sub" style="margin-top:8px;">The pharmacist doesn't know it. Nobody told them.</div>
-    <div class="lstack" style="margin-top:28px;">
-      <div class="li-row"><div class="li-num">S22</div><div class="li-body"><div class="li-act">DPDP 2023</div><div class="li-desc">Dispensing without verified patient identity = data violation</div><div class="li-pen">₹50 Crore per violation</div></div></div>
-      <div class="li-row"><div class="li-num">CDSCO</div><div class="li-body"><div class="li-act">Drugs & Cosmetics Act</div><div class="li-desc">Dispensing a prescription drug without valid prescription</div><div class="li-pen">Criminal prosecution · licence cancellation</div></div></div>
-      <div class="li-row"><div class="li-num">CPA</div><div class="li-body"><div class="li-act">Consumer Protection Act 2019</div><div class="li-desc">Deficiency in service · patient harm</div><div class="li-pen">Civil damages · compensation order</div></div></div>
-      <div class="li-row"><div class="li-num">IPC</div><div class="li-body"><div class="li-act">IPC Section 304A</div><div class="li-desc">Death or grievous hurt by negligent act</div><div class="li-pen">Up to 2 years imprisonment</div></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- UC03 · Beat 3: Dhara Pharmacy routing -->
-<div class="scene" id="uc2b2">
-  <div class="rh">
-    <div class="stag">With Dhara</div>
-    <div class="hospline" style="color:var(--grey2);">Pharmacy routing · Digital verified prescription</div>
-    <div class="shl">The pharmacist is protected. The record proves it.</div>
-  </div>
-  <div class="rb">
-    <div class="cgrid">
-      <div class="ccard cc-teal"><div class="cc-l">Prescription</div><div class="cc-v">QR-verified digital</div><div class="cc-s">Dr. Sharma · PGIMER · timestamp + signature</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Drug correct</div><div class="cc-v">Metformin 500mg ✓</div><div class="cc-s">Matched against prescription — dispensed correctly</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Interaction check</div><div class="cc-v">Passed ✓</div><div class="cc-s">No contraindications for this patient's active medications</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Patient identity</div><div class="cc-v">Dhara ID verified</div><div class="cc-s">QR scan · biometric match · audit logged</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Audit trail</div><div class="cc-v">Complete</div><div class="cc-s">Prescriber → pharmacy → patient · immutable log</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Liability shield</div><div class="cc-v">Pharmacist protected</div><div class="cc-s">Digital evidence chain satisfies all 4 liability layers</div></div>
-    </div>
-    <div style="margin-top:auto;padding-top:16px;border-top:1px solid var(--rule);">
-      <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.10em;color:var(--teal);">Dhara routes ₹31/fill. Pharmacist pays for legal protection, not a network fee. Sales motion: shield, not service.</div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     UC04 · SETU
-     ═══════════════════════════════════════════ -->
-
-<!-- UC04 · Beat 1: Transplant coordination failure -->
-<div class="scene" id="uc3b0">
-  <div class="fhd">
-    <div class="btag">Failure · Transplant Coordination</div>
-    <div class="hospline">PGIMER Chandigarh — Chennai · Organ available · 4-hour viability window</div>
-    <div class="big-stmt" style="margin-top:10px;">Organ available. Patient waiting.<br>System: telephone.</div>
-    <div class="pres" style="margin-top:6px;">Compatible kidney. O+ blood type. Patient on waiting list 3 years. Distance: 2,200 km. Coordination: manual phone calls and fax.</div>
-  </div>
-  <div style="flex:1;padding:24px 48px;display:flex;flex-direction:column;gap:14px;overflow:hidden;">
-    <div class="cgrid">
-      <div class="ccard cc-red"><div class="cc-l">Organ viability</div><div class="cc-v">4–6 hours</div><div class="cc-s">Kidney · cold ischaemia time · hard deadline</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Time elapsed</div><div class="cc-v">6 hours 20 min</div><div class="cc-s">Phone calls · registry checks · manual verification</div></div>
-      <div class="ccard cc-red"><div class="cc-l">NOTTO coordination</div><div class="cc-v">Manual</div><div class="cc-s">No real-time digital link between centres</div></div>
-      <div class="ccard cc-red"><div class="cc-l">HLA matching</div><div class="cc-v">Paper record</div><div class="cc-s">Faxed from Chennai. Arrived page 3 of 4.</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Outcome</div><div class="cc-v">Organ discarded</div><div class="cc-s">Window exceeded. Patient remains on list.</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Next opportunity</div><div class="cc-v">Unknown</div><div class="cc-s">Average wait from this point: 2–4 years additional</div></div>
-    </div>
-  </div>
-  <div class="b0-alert">
-    <div class="alth">✗ &nbsp;The organ existed. The system couldn't connect it.</div>
-    <div class="altb">India has no real-time digital organ coordination infrastructure. <strong>NOTTO runs on phone calls and fax.</strong> Every wasted organ is a coordination failure, not a supply failure.</div>
-  </div>
-</div>
-
-<!-- UC04 · Beat 2: Scale -->
-<div class="scene" id="uc3b1">
-  <div class="stat-wrap">
-    <div class="btag">Scale · Transplant Crisis</div>
-    <div class="stat-big">500K</div>
-    <div class="stat-label">Patients on transplant waiting lists in India.<br>8,000 transplants performed per year.</div>
-    <div class="stat-sub" style="margin-top:16px;">That is a 1.6% match rate. 98.4% of patients who need a transplant will not receive one this year. Not because organs don't exist — India's deceased donor rates are rising — but because the coordination infrastructure to connect them does not exist at speed.</div>
-    <div class="stat-row" style="margin-top:28px;">
-      <div class="stat-item"><div class="si-num">7 yrs</div><div class="si-label">Average wait time</div><div class="si-val">Kidney transplant, India, 2024</div></div>
-      <div class="stat-item"><div class="si-num">4–6 hrs</div><div class="si-label">Kidney viability window</div><div class="si-val">Cold ischaemia — hard deadline</div></div>
-      <div class="stat-item"><div class="si-num">PGIMER</div><div class="si-label">SAHI AI Centre of Excellence</div><div class="si-val">Named in MoHFW SAHI doc, Feb 2026. Setu is deployed here.</div></div>
-    </div>
-    <div class="stat-alert">
-      <div class="sa-txt">"The organs exist. The system can't connect them in time." — that is the problem Setu solves.</div>
-    </div>
-  </div>
-</div>
-
-<!-- UC04 · Beat 3: Setu -->
-<div class="scene" id="uc3b2">
-  <div class="rh">
-    <div class="stag">Setu · Transplant Coordination</div>
-    <div class="hospline" style="color:var(--grey2);">PGIMER Chandigarh · Nephrology · Real-time match</div>
-    <div class="shl">NOTTO-aligned. Real-time. 47 minutes.</div>
-  </div>
-  <div class="rb">
-    <div class="cgrid">
-      <div class="ccard cc-teal"><div class="cc-l">Organ available</div><div class="cc-v">Chennai · Kidney · O+</div><div class="cc-s">Registered in Setu at time of harvest · 0 min</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Patient match</div><div class="cc-v">PGIMER · O+ · HLA 5/6</div><div class="cc-s">Crossmatch negative · waiting 3 years · highest priority</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Match confirmed</div><div class="cc-v">12 minutes</div><div class="cc-s">Digital verification · NOTTO compliance check · approval</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Logistics arranged</div><div class="cc-v">19 minutes</div><div class="cc-s">Green corridor · flight booking · cold chain confirmed</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Surgical team notified</div><div class="cc-v">22 minutes</div><div class="cc-s">PGIMER transplant team · OT block · patient prepped</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Total coordination time</div><div class="cc-v">47 minutes</div><div class="cc-s">vs. 6h 20 min manual. Well within viability window.</div></div>
-    </div>
-    <div style="margin-top:auto;padding-top:16px;border-top:1px solid var(--rule);">
-      <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.10em;color:var(--teal);">Setu is free to all hospitals, all departments. Revenue comes from the routing of pharmacy and pathology orders generated by transplant patients — who generate 3–10× more transaction volume than general patients.</div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     UC05 · VAANI
-     ═══════════════════════════════════════════ -->
-
-<!-- UC05 · Beat 1: Documentation burden -->
-<div class="scene" id="uc4b0">
-  <div class="fhd">
-    <div class="btag">Failure · Documentation Burden</div>
-    <div class="hospline">Private clinic · 40 patients scheduled · 8 minutes per slot</div>
-    <div class="big-stmt" style="margin-top:10px;">8 minutes per patient.<br>3 minutes typing. 5 minutes doctoring.</div>
-    <div class="pres" style="margin-top:6px;">The EMR was built to help doctors. It is consuming 37% of consultation time.</div>
-  </div>
-  <div style="flex:1;padding:24px 48px;display:flex;flex-direction:column;gap:14px;overflow:hidden;">
-    <div class="cgrid">
-      <div class="ccard cc-red"><div class="cc-l">Consultation time</div><div class="cc-v">8 minutes</div><div class="cc-s">Standard slot in Indian private practice</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Documentation</div><div class="cc-v">3 minutes</div><div class="cc-s">EMR entry, ICD coding, SOAP note, prescription</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Time with patient</div><div class="cc-v">5 minutes</div><div class="cc-s">Examination + history + explanation</div></div>
-      <div class="ccard cc-red"><div class="cc-l">ICD-10 accuracy</div><div class="cc-v">~60%</div><div class="cc-s">Manual entry under time pressure — frequent miscoding</div></div>
-      <div class="ccard cc-red"><div class="cc-l">SOAP notes</div><div class="cc-v">Incomplete</div><div class="cc-s">Assessment and plan often abbreviated or skipped</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Doctor burnout</div><div class="cc-v">47% rate</div><div class="cc-s">IMA 2024 survey · documentation cited as top factor</div></div>
-    </div>
-  </div>
-  <div class="b0-alert">
-    <div class="alth">✗ &nbsp;The scribe problem</div>
-    <div class="altb">India has no clinical scribe infrastructure. Doctors in the US and UK use human scribes. Indian doctors type — in Hindi, in English, across systems that don't talk to each other. <strong>Every keystroke is consultation time stolen from the patient.</strong></div>
-  </div>
-</div>
-
-<!-- UC05 · Beat 2: Scale -->
-<div class="scene" id="uc4b1">
-  <div class="stat-wrap">
-    <div class="btag">Scale · Lost Doctor-Years</div>
-    <div class="stat-big">30M hrs</div>
-    <div class="stat-label">Lost to clinical documentation in India every year.<br>600 million consultations × 3 minutes each.</div>
-    <div class="stat-sub" style="margin-top:16px;">At 8 working hours per day, that is 10,000 full-time doctors doing nothing but documentation. In a country with a doctor-to-patient ratio of 1:834, every minute reclaimed from paperwork is a minute returned to care.</div>
-    <div class="stat-row" style="margin-top:28px;">
-      <div class="stat-item"><div class="si-num">10,000</div><div class="si-label">Doctor-years lost annually</div><div class="si-val">To EMR documentation in India</div></div>
-      <div class="stat-item"><div class="si-num">1:834</div><div class="si-label">Doctor-patient ratio</div><div class="si-val">India · WHO recommends 1:1000</div></div>
-      <div class="stat-item"><div class="si-num">₹187/hr</div><div class="si-label">Vaani blended rate</div><div class="si-val">₹4,999/mo GP · tiered psych · margin 56%</div></div>
-    </div>
-    <div class="stat-alert">
-      <div class="sa-txt">Sarvam ASR · Hindi-native · on-device transcription · doctor-confirms-all · outside CDSCO SaMD classification.</div>
-    </div>
-  </div>
-</div>
-
-<!-- UC05 · Beat 3: Vaani -->
-<div class="scene" id="uc4b2">
-  <div class="rh">
-    <div class="stag">Vaani · Clinical Scribe</div>
-    <div class="hospline" style="color:var(--grey2);">Dr. Patel · Private clinic · Chandigarh · Hindi + English</div>
-    <div class="shl">Doctor speaks. Vaani structures. Doctor confirms.</div>
-  </div>
-  <div class="rb">
-    <div class="cgrid">
-      <div class="ccard cc-teal"><div class="cc-l">Transcription</div><div class="cc-v">Real-time · Hindi + English</div><div class="cc-s">Sarvam ASR · &lt;300ms latency · on-device</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">SOAP note</div><div class="cc-v">Auto-drafted</div><div class="cc-s">Structured from conversation · ready in 20 seconds</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">ICD-10 code</div><div class="cc-v">Suggested · J18.9</div><div class="cc-s">Community-acquired pneumonia · doctor confirms</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Doctor action</div><div class="cc-v">1 tap to confirm</div><div class="cc-s">Every suggestion requires explicit confirmation. Nothing auto-submits.</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Time saved</div><div class="cc-v">2.5 min per consult</div><div class="cc-s">At 40 patients/day: 100 minutes returned to care</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">CDSCO SaMD class</div><div class="cc-v">Class A / B</div><div class="cc-s">Doctor-confirms-all architecture. No central approval required.</div></div>
-    </div>
-    <div style="margin-top:auto;padding-top:16px;border-top:1px solid var(--rule);">
-      <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.10em;color:var(--teal);">Vaani is a scribe, not a decision maker. Every AI suggestion requires the doctor's explicit confirmation. The doctor's clinical judgment is never bypassed.</div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     UC06 · DATA
-     ═══════════════════════════════════════════ -->
-
-<!-- UC06 · Beat 1: Data without consent -->
-<div class="scene" id="uc5b0">
-  <div class="fhd">
-    <div class="btag">Failure · Data Without Consent</div>
-    <div class="hospline">Every Indian health platform · Training AI on patient data · No purpose-specific consent</div>
-    <div class="big-stmt" style="margin-top:10px;">The models are trained.<br>The patients don't know.</div>
-    <div class="pres" style="margin-top:6px;">A psychiatric patient's consultation history used to train a clinical LLM. No AI training consent was ever obtained.</div>
-  </div>
-  <div style="flex:1;padding:24px 48px;display:flex;flex-direction:column;gap:14px;overflow:hidden;">
-    <div class="cgrid">
-      <div class="ccard cc-red"><div class="cc-l">Consent obtained for</div><div class="cc-v">Treatment</div><div class="cc-s">Generic hospital form. AI training not mentioned.</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Data used for</div><div class="cc-v">AI model training</div><div class="cc-s">Clinical LLM. Consultation transcripts. Diagnoses.</div></div>
-      <div class="ccard cc-red"><div class="cc-l">DPDP requirement</div><div class="cc-v">Purpose-specific consent</div><div class="cc-s">S.6: every purpose needs separate, explicit consent</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Psychiatric data</div><div class="cc-v">Sensitive personal data</div><div class="cc-s">Highest protection class under DPDP S.8</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Enforcement date</div><div class="cc-v">May 13, 2027</div><div class="cc-s">Every training corpus must be consented by this date</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Competitor exposure</div><div class="cc-v">₹200Cr+ per platform</div><div class="cc-s">EkaCare Parrotlet-a · HealthPlix AI · undisclosed others</div></div>
-    </div>
-  </div>
-  <div class="b0-alert">
-    <div class="alth">✗ &nbsp;The enforcement clock is running</div>
-    <div class="altb">When DPDP enforcement begins, every AI model trained on unconsented patient data becomes a liability. <strong>No competitor has resolved this. Dhara is the only platform with purpose-specific AI training consent built into onboarding.</strong></div>
-  </div>
-</div>
-
-<!-- UC06 · Beat 2: The asset -->
-<div class="scene" id="uc5b1">
-  <div class="stat-wrap">
-    <div class="btag">Opportunity · The Missing Dataset</div>
-    <div class="stat-big">600M</div>
-    <div class="stat-label">Clinical data points generated in India per year.<br>This is the world's largest clinical AI training dataset. It doesn't exist yet.</div>
-    <div class="stat-sub" style="margin-top:16px;">Fragmented across 600,000 clinics. No structured format. No consent architecture. No longitudinal view. AI companies building for India need Indian clinical data — Indian brand names, Indian disease patterns, Hindi terminology. Nobody has it. Dhara builds it with consent, not extraction.</div>
-    <div class="stat-row" style="margin-top:28px;">
-      <div class="stat-item"><div class="si-num">FHIR R4</div><div class="si-label">Native structure</div><div class="si-val">Every record machine-readable from day one</div></div>
-      <div class="stat-item"><div class="si-num">BODH</div><div class="si-label">Government validation</div><div class="si-val">NHA + IIT Kanpur · Dhara is BODH's data source</div></div>
-      <div class="stat-item"><div class="si-num">₹5L/mo</div><div class="si-label">Enterprise AI subscription</div><div class="si-val">Pharma · research · AI companies · consented access</div></div>
-    </div>
-    <div class="stat-alert">
-      <div class="sa-txt">Intelligence is downstream of continuity. You cannot train a trustworthy clinical AI on fragmented, unconsented records.</div>
-    </div>
-  </div>
-</div>
-
-<!-- UC06 · Beat 3: Dhara data layer -->
-<div class="scene" id="uc5b2">
-  <div class="rh">
-    <div class="stag">Dhara · Data Layer</div>
-    <div class="hospline" style="color:var(--grey2);">India's first consent-native clinical intelligence dataset</div>
-    <div class="shl">Patient-owned. Consented. Structured. Longitudinal.</div>
-  </div>
-  <div class="rb">
-    <div class="cgrid">
-      <div class="ccard cc-teal"><div class="cc-l">Consent architecture</div><div class="cc-v">Per-purpose · per-bucket</div><div class="cc-s">AI training = explicit opt-in · separate from treatment consent</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Data structure</div><div class="cc-v">FHIR R4 · ICD-10</div><div class="cc-s">Machine-readable from day one · BODH-compatible</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Longitudinal</div><div class="cc-v">Follows the patient</div><div class="cc-s">Not trapped in institutions · true continuity record</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Subscription — doctors</div><div class="cc-v">₹2,999/month</div><div class="cc-s">Clinical decision support · Indian drug names · Hindi patterns</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">Subscription — pharma</div><div class="cc-v">₹50,000–5,00,000/mo</div><div class="cc-s">Research access · anonymised · consented · BODH validated</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">BODH validation</div><div class="cc-v">Government certified</div><div class="cc-s">NHA benchmark · the data SAHI mandates · only Dhara can provide</div></div>
-    </div>
-    <div style="margin-top:auto;padding-top:16px;border-top:1px solid var(--rule);">
-      <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.10em;color:var(--teal);">Prerequisite: super-specialty data volume first. Data subscriptions are Year 3+ revenue. The infrastructure is built from day one.</div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     UC07 · THESIS
-     ═══════════════════════════════════════════ -->
-
-<!-- UC07 · Beat 1: The gap -->
-<div class="scene" id="uc6b0">
-  <div class="fhd">
-    <div class="btag">Thesis · India Has Identity. Not Memory.</div>
-    <div class="hospline">National Health Authority · ABDM · 88 crore ABHA IDs created</div>
-    <div class="big-stmt" style="margin-top:10px;">India built the identity layer.<br>Nobody built the memory layer.</div>
-    <div class="pres" style="margin-top:6px;">An ABHA ID tells the system who the patient is. It does not tell the system what happened to them.</div>
-  </div>
-  <div style="flex:1;padding:24px 48px;display:flex;flex-direction:column;gap:14px;overflow:hidden;">
-    <div class="cgrid">
-      <div class="ccard cc-teal"><div class="cc-l">ABDM</div><div class="cc-v">Identity layer ✓</div><div class="cc-s">88 crore ABHA IDs · interoperability rails · consent exchange</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">SAHI</div><div class="cc-v">AI governance ✓</div><div class="cc-s">MoHFW Feb 2026 · 7 sutras · 32 recommendations</div></div>
-      <div class="ccard cc-teal"><div class="cc-l">BODH</div><div class="cc-v">AI benchmarking ✓</div><div class="cc-s">NHA + IIT Kanpur · model validation · bias testing</div></div>
-      <div class="ccard cc-red"><div class="cc-l">Memory layer</div><div class="cc-v">Missing ✗</div><div class="cc-s">No longitudinal patient record infrastructure exists at scale</div></div>
-      <div class="ccard cc-red"><div class="cc-l">SAHI Rec 9</div><div class="cc-v">Unfulfilled</div><div class="cc-s">Mandates private sector longitudinal data participation. Nobody answered.</div></div>
-      <div class="ccard cc-red"><div class="cc-l">BODH data source</div><div class="cc-v">Undefined</div><div class="cc-s">BODH benchmarks AI models. Needs structured clinical data. Doesn't have it.</div></div>
-    </div>
-  </div>
-  <div class="b0-alert">
-    <div class="alth">✗ &nbsp;Identity without memory is a name tag, not a medical history</div>
-    <div class="altb">88 crore Indians have an ABHA ID. <strong>Not one of them has a longitudinal clinical memory that follows them across hospitals.</strong> The government built every layer except this one.</div>
-  </div>
-</div>
-
-<!-- UC07 · Beat 2: The stack visualised -->
-<div class="scene" id="uc6b1">
-  <div class="stat-wrap">
-    <div class="btag">Architecture · The Stack With a Gap</div>
-    <div class="big-stmt">Every layer of India's health AI<br>stack exists. Except the middle one.</div>
-    <div style="margin-top:28px;display:flex;gap:48px;align-items:flex-start;">
+  <!-- ======================= UC (data-uc 1=Emergency 2=Transplant 3=Rx 4=Vaani 5=Consent 6=Data→Intel) ======================= -->
+  <!-- ======================= TRANSPLANT (now data-uc 2) ======================= -->
+  <div class="scene" data-uc="2">
+    <div class="two">
       <div>
-        <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--grey2);margin-bottom:12px;">Current state</div>
-        <div class="arch-stack">
-          <div class="arch-layer al-teal"><div class="al-num">01</div><div class="al-name">ABDM</div><div class="al-tag">Identity · interoperability</div></div>
-          <div class="arch-arrow">↓</div>
-          <div class="arch-layer al-miss"><div class="al-num">??</div><div class="al-name" style="color:var(--red-mid);">Memory layer</div><div class="al-tag" style="color:var(--red-mid);">Missing</div></div>
-          <div class="arch-arrow">↓</div>
-          <div class="arch-layer al-teal"><div class="al-num">03</div><div class="al-name">SAHI</div><div class="al-tag">AI governance</div></div>
-          <div class="arch-arrow">↓</div>
-          <div class="arch-layer al-teal"><div class="al-num">04</div><div class="al-name">BODH</div><div class="al-tag">AI benchmarking</div></div>
-          <div class="arch-arrow">↓</div>
-          <div class="arch-layer al-miss"><div class="al-num">05</div><div class="al-name" style="color:var(--red-mid);">Clinical AI</div><div class="al-tag" style="color:var(--red-mid);">Ungovernable without memory</div></div>
+        <div class="eyebrow warn">Kidney transplant · the real journey</div>
+        <div class="chip rose">The problem</div>
+        <h1>A transplant isn't an operation.<br>It's a <span class="bad">months-long maze</span>.</h1>
+        <p class="lede">Dialysis. Tissue typing. Crossmatch. No family match — so a <b>swap</b> or unrelated donor. An <b>Authorization Committee</b>. A mountain of labs and legal papers — each on a <b>separate island</b>, mostly on paper, nothing connected.</p>
+        <div class="teach warn"><b>The lesson:</b> a transplant is <b>coordination</b>, not one event. While the paper shuffles between desks, the patient stays on dialysis — deteriorating.</div>
+        <div class="counter-strip">
+          <div class="cs-item"><div class="cs-n" id="tWeeks">0</div><div class="cs-l">Weeks lost to coordination</div></div>
+          <div class="cs-item"><div class="cs-n" id="tDial">0</div><div class="cs-l">Dialysis sessions endured</div></div>
         </div>
       </div>
-      <div style="flex:1;padding-top:32px;">
-        <div style="font-size:14px;color:var(--grey);line-height:1.8;margin-bottom:16px;">SAHI mandates consent-native, FHIR-structured longitudinal data. BODH needs it to benchmark AI models. Clinical AI needs it to learn from. <strong style="color:var(--white);font-weight:normal;">Without the memory layer, the entire stack is theoretical.</strong></div>
-        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.12em;color:var(--red-mid);text-transform:uppercase;">"The government asked for it. No one delivered it."</div>
-      </div>
+      <div class="maze"><div class="maze-inner">
+        <div class="patient-core"><div class="pc-t">Waiting</div><div class="pc-n">R. Devi · 42F</div><div class="pc-s">O+ · ESRD · on dialysis</div></div>
+        <div class="island i1"><div class="is-ic">🩸</div><div class="is-l">Dialysis centre</div><div class="is-tag">3× / week</div></div>
+        <div class="island i2"><div class="is-ic">🧬</div><div class="is-l">HLA tissue typing</div><div class="is-tag">private lab</div></div>
+        <div class="island i3"><div class="is-ic">🔬</div><div class="is-l">Crossmatch</div><div class="is-tag">hospital lab</div></div>
+        <div class="island i4"><div class="is-ic">💉</div><div class="is-l">Viral panel</div><div class="is-tag">another lab</div></div>
+        <div class="island i5 fail"><div class="is-ic">⚠</div><div class="is-l">Family match: FAILED</div><div class="is-tag">incompatible</div></div>
+        <div class="island i6"><div class="is-ic">🤝</div><div class="is-l">Swap pair search</div><div class="is-tag">manual / phone</div></div>
+        <div class="island i7"><div class="is-ic">⚖️</div><div class="is-l">Authorization Committee</div><div class="is-tag">THOTA approval</div></div>
+        <div class="island i8"><div class="is-ic">📑</div><div class="is-l">Legal docs &amp; minutes</div><div class="is-tag">paper file</div></div>
+      </div></div>
     </div>
   </div>
-</div>
 
-<!-- UC07 · Beat 3: Dhara fills the gap -->
-<div class="scene" id="uc6b2">
-  <div class="rh">
-    <div class="stag">Dhara · The Memory Layer</div>
-    <div class="hospline" style="color:var(--grey2);">ABDM → Dhara → SAHI → BODH → Clinical Intelligence</div>
-    <div class="shl">Healthcare intelligence is not where we start.<br>It is what naturally emerges once healthcare finally remembers.</div>
-  </div>
-  <div class="rb">
-    <div style="display:flex;gap:48px;align-items:flex-start;">
+  <div class="scene" data-uc="2">
+    <div class="two">
       <div>
-        <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--grey2);margin-bottom:12px;">Complete stack</div>
-        <div class="arch-stack">
-          <div class="arch-layer al-teal"><div class="al-num">01</div><div class="al-name">ABDM</div><div class="al-tag">Identity · interoperability</div></div>
-          <div class="arch-arrow">↓</div>
-          <div class="arch-layer" style="background:rgba(100,175,195,0.12);border-color:rgba(100,175,195,0.40) !important;"><div class="al-num" style="color:var(--teal);">02</div><div class="al-name" style="color:var(--teal);">Dhara</div><div class="al-tag" style="color:var(--teal);">Memory · continuity · consent</div></div>
-          <div class="arch-arrow">↓</div>
-          <div class="arch-layer al-teal"><div class="al-num">03</div><div class="al-name">SAHI</div><div class="al-tag">AI governance · Rec 9 fulfilled</div></div>
-          <div class="arch-arrow">↓</div>
-          <div class="arch-layer al-teal"><div class="al-num">04</div><div class="al-name">BODH</div><div class="al-tag">AI benchmarking · has data now</div></div>
-          <div class="arch-arrow">↓</div>
-          <div class="arch-layer al-teal"><div class="al-num">05</div><div class="al-name">Clinical AI</div><div class="al-tag">Trustworthy · consent-native · Indian</div></div>
+        <div class="eyebrow">Why it matters</div>
+        <div class="chip amber">The stakes</div>
+        <h1>Every month waiting is<br>a month the <span class="bad">body pays for</span>.</h1>
+        <p class="lede">Dialysis isn't a holding pattern — it <b>wears down the heart and vessels</b>, and rising sensitisation makes the <b>next</b> match harder. Time on the list is measured in deteriorating tissue, not inconvenience.</p>
+        <div class="founder-note"><span class="fn-ic">Founder</span> The founder has walked this maze — twice.</div>
+      </div>
+      <div><div class="curve-card">
+        <div class="cc-top"><span class="cc-ttl">Patient deterioration vs time on dialysis</span><span class="cc-sub">illustrative</span></div>
+        <svg viewBox="0 0 360 150" width="100%" height="150" preserveAspectRatio="none">
+          <defs><linearGradient id="rg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="oklch(56% 0.17 25)" stop-opacity="0.28"/><stop offset="1" stop-color="oklch(56% 0.17 25)" stop-opacity="0"/></linearGradient></defs>
+          <path class="area" d="M6,140 C90,132 150,118 220,80 C275,50 320,26 354,12 L354,148 L6,148 Z"/>
+          <path class="ln" d="M6,140 C90,132 150,118 220,80 C275,50 320,26 354,12"/>
+        </svg>
+        <div style="display:flex;justify-content:space-between;margin-top:4px;"><span class="axis-l">Day 0</span><span class="axis-l">Months on dialysis →</span></div>
+        <div class="gap-row">
+          <div class="gap-bar gb-need"><div class="gb-k">Patients who need a kidney</div><div class="gb-track"><div class="gb-fill"></div></div><div class="gb-c">the need</div></div>
+          <div class="gap-bar gb-tx"><div class="gb-k">Patients who receive one</div><div class="gb-track"><div class="gb-fill"></div></div><div class="gb-c">the gap is the waitlist — and the waitlist is dialysis</div></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="scene" data-uc="2">
+    <div class="two">
+      <div>
+        <div class="eyebrow">With Dhara + Setu</div>
+        <div class="chip teal"><span>⬡</span> What Dhara does</div>
+        <h1>The maze becomes<br><span class="accent">one place</span>.</h1>
+        <p class="lede">One <b>waiting list</b>, every lab attached to the living record. The engine surfaces what a phone tree never could — a <b>swap pair</b> hiding in the pool, with an <b>explainable</b> score. <b>Try it →</b></p>
+        <div class="cta-row" id="tB3cta"><button class="btn-primary" onclick="t_runMatch()">Find matches &amp; swap pairs <span class="arrow">→</span></button></div>
+        <button class="relink" id="tB3reset" style="display:none" onclick="t_resetMatch()">↺ Reset</button>
+        <div class="teach"><b>The lesson:</b> the same scattered data, finally in one auditable place. The engine <b>assists</b> — NOTTO criteria and the clinician decide.</div>
+      </div>
+      <div><div class="card">
+        <div class="card-head"><div class="rec-badge"><span class="tick">✓</span> Setu · waiting list</div><div class="rec-id">Nephrology · O+ pool</div></div>
+        <div class="gate">ABO gate <span class="gck">✓</span> ranking only <b>within compatible groups</b> <span style="color:var(--ink-3)">· NOTTO-based</span></div>
+        <div class="wl">
+          <div class="wl-row" id="tWl0"><span class="wl-n">R. Devi</span><span class="bgp">O+ · donor B+</span><span class="ptag">⇄ swap</span><span class="wl-meta">waitlisted 14 mo · High</span></div>
+          <div class="wl-row" id="tWl1"><span class="wl-n">A. Khan</span><span class="bgp">B+ · donor O+</span><span class="ptag">⇄ swap</span><span class="wl-meta">waitlisted 9 mo · Med</span></div>
+          <div class="wl-row"><span class="wl-n">S. Rao</span><span class="bgp">A+</span><span class="wl-meta">waitlisted 22 mo · High</span></div>
+          <div class="wl-row"><span class="wl-n">M. Iqbal</span><span class="bgp">O+</span><span class="wl-meta">waitlisted 6 mo · Low</span></div>
+        </div>
+        <div class="swap-result" id="tSwap">
+          <div class="sr-h"><div class="sr-t">⇄ Swap pair found · SW-2271</div><div class="sr-score">match <b>91</b></div></div>
+          <div class="sr-d"><b>R. Devi</b> (needs O+, has a B+ donor) ⇄ <b>A. Khan</b> (needs B+, has an O+ donor). Each one's donor is the <b>other's</b> match — a paired exchange neither hospital would have found alone.</div>
+          <div class="bars">
+            <div class="bar"><div class="bl">HLA 5/6</div><div class="bt"><div class="bf" style="--w:83%"></div></div></div>
+            <div class="bar"><div class="bl">Wait time</div><div class="bt"><div class="bf" style="--w:90%"></div></div></div>
+            <div class="bar"><div class="bl">Urgency</div><div class="bt"><div class="bf" style="--w:86%"></div></div></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="scene" data-uc="2">
+    <div class="two">
+      <div>
+        <div class="eyebrow">Compliance, produced by the workflow</div>
+        <div class="chip teal"><span>⬡</span> What Dhara does</div>
+        <h1>The committee reviews and<br>approves <span class="accent">online</span>.</h1>
+        <p class="lede">A swap needs <b>Authorization Committee</b> approval under THOTA. Dhara assembles the packet from the connected record in <b>one click</b> — then each member <b>opens the reports online</b>, reviews, and approves <b>in the system</b>. No paper, no posting minutes.</p>
+        <div class="cta-row" id="tB4cta">
+          <button class="btn-primary" id="tGenBtn" onclick="t_gen()">Generate committee packet <span class="arrow">→</span></button>
+          <button class="btn-primary" id="tApprBtn" onclick="t_appr()" style="display:none">Committee approves online <span class="arrow">→</span></button>
+        </div>
+        <button class="relink" id="tB4reset" style="display:none" onclick="t_resetPacket()">↺ Reset</button>
+        <div class="shield"><span class="s-ic">🛡</span> <b>Explainable</b> · <b>THOTA-tracked</b> · <b>immutable</b> · retained <b>permanently</b></div>
+      </div>
+      <div><div class="card">
+        <div class="card-head"><div class="rec-badge"><span class="tick">⚖</span> Authorization Committee · SW-2271</div><div class="rec-id" id="tStatus">REGISTERED</div></div>
+        <div class="pipe">
+          <div class="pstep on" id="tPs0"><div class="pd"></div>Registered</div>
+          <div class="pstep" id="tPs1"><div class="pd"></div>Committee review</div>
+          <div class="pstep" id="tPs2"><div class="pd"></div>Approved</div>
+          <div class="pstep" id="tPs3"><div class="pd"></div>Paired</div>
+        </div>
+        <div class="packet">
+          <div class="prow" id="tPr0"><span class="pck">✓</span> Donor A &amp; Recipient A — records <span class="popen">↗ open</span></div>
+          <div class="prow" id="tPr1"><span class="pck">✓</span> Donor B &amp; Recipient B — records <span class="popen">↗ open</span></div>
+          <div class="prow" id="tPr2"><span class="pck">✓</span> HLA crossmatch — both pairs <span class="popen">↗ open</span></div>
+          <div class="prow" id="tPr3"><span class="pck">✓</span> Family consent — both donors <span class="popen">↗ open</span></div>
+          <div class="prow" id="tPr4"><span class="pck">✓</span> Legal documentation (THOTA) <span class="popen">↗ open</span></div>
+          <div class="prow" id="tPr5"><span class="pck">✓</span> Allocation rationale — explainable score <span class="popen">↗ open</span></div>
+        </div>
+        <div class="committee" id="tCommittee">
+          <div class="cm-h">⚖ Authorization Committee · online review</div>
+          <div class="cm-row" id="tCm0"><div class="cm-av">①</div><div><div class="cm-nm">Chairperson</div><div class="cm-role">Govt. nominee</div></div><div class="cm-status">Pending<span class="rev">reports opened ✓</span></div></div>
+          <div class="cm-row" id="tCm1"><div class="cm-av">②</div><div><div class="cm-nm">Medical expert</div><div class="cm-role">Nephrology</div></div><div class="cm-status">Pending<span class="rev">reports opened ✓</span></div></div>
+          <div class="cm-row" id="tCm2"><div class="cm-av">③</div><div><div class="cm-nm">Independent member</div><div class="cm-role">Legal</div></div><div class="cm-status">Pending<span class="rev">reports opened ✓</span></div></div>
+        </div>
+        <div class="locked-bar" id="tLock"><div class="lk">🔒</div><div class="lt"><b>Record locked.</b> Decision recorded in-system · immutable · <b>retained permanently</b> · SOTTO read-only. No role can edit or delete.</div></div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="scene" data-uc="2">
+    <div class="payoff">
+      <div class="eyebrow">The payoff</div>
+      <h1 style="text-align:center;">Months back. Less dialysis. <span class="accent">A life moved up the list.</span></h1>
+      <div class="po-compare">
+        <div class="po-col then"><div class="po-k">Today · fragmented</div>
+          <div class="po-li"><span class="pli-ic">●</span> 60+ documents across 5+ institutions</div>
+          <div class="po-li"><span class="pli-ic">●</span> Repeat labs because reports get lost</div>
+          <div class="po-li"><span class="pli-ic">●</span> Committee packet built by hand over weeks</div>
+          <div class="po-li"><span class="pli-ic">●</span> More dialysis · more deterioration</div></div>
+        <div class="po-arrow">→</div>
+        <div class="po-col now"><div class="po-k">With Dhara + Setu</div>
+          <div class="po-li"><span class="pli-ic">✓</span> One connected record, one source of truth</div>
+          <div class="po-li"><span class="pli-ic">✓</span> Explainable match · swap pair found in the pool</div>
+          <div class="po-li"><span class="pli-ic">✓</span> Packet in one click · committee approves online</div>
+          <div class="po-li"><span class="pli-ic">✓</span> Immutable record, retained permanently</div></div>
+      </div>
+      <div class="po-metric">
+        <div class="pm"><div class="pm-n">−2–3 mo</div><div class="pm-l">avoidable coordination time</div></div>
+        <div class="pm"><div class="pm-n">fewer</div><div class="pm-l">dialysis sessions endured</div></div>
+        <div class="pm"><div class="pm-n">better</div><div class="pm-l">graft outcomes &amp; lower cost</div></div>
+      </div>
+      <div class="thesis">If Dhara can integrate the <span class="hl">hardest, most document-heavy, most legally-complex</span> journey in medicine, everything downstream follows. <span class="hl">Transplant is the proof of the infrastructure.</span></div>
+      <div class="honest">We compress the months lost to <b>fragmentation</b> — not the medical workup, and not committee approval. Matching is decision-support; NOTTO &amp; the clinician decide.</div>
+    </div>
+  </div>
+
+  <!-- ======================= UC02 · EMERGENCY ======================= -->
+  <div class="scene" data-uc="1">
+    <div class="two">
+      <div>
+        <div class="eyebrow warn">Emergency admission · 2:47 AM</div>
+        <div class="chip rose">The problem</div>
+        <h1>The doctor asks.<br>The patient <span class="bad">can't answer</span>.</h1>
+        <div class="dlg">
+          <div class="dline"><div class="who">Dr. Sharma</div><div class="said">"What medications are you on?"</div></div>
+          <div class="dline pt"><div class="who">Patient</div><div class="said">"I take… tablets… many… I don't know the names. My kidneys… years ago… there was a machine…"</div></div>
+        </div>
+        <p class="lede">Acute breathlessness. Creatinine rising. <b>No record, no continuity</b> — the doctor is about to treat blind.</p>
+      </div>
+      <div><div class="card fail">
+        <div class="card-head"><div class="rec-badge fail"><span class="tick">!</span> No record available</div><div class="rec-id">A. Kaushal · 35M</div></div>
+        <div class="card-body"><div class="rec-fields">
+          <div class="frow"><div class="fl">Transplant</div><div class="fv"><span class="unk"><span class="ubar"></span>Unknown</span></div></div>
+          <div class="frow"><div class="fl">Immunosuppressants</div><div class="fv"><span class="unk"><span class="ubar"></span>Unknown</span></div></div>
+          <div class="frow"><div class="fl">Cardiac</div><div class="fv"><span class="unk"><span class="ubar"></span>Unknown</span></div></div>
+          <div class="frow"><div class="fl">Kidney baseline</div><div class="fv"><span class="unk"><span class="ubar"></span>Unknown</span></div></div>
+          <div class="frow"><div class="fl">Medications</div><div class="fv"><span class="unk"><span class="ubar"></span>Unknown</span></div></div>
+          <div class="frow"><div class="fl">Allergies</div><div class="fv"><span class="unk"><span class="ubar"></span>Unknown</span></div></div>
+        </div>
+        <div class="rx-line">Prescribed: <b>Gentamicin 240mg IV</b> · standard infection protocol</div>
+        <div class="card-alert static"><div class="ca-ic">⚠</div><div class="ca-tx"><b>Nephrotoxic in transplant patients.</b> But no one in the room knows he <em>is</em> one. The interaction is invisible.</div></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="scene" data-uc="1">
+    <div class="story">
+      <div class="eyebrow">Why Dhara exists</div>
+      <h1>This isn't a hypothetical.<br><span class="accent">It's the founder's own wrist tag.</span></h1>
+      <div class="band">
+        <div class="band-barcode"></div>
+        <div><div class="band-name">ADITYA KAUSHAL · 35M</div><div class="band-dx">PULMONARY OEDEMA</div></div>
+        <div class="band-loc">Critical Care<br>Tunisia · May 2022</div>
+      </div>
+      <div class="band-cap">Scribbled by someone not used to writing Indian names. A name, and two words — <b>nothing else.</b></div>
+      <div class="story-quote">"Creatinine 5. A ward where no one spoke my language — I described my symptoms in <span class="hl">gestures</span>. Sliding toward kidney failure for the <span class="hl">second</span> time, far from home."</div>
+      <div class="im-row">
+        <div class="im im-id"><div class="im-k">Identity ✓</div><div class="im-v">A name on a wristband. That much the system had.</div></div>
+        <div class="im im-mem"><div class="im-k">Memory ✗</div><div class="im-v">A 2005 kidney transplant · lifelong immunosuppressants · seventeen years of history — invisible, in his memory alone.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene" data-uc="1">
+    <div class="two">
+      <div>
+        <div class="eyebrow">Emergency admission · 2:47 AM · with Dhara</div>
+        <div class="chip teal"><span>⬡</span> What Dhara does</div>
+        <h1>One tap brings<br>the <span class="accent">whole history</span>.</h1>
+        <p class="lede">Dhara asks the <b>patient</b> — not the hospital — for time-boxed access. <b>Try it →</b></p>
+        <div class="cta-row" id="eCta">
+          <button class="btn-primary" onclick="e_grant()">Grant access · 24 hours <span class="arrow">→</span></button>
+          <button class="btn-ghost" onclick="e_decline()">Decline</button>
+        </div>
+        <div class="status-line granted" id="eGranted"><span class="badge">✓</span> Access granted · audit logged · expires in 24h</div>
+        <div class="status-line declined" id="eDeclined"><span class="badge">✕</span> Access declined</div>
+        <div class="cta-note" id="eNote"><span class="dot"></span> Consent-scoped · audit-logged · revocable anytime</div>
+        <button class="relink" id="eRelink" style="display:none" onclick="e_reset()">↺ Reset</button>
+        <div class="shield"><span class="s-ic">🛡</span> Break-glass access, fully <b>audited</b> — lawful even when the patient can't consent</div>
+      </div>
+      <div><div class="card">
+        <div class="card-head"><div class="rec-badge"><span class="tick">✓</span> Dhara · verified record</div><div class="rec-id">A. Kaushal · 35M</div></div>
+        <div class="card-body"><div class="rec-fields">
+          <div class="frow"><div class="fl">Transplant</div><div class="fv" id="eF0"><span class="unk"><span class="ubar"></span>Unknown</span></div></div>
+          <div class="frow"><div class="fl">Immunosuppressants</div><div class="fv" id="eF1"><span class="unk"><span class="ubar"></span>Unknown</span></div></div>
+          <div class="frow"><div class="fl">Cardiac</div><div class="fv" id="eF2"><span class="unk"><span class="ubar"></span>Unknown</span></div></div>
+          <div class="frow"><div class="fl">Kidney baseline</div><div class="fv" id="eF3"><span class="unk"><span class="ubar"></span>Unknown</span></div></div>
+          <div class="frow"><div class="fl">Medications</div><div class="fv" id="eF4"><span class="unk"><span class="ubar"></span>Unknown</span></div></div>
+          <div class="frow"><div class="fl">Allergies</div><div class="fv" id="eF5"><span class="unk"><span class="ubar"></span>Unknown</span></div></div>
+        </div>
+        <div class="card-alert" id="eAlert"><div class="ca-ic">⚠</div><div class="ca-tx"><b>Gentamicin contraindicated.</b> Nephrotoxic in transplant patients — flagged <b>before</b> the prescription is signed. Suggested: Meropenem or Pip-Taz.</div></div>
+        <div class="veil" id="eVeil"><div class="lock">🔒</div><div class="vt">Awaiting patient consent</div><div class="vs">Tap "Grant access" to illuminate</div></div>
+        <div class="decline-ov" id="eDeclineOv"><div class="do-t">Access declined.</div><div class="do-rx">Gentamicin 240mg IV prescribed.</div><div class="do-n">Without the record, the doctor treats blind — the same prescription, the same missed interaction, the same outcome as before Dhara existed.</div></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- ======================= UC03 · PRESCRIPTION ======================= -->
+  <div class="scene" data-uc="3">
+    <div class="two">
+      <div>
+        <div class="eyebrow warn">Out-patient clinic · a routine script</div>
+        <div class="chip rose">The problem</div>
+        <h1>A handwritten script.<br>No checks. <span class="bad">Two people exposed.</span></h1>
+        <p class="lede">The patient is allergic to <b>penicillin</b> and on <b>warfarin</b> — but the doctor can't see it, and the pharmacist can't read the scrawl. An illegible, unchecked prescription puts <b>both</b> of them on the hook.</p>
+        <div class="teach warn"><b>The lesson:</b> bad handwriting isn't just unsafe — it's a <b>DPDP accuracy liability</b>. An inaccurate record acted on downstream is a legal failure, and it lands on the doctor <em>and</em> the pharmacist.</div>
+      </div>
+      <div><div class="card fail">
+        <div class="card-head"><div class="rec-badge fail"><span class="tick">!</span> Paper prescription</div><div class="rec-id">P. Sharma · 58M</div></div>
+        <div class="hand-rx">
+          <div class="hand-h"><span>Rx</span><span>City Clinic</span></div>
+          <div class="hand-line blur">℞ Amoxicillin 500mg — 1-0-1 × 5d</div>
+          <div class="hand-line blur">Paracetamol 650 SOS</div>
+          <div class="hand-foot">— Dr. ___</div>
+        </div>
+        <div class="card-alert static"><div class="ca-ic">⚠</div><div class="ca-tx"><b>Penicillin allergy on file · warfarin interaction.</b> Neither is visible here. The pharmacist will dispense what they think it says.</div></div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="scene" data-uc="3">
+    <div class="two">
+      <div>
+        <div class="eyebrow">With Dhara · at signing time</div>
+        <div class="chip teal"><span>⬡</span> What Dhara does</div>
+        <h1>Four safety checks,<br>before the <span class="accent">pen lifts</span>.</h1>
+        <p class="lede">The same drug, entered in Dhara. It runs <b>four checks</b> against the patient's living record — interaction, allergy, duplicate, dosage — the instant before signing. A critical hit <b>blocks the signature</b>. <b>Try it →</b></p>
+        <div class="cta-row" id="rxCta">
+          <button class="btn-primary" id="rxRunBtn" onclick="rx_run()">Run safety check (4) <span class="arrow">→</span></button>
+          <button class="btn-primary" id="rxSwapBtn" onclick="rx_swap()" style="display:none">Replace with Azithromycin <span class="arrow">→</span></button>
+        </div>
+        <button class="relink" id="rxReset" style="display:none" onclick="rx_reset()">↺ Reset</button>
+        <div class="teach"><b>The lesson:</b> the record that the emergency room lacked is the record the clinic uses to stop an error before it happens.</div>
+      </div>
+      <div><div class="card" id="rxCard">
+        <div class="card-head"><div class="rec-badge"><span class="tick">℞</span> Dhara · prescription</div><div class="rec-id" id="rxDrug">Amoxicillin 500mg</div></div>
+        <div style="padding:9px 20px 2px;font-family:var(--mono);font-size:10.5px;color:var(--ink-3);">P. Sharma · 58M · allergy: <span style="color:var(--rose)">Penicillin</span> · on Warfarin 5mg</div>
+        <div class="checks" id="rxChecks">
+          <div style="font-family:var(--mono);font-size:11.5px;color:var(--ink-3);text-align:center;padding:54px 0;" id="rxHint">Tap "Run safety check" to test the script →</div>
+        </div>
+        <div class="verdict" id="rxVerdict"></div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="scene" data-uc="3">
+    <div class="two">
+      <div>
+        <div class="eyebrow">One verified script · two parties covered</div>
+        <div class="chip teal"><span>⬡</span> What Dhara does</div>
+        <h1>It protects the doctor<br><span class="accent">and the pharmacist</span>.</h1>
+        <p class="lede">The signed script becomes a <b>legible, verified, digital</b> prescription — carrying its own safety log. The doctor is covered for what they signed; the pharmacist is covered for what they dispense.</p>
+        <div class="shield"><span class="s-ic">🛡</span> <b>Accuracy</b> · <b>dual liability shield</b> · DPDP-audited chain</div>
+      </div>
+      <div>
+        <div class="dual">
+          <div class="dcol">
+            <div class="dh"><span class="dh-ic">🩺</span> Doctor protected</div>
+            <div class="dli"><span class="dci">✓</span> 4-check pass recorded at signing time</div>
+            <div class="dli"><span class="dci">✓</span> Any override saved <b>with a reason</b></div>
+            <div class="dli"><span class="dci">✓</span> A defensible audit trail, automatically</div>
+          </div>
+          <div class="dcol">
+            <div class="dh"><span class="dh-ic">💊</span> Pharmacist protected</div>
+            <div class="dli"><span class="dci">✓</span> Legible, <b>verified</b> digital script — no guessing</div>
+            <div class="dli"><span class="dci">✓</span> Interaction &amp; allergy log travels with it</div>
+            <div class="dli"><span class="dci">✓</span> Never dispenses on an ambiguous scrawl</div>
+          </div>
+        </div>
+        <div class="flowmid" style="margin-top:10px;">🩺 &nbsp;—— verified script ——▸&nbsp; 💊</div>
+        <div class="honest" style="margin-top:14px;text-align:left;max-width:520px;">Handwriting error on a paper script can expose a pharmacist under DPDP §22, CDSCO and consumer law. A verified digital chain moves the risk off both of them.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================= UC04 · CONSENT ======================= -->
+  <div class="scene" data-uc="5">
+    <div class="two">
+      <div>
+        <div class="eyebrow warn">Registration desk · "I agree"</div>
+        <div class="chip rose">The problem</div>
+        <h1>One tick at the desk.<br>Your record <span class="bad">sprays everywhere</span>.</h1>
+        <p class="lede">A single checkbox at registration, and the same record flows to the lab, the pharmacy, the insurer, analytics — <b>no granularity, no expiry, no log</b>. You agreed to one thing; it went to everyone.</p>
+        <div class="teach warn"><b>The lesson:</b> that isn't consent. It's a signature nobody can audit — exactly what DPDP §6 stops being legal from <b>May 13, 2027</b>.</div>
+      </div>
+      <div><div class="spray">
+        <div class="tickbox"><span class="tb">✓</span> "I agree to the terms &amp; privacy policy"</div>
+        <div class="spray-targets">
+          <div class="starget" style="animation-delay:.1s"><span class="st-ic">🧪</span>Lab</div>
+          <div class="starget" style="animation-delay:.2s"><span class="st-ic">💊</span>Pharmacy</div>
+          <div class="starget" style="animation-delay:.3s"><span class="st-ic">🏦</span>Insurer</div>
+          <div class="starget" style="animation-delay:.4s"><span class="st-ic">📊</span>Analytics</div>
+          <div class="starget" style="animation-delay:.5s"><span class="st-ic">📣</span>Marketing</div>
+        </div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--rose);margin-top:22px;letter-spacing:.04em;">same record · no limit · no record of who took it</div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="scene" data-uc="5">
+    <div class="two">
+      <div>
+        <div class="eyebrow">With Dhara · consent the patient holds</div>
+        <div class="chip teal"><span>⬡</span> What Dhara does</div>
+        <h1>Consent becomes a<br><span class="accent">living ledger</span>.</h1>
+        <p class="lede">The patient grants access per <b>doctor, scope and validity</b> — and every grant or revoke writes a <b>timestamped row that never erases</b>. Watch it compound into proof. <b>Try it →</b></p>
+        <div class="cta-row" id="cCta">
+          <button class="btn-primary" id="cGrantBtn" onclick="c_grant()">Grant access <span class="arrow">→</span></button>
+          <button class="btn-ghost" id="cRevokeBtn" onclick="c_revoke()" style="display:none">Revoke</button>
+        </div>
+        <button class="relink" id="cReset" style="display:none" onclick="c_reset()">↺ Reset</button>
+        <div class="shield"><span class="s-ic">🛡</span> <b>Consent</b> · <b>purpose-limited</b> · revocable · every event provable</div>
+      </div>
+      <div><div class="card">
+        <div class="card-head"><div class="rec-badge"><span class="tick">✓</span> Dhara · consent</div><div class="rec-id">Mrs. Rao · patient-held</div></div>
+        <div class="consent-panel">
+          <div class="cfield"><span class="cf-l">Doctor</span> <span class="cpill">Dr. Mehta · Cardiology</span></div>
+          <div class="cfield"><span class="cf-l">Scope</span> <span class="cpill">READ</span> <span class="cpill alt">Conditions + Meds</span></div>
+          <div class="cfield"><span class="cf-l">Validity</span> <span class="cpill alt">30 days</span></div>
+        </div>
+        <div class="ledger">
+          <div class="ledger-h">Consent ledger · append-only</div>
+          <div class="led-body" id="cLedger">
+            <div style="font-family:var(--mono);font-size:11px;color:var(--ink-3);text-align:center;padding:38px 0;" id="cLhint">No events yet — grant access to write the first row →</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- ======================= UC05 · VAANI ======================= -->
+  <div class="scene" data-uc="4">
+    <div class="two">
+      <div>
+        <div class="eyebrow warn">The consultation · documentation burden</div>
+        <div class="chip rose">The problem</div>
+        <h1>Eyes on the screen,<br>not on the <span class="bad">patient</span>.</h1>
+        <p class="lede">The doctor either types through the visit — half-listening — or scribbles nothing and reconstructs it later from memory. <b>Either way the record suffers</b>, and so does the patient in the chair.</p>
+        <div class="teach warn"><b>The lesson:</b> the fear with an AI scribe is the opposite failure — that it <b>invents</b> what was never said. A note you can't trust is worse than no note.</div>
+      </div>
+      <div><div class="card fail">
+        <div class="card-head"><div class="rec-badge fail"><span class="tick">!</span> Manual note</div><div class="rec-id">15-min slot</div></div>
+        <div style="padding:22px;font-family:var(--hand);font-size:23px;color:#1a2a4a;line-height:1.5;">
+          <div class="hand-line blur">c/o cough, fever 3d…</div>
+          <div class="hand-line blur" style="opacity:.5">chest — ? crepts</div>
+          <div class="hand-line blur" style="opacity:.4">— rest later</div>
+        </div>
+        <div class="card-alert static"><div class="ca-ic">⚠</div><div class="ca-tx"><b>Reconstructed from memory.</b> Half the detail is lost, the coding is a guess, and continuity breaks the moment the patient moves on.</div></div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="scene" data-uc="4">
+    <div class="two">
+      <div>
+        <div class="eyebrow">With Dhara · Vaani listens</div>
+        <div class="chip teal"><span>⬡</span> What Dhara does</div>
+        <h1>Speak normally.<br>It writes a <span class="accent">grounded note</span>.</h1>
+        <p class="lede">Vaani transcribes the consult in <b>Hindi and English</b>, separates doctor from patient, and structures a <b>SOAP note with ICD-10</b> — every line tied to a <b>timestamp in the transcript</b>. Nothing is saved until the doctor confirms. <b>Try it →</b></p>
+        <div class="cta-row" id="vCta">
+          <button class="btn-primary" id="vStartBtn" onclick="v_start()">Start dictation <span class="arrow">→</span></button>
+          <button class="btn-primary" id="vSaveBtn" onclick="v_save()" style="display:none">Confirm &amp; save <span class="arrow">→</span></button>
+        </div>
+        <button class="relink" id="vReset" style="display:none" onclick="v_reset()">↺ Reset</button>
+        <div class="shield"><span class="s-ic">🛡</span> <b>Timestamp-grounded</b> · <b>doctor-confirms-all</b> · runs on Indian infrastructure</div>
+      </div>
+      <div><div class="card">
+        <div class="card-head"><div class="rec-badge"><span class="tick">🎙</span> Vaani · live consult</div><div class="rec-id" id="vStatus">ready</div></div>
+        <div class="vstream" id="vStream">
+          <div style="font-family:var(--mono);font-size:11.5px;color:var(--ink-3);text-align:center;padding:48px 0;" id="vHint">Tap "Start dictation" to hear the room →</div>
+        </div>
+        <div class="vsum" id="vSum">
+          <div class="vsum-h"><span>Structured note · auto-drafted</span><span>unsaved</span></div>
+          <div class="vsoap">
+            <div class="vsrow"><span class="vk">S</span><span class="vv">Cough &amp; fever × 3 days, productive</span><span class="vts">00:04</span></div>
+            <div class="vsrow"><span class="vk">O</span><span class="vv">Crepitations, right lower zone</span><span class="vts">00:11</span></div>
+            <div class="vsrow"><span class="vk">A</span><span class="vv">Community-acquired pneumonia <span class="icd">ICD-10 J18.9</span></span><span class="vts">00:15</span></div>
+            <div class="vsrow"><span class="vk">P</span><span class="vv">Azithromycin 500mg OD × 3d · review in 5d</span><span class="vts">00:21</span></div>
+          </div>
+        </div>
+        <div class="vsaved" id="vSaved">✓ Confirmed by doctor · saved to the record</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- ======================= UC06 · DATA ======================= -->
+  <div class="scene" data-uc="6">
+    <div class="two">
+      <div>
+        <div class="eyebrow warn">Health AI · trained on what, exactly?</div>
+        <div class="chip rose">The problem</div>
+        <h1>Your record trained a model.<br><span class="bad">You never said yes.</span></h1>
+        <p class="lede">Most health AI is built on records used for care and then quietly reused for training — with <b>no separate opt-in</b>. When enforcement lands, that corpus becomes a liability, not an asset.</p>
+        <div class="teach warn"><b>The lesson:</b> DPDP treats <b>AI-training as its own purpose</b>. The real moat isn't how much data you have — it's whether the patient <b>consented to that exact use</b>.</div>
+      </div>
+      <div><div class="card fail">
+        <div class="card-head"><div class="rec-badge fail"><span class="tick">!</span> Training corpus · no purpose consent</div></div>
+        <div style="padding:18px 20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-2);line-height:1.9;">
+          consultations · prescriptions · lab results<br>
+          → scraped into a model<br>
+          → <span style="color:var(--rose)">no AI-training consent on file</span><br>
+          → challengeable from <b style="color:var(--ink)">May 13, 2027</b>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="scene" data-uc="6">
+    <div class="two">
+      <div>
+        <div class="eyebrow">With Dhara · the consent gate</div>
+        <div class="chip teal"><span>⬡</span> What Dhara does</div>
+        <h1>Only consented data<br><span class="accent">crosses the gate</span>.</h1>
+        <p class="lede">Every record carries its own <b>AI-training consent</b>. Open the gate and the consented records flow in — <b>anonymised</b> — while the rest are <b>held back</b>, visibly. That gate is the moat and the compliance line. <b>Try it →</b></p>
+        <div class="cta-row" id="dCta"><button class="btn-primary" onclick="d_open()">Open the consent gate <span class="arrow">→</span></button></div>
+        <button class="relink" id="dReset" style="display:none" onclick="d_reset()">↺ Reset</button>
+        <div class="shield"><span class="s-ic">🛡</span> <b>Purpose-specific consent</b> · anonymised · auditable</div>
+      </div>
+      <div><div class="card">
+        <div class="card-head"><div class="rec-badge"><span class="tick">✓</span> Dhara · data layer</div></div>
+        <div class="gatebox"><div class="records-col">
+          <div class="drec" id="dRec0"><span class="dr-n">Cardiology consult</span><span class="dr-consent on">AI-consent ✓</span></div>
+          <div class="drec" id="dRec1"><span class="dr-n">Diabetes panel</span><span class="dr-consent on">AI-consent ✓</span></div>
+          <div class="drec" id="dRec2"><span class="dr-n">Psychiatry note</span><span class="dr-consent off">AI-consent ✗</span></div>
+          <div class="drec" id="dRec3"><span class="dr-n">Pathology report</span><span class="dr-consent on">AI-consent ✓</span></div>
+        </div></div>
+        <div class="intel-core" id="dCore"><div class="ic-t">Healthcare intelligence layer</div><div class="ic-n" id="dCoreN">awaiting consented records</div></div>
+        <div class="tiers">
+          <div class="tier"><div class="ti-p">₹999</div><div class="ti-l">students</div></div>
+          <div class="tier"><div class="ti-p">₹2,999</div><div class="ti-l">doctors</div></div>
+          <div class="tier"><div class="ti-p">₹50k–5L</div><div class="ti-l">pharma / BODH</div></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- ===== UC06 · DATA → INTELLIGENCE · beat 3 (convergence finale, merged) ===== -->
+  <div class="scene" data-uc="6">
+    <div class="two">
+      <div>
+        <div class="eyebrow">The convergence</div>
+        <div class="chip teal"><span>⬡</span> Where this goes</div>
+        <h1>Memory compounds into<br><span class="accent">intelligence</span>.</h1>
+        <p class="lede">Millions of consented, structured records converge — and a healthcare intelligence layer <b>emerges</b>: earlier detection, fairer allocation, drug safety at population scale. <b>Watch it →</b></p>
+        <div class="cta-row" id="iCta"><button class="btn-primary" onclick="i_converge()">Converge <span class="arrow">→</span></button></div>
+        <button class="relink" id="iReset" style="display:none" onclick="i_reset()">↺ Reset</button>
+        <div class="thesis" style="text-align:left;font-size:17px;margin-top:8px;max-width:430px;">"Intelligence is not where we start. It is what <span class="hl">emerges</span> once healthcare finally remembers."</div>
+      </div>
+      <div class="infra" id="infra2">
+        <div class="dotfield" id="dotfield2"></div>
+        <div class="core-reveal">
+          <div class="core-orb"><div class="co-t">Dhara</div><div class="co-n">Healthcare<br>Intelligence</div></div>
+          <div class="emergent">
+            <div class="em"><div class="em-ic">🔬</div><div class="em-l">Earlier<br>detection</div></div>
+            <div class="em"><div class="em-ic">⚖️</div><div class="em-l">Fairer<br>allocation</div></div>
+            <div class="em"><div class="em-ic">💊</div><div class="em-l">Population<br>drug-safety</div></div>
+          </div>
         </div>
       </div>
-      <div style="flex:1;padding-top:32px;">
-        <div style="font-size:14px;color:var(--grey);line-height:1.8;margin-bottom:20px;"><strong style="color:var(--white);font-weight:normal;">AyuVinc is not competing with the government stack.</strong> AyuVinc is the layer the government stack depends on. PGIMER Chandigarh — named in SAHI as India's AI Centre of Excellence — is where Setu is already deployed.</div>
-        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.10em;color:var(--teal);line-height:1.9;">
-          India has healthcare identity.<br>
-          It still lacks healthcare memory.<br>
-          The intelligence layer is downstream of continuity.
-        </div>
-      </div>
     </div>
   </div>
+
 </div>
 
-<!-- UC08 · Beat 1: Continuity compounds -->
-<div class="scene" id="uc7b0">
-  <div class="inf-wrap">
-    <div class="stag">The Infrastructure</div>
-    <div class="inf-stmt">One patient's memory is a record.<br>A million of them is infrastructure.</div>
-    <div class="inf-sub">Each dot is a clinic. Each clinic, thousands of patients. Each patient, one continuous record — owned by them, not trapped in a building.</div>
-    <div class="inf-grid" id="infraGrid"></div>
-    <div class="inf-anchor">
-      <div class="inf-num">50,000&nbsp;→&nbsp;200,000</div>
-      <div class="inf-numlbl">clinics on Dhara · Year 5 to Year 10 (projection)<br>every record the same shape: consented · FHIR R4 · longitudinal</div>
-    </div>
-  </div>
-</div>
-
-<!-- UC08 · Beat 2: The data layer forms -->
-<div class="scene" id="uc7b1">
-  <div class="inf-wrap">
-    <div class="stag">The layer no one else can build</div>
-    <div class="inf-stmt">Every consented record flows into one layer.</div>
-    <div class="inf-sub">Patient-owned. Consent-governed. Structured the same way, everywhere.</div>
-    <div class="inf-flow">
-      <div class="inf-converge">Millions of patient-owned records</div>
-      <div class="inf-arrowdown">↓ &nbsp; converging &nbsp; ↓</div>
-      <div class="data-layer">
-        <div class="dl-title">India's consent-governed clinical memory</div>
-        <div class="dl-meta">FHIR R4 · ICD-10 · longitudinal · patient-owned · consented per purpose</div>
-      </div>
-    </div>
-    <div class="inf-final">
-      <div class="inf-final-l">The layer SAHI asked for. The data BODH needs. <span class="dim">No one else can build it without rebuilding on consent they never had.</span></div>
-    </div>
-  </div>
-</div>
-
-<!-- UC08 · Beat 3: Intelligence emerges -->
-<div class="scene" id="uc7b2">
-  <div class="inf-wrap">
-    <div class="stag">What memory makes possible</div>
-    <div class="data-layer" style="margin-top:6px;">
-      <div class="dl-title">Consent-governed clinical memory</div>
-      <div class="dl-meta">the same layer — now put to work</div>
-    </div>
-    <div class="inf-arrowdown">↓</div>
-    <div class="inf-outs">
-      <div class="inf-out"><div class="io-k">Complex cases</div><div class="io-v">The <strong>2:47 AM transplant patient</strong> — resolved in seconds, in any hospital, not only where his file happened to be.</div></div>
-      <div class="inf-out"><div class="io-k">Population signal</div><div class="io-v">A dangerous drug interaction caught across <strong>a million records</strong> before it reaches the next patient.</div></div>
-      <div class="inf-out"><div class="io-k">Indian clinical AI</div><div class="io-v">A model that knows <strong>Indian drugs, Indian disease, Indian languages</strong> — BODH-validated, consent-trained.</div></div>
-    </div>
-    <div class="inf-final">
-      <div class="inf-final-l">India has healthcare identity. <span class="dim">It still lacks healthcare memory.</span><br>The intelligence layer is downstream of continuity.<br><strong style="font-weight:400;">Healthcare intelligence is not where we start. It is what naturally emerges once healthcare finally remembers.</strong></div>
-    </div>
-  </div>
-</div>
-
-</div><!-- /scenes -->
-
-<!-- BOTTOM NAV -->
 <div class="botnav">
-  <button class="narr" id="pb" onclick="nav(-1)" disabled>←</button>
-  <div class="ndots" id="ndots"></div>
-  <button class="narr" id="nb" onclick="nav(1)">→</button>
+  <button class="nav-btn" id="pb" onclick="go(-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <button class="nav-btn" id="nb" onclick="go(1)">→</button>
   <span class="nctr" id="nctr"></span>
 </div>
 
+<div class="gate-modal" id="gateModal">
+  <div class="gm-card">
+    <div class="gm-lock">🔒</div>
+    <div class="gm-t">Protected use case</div>
+    <div class="gm-s">These cases reveal how Dhara's compliance architecture works. Enter the access code to continue.</div>
+    <input type="password" class="gm-input" id="gmInput" placeholder="Access code" autocomplete="off">
+    <div class="gm-err" id="gmErr">Incorrect code — try again.</div>
+    <div class="gm-btns"><button class="btn-ghost" onclick="gmClose()">Back</button><button class="btn-primary" onclick="gmSubmit()">Enter →</button></div>
+  </div>
+</div>
+
 <script>
-const UCS = [
-  {beats:['uc0b0','uc0b1','uc0b2']},
-  {beats:['uc1b0','uc1b1','uc1b2']},
-  {beats:['uc2b0','uc2b1','uc2b2']},
-  {beats:['uc3b0','uc3b1','uc3b2']},
-  {beats:['uc4b0','uc4b1','uc4b2']},
-  {beats:['uc5b0','uc5b1','uc5b2']},
-  {beats:['uc6b0','uc6b1','uc6b2']},
-  {beats:['uc7b0','uc7b1','uc7b2']},
-];
+const $=id=>document.getElementById(id);
+const UCNAMES=['Emergency','Transplant · Setu','Prescription','Vaani','Consent','Data → Intelligence'];
+const GATED=[2,4,5], PW='dhara2026';  /* Prescription · Consent · Data→Intelligence are moat-gated */
+let curUC=0,curBeat=0,ucScenes=[],unlocked=false,gateTarget=null;
 
-const SF_DATA = [
-  {m:'Kidney transplant · July 2005 · PGIMER Chandigarh', s:'Donor: Father (O+) · Functioning 17 years'},
-  {m:'Tacrolimus 3mg BD · Mycophenolate Mofetil 500mg BD', s:'Active immunosuppressant protocol'},
-  {m:'Calcified aortic valve · Severe aortic regurgitation', s:'Surgical correction pending at admission'},
-  {m:'Creatinine 1.4 mg/dL · last recorded 2020', s:'Current: 5.5 mg/dL — transplanted kidney in acute failure'},
-  {m:'8 active medications', s:'Antihypertensives · Immunosuppressants · Supplements · [view all]'},
-  {m:'None documented', s:''},
-];
-
-let curUC=0, curBeat=0, granted=false, declined=false;
-
-function init(){
-  document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
-  document.getElementById(UCS[curUC].beats[curBeat]).classList.add('active');
-  renderDots(); updateNav(); updateTopbar();
-}
-
-function loadUC(n){
-  curUC=n; curBeat=0; granted=false; declined=false;
-  resetGrantUI();
-  init();
-}
-
-function nav(d){
-  const n=curBeat+d;
-  const beats=UCS[curUC].beats;
-  if(n<0||n>=beats.length)return;
-  curBeat=n;
-  document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
-  document.getElementById(beats[curBeat]).classList.add('active');
-  renderDots(); updateNav();
-}
-
-function renderDots(){
-  const w=document.getElementById('ndots'); w.innerHTML='';
-  const beats=UCS[curUC].beats;
-  const isLight=(curUC===0&&curBeat===2&&granted);
-  beats.forEach((_,i)=>{
-    const d=document.createElement('button');
-    d.className='ndot'+(i===curBeat?' active':'');
-    if(i===curBeat){d.style.background=isLight?'#090d18':'#f5f4f0';}
-    else{d.style.background=isLight?'rgba(9,13,24,0.25)':'rgba(155,150,145,0.20)';}
-    d.onclick=()=>{curBeat=i;nav(0);nav(0);loadBeat(i);};
-    w.appendChild(d);
-  });
-}
-
-function loadBeat(n){
-  curBeat=n;
-  document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
-  document.getElementById(UCS[curUC].beats[curBeat]).classList.add('active');
-  renderDots(); updateNav();
-}
-
-function updateNav(){
-  const beats=UCS[curUC].beats;
-  document.getElementById('pb').disabled=curBeat===0;
-  document.getElementById('nb').disabled=curBeat===beats.length-1;
-  document.getElementById('nctr').textContent=(curBeat+1)+' / '+beats.length;
-}
-
-function updateTopbar(){
-  document.querySelectorAll('.ucb').forEach((b,i)=>b.classList.toggle('active',i===curUC));
-}
-
-function grantAccess(){
-  if(granted||declined)return;
-  granted=true;
-  document.getElementById('pcact').style.display='none';
-  document.getElementById('grantLine').classList.add('show');
-  document.getElementById('darkOverlay').classList.add('gone');
-  SF_DATA.forEach((d,i)=>{
-    setTimeout(()=>{
-      const r=document.getElementById('sf'+i);
-      if(r) r.querySelector('.sfval').innerHTML='<div class="sffill">'+d.m+(d.s?'<div class="sfsub">'+d.s+'</div>':'')+' </div>';
-    },i*280);
-  });
-  setTimeout(()=>{
-    document.getElementById('dalert').classList.add('show');
-    document.getElementById('afooter').classList.add('show');
-    renderDots();
-  },SF_DATA.length*280+200);
-}
-
-function declineAccess(){
-  if(granted||declined)return;
-  declined=true;
-  document.getElementById('pcact').style.display='none';
-  document.getElementById('declineLine').classList.add('show');
-  document.getElementById('reconBtn').classList.add('show');
-  setTimeout(()=>document.getElementById('declineOverlay').classList.add('show'),400);
-}
-
-function resetCard(){
-  declined=false;
-  document.getElementById('pcact').style.display='flex';
-  document.getElementById('declineLine').classList.remove('show');
-  document.getElementById('reconBtn').classList.remove('show');
-  document.getElementById('declineOverlay').classList.remove('show');
-}
-
-function resetGrantUI(){
-  const pa=document.getElementById('pcact');
-  if(pa)pa.style.display='flex';
-  ['grantLine','declineLine','reconBtn'].forEach(id=>{const el=document.getElementById(id);if(el){el.classList.remove('show');}});
-  const dov=document.getElementById('darkOverlay');
-  if(dov)dov.classList.remove('gone');
-  const dev=document.getElementById('declineOverlay');
-  if(dev)dev.classList.remove('show');
-  const dal=document.getElementById('dalert');
-  if(dal)dal.classList.remove('show');
-  const af=document.getElementById('afooter');
-  if(af)af.classList.remove('show');
-  for(let i=0;i<6;i++){
-    const r=document.getElementById('sf'+i);
-    if(r){const v=r.querySelector('.sfval');if(v)v.innerHTML='<div class="sfempty"><div class="sfbar"></div><div class="sfunk">—</div></div>';}
-  }
-}
-
-function buildInfraGrid(){
-  const g=document.getElementById('infraGrid');
-  if(!g||g.childElementCount)return;
-  const N=28*8;
-  for(let i=0;i<N;i++){
-    const d=document.createElement('div');
-    d.className='cnode';
-    d.style.animationDelay=(i*7)+'ms';
-    g.appendChild(d);
-  }
-}
-
-function checkPwd(){
-  const v=document.getElementById('pwdinput').value;
-  if(v==='dhara2026'){
-    document.getElementById('lockscreen').style.display='none';
-    buildInfraGrid();
-    init();
-  } else {
-    document.getElementById('pwderr').style.display='block';
-    const inp=document.getElementById('pwdinput');
-    inp.value='';inp.focus();
-  }
-}
-
-function toggleFS(){!document.fullscreenElement?document.documentElement.requestFullscreen().catch(()=>{}):document.exitFullscreen();}
-
-// Keyboard
-document.addEventListener('keydown',e=>{
-  if(['ArrowRight','ArrowDown'].includes(e.key))nav(1);
-  if(['ArrowLeft','ArrowUp'].includes(e.key))nav(-1);
-  if(e.key==='f'||e.key==='F')toggleFS();
+/* tabs */
+const tabsWrap=$('uctabs');
+UCNAMES.forEach((nm,u)=>{
+  const b=document.createElement('button');b.className='uctab';
+  b.innerHTML='<b>'+String(u+1).padStart(2,'0')+'</b> '+nm.split(' · ')[0]+(GATED.includes(u)?' <span class="tab-lock">🔒</span>':'');
+  b.onclick=()=>loadUC(u);tabsWrap.appendChild(b);
 });
-// Swipe
-let tx=0;
-document.addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX;},{passive:true});
-document.addEventListener('touchend',e=>{
-  const d=tx-e.changedTouches[0].screenX;
-  if(Math.abs(d)>50)nav(d>0?1:-1);
-});
+for(let u=0;u<6;u++)ucScenes[u]=[...document.querySelectorAll('.scene[data-uc="'+(u+1)+'"]')];
 
-// Fix dot navigation - rewrite to avoid recursion
-document.getElementById('ndots').addEventListener('click',e=>{
-  if(e.target.classList.contains('ndot')){
-    const dots=[...document.querySelectorAll('.ndot')];
-    const i=dots.indexOf(e.target);
-    if(i>=0)loadBeat(i);
-  }
-});
+const dotsWrap=$('dots');
+function loadUC(u){
+  if(GATED.includes(u)&&!unlocked){showGate(u);return;}
+  curUC=u;curBeat=0;
+  $('cover').classList.remove('active');
+  [...tabsWrap.children].forEach((t,k)=>t.classList.toggle('active',k===u));
+  dotsWrap.innerHTML='';
+  ucScenes[u].forEach((s,i)=>{const d=document.createElement('button');d.className='ndot';d.onclick=()=>showBeat(i);dotsWrap.appendChild(d);});
+  showBeat(0);
+}
+function showBeat(i){
+  const list=ucScenes[curUC];curBeat=(i+list.length)%list.length;
+  document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
+  list[curBeat].classList.add('active');
+  [...dotsWrap.children].forEach((d,k)=>d.classList.toggle('active',k===curBeat));
+  $('pb').disabled=curBeat===0;$('nb').disabled=curBeat===list.length-1;
+  $('nctr').textContent=UCNAMES[curUC].split(' · ')[0]+' · '+(curBeat+1)+' / '+list.length;
+  onShow();
+}
+function go(d){showBeat(curBeat+d);}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1);});
+
+function onShow(){
+  if(curUC===0&&curBeat===2)e_reset();                                            /* Emergency */
+  if(curUC===1){if(curBeat===0)t_counters();if(curBeat===2)t_resetMatch();if(curBeat===3)t_resetPacket();} /* Transplant */
+  if(curUC===2&&curBeat===1)rx_reset();                                           /* Prescription */
+  if(curUC===3&&curBeat===1)v_reset();                                            /* Vaani */
+  if(curUC===4&&curBeat===1)c_reset();                                            /* Consent */
+  if(curUC===5){if(curBeat===1)d_reset();if(curBeat===2){i_seed(2);i_reset();}}   /* Data → Intelligence */
+}
+
+/* ===== UC01 Transplant ===== */
+let tCt=null;
+function t_counters(){clearInterval(tCt);let t=0;tCt=setInterval(()=>{t++;const p=t/40;$('tWeeks').textContent=Math.min(16,Math.round(16*p));$('tDial').textContent=Math.min(192,Math.round(192*p));if(t>=40)clearInterval(tCt);},28);}
+function t_runMatch(){$('tB3cta').style.display='none';$('tB3reset').style.display='inline-block';$('tWl0').classList.add('paired');$('tWl1').classList.add('paired');setTimeout(()=>$('tSwap').classList.add('show'),380);}
+function t_resetMatch(){$('tB3cta').style.display='flex';$('tB3reset').style.display='none';$('tWl0').classList.remove('paired');$('tWl1').classList.remove('paired');$('tSwap').classList.remove('show');}
+let tPk=[];
+function t_gen(){$('tGenBtn').disabled=true;$('tPs1').classList.add('on');$('tStatus').textContent='COMMITTEE_REVIEW';for(let i=0;i<6;i++)tPk.push(setTimeout(()=>$('tPr'+i).classList.add('in'),180+i*240));tPk.push(setTimeout(()=>{$('tCommittee').classList.add('show');$('tApprBtn').style.display='flex';$('tB4reset').style.display='inline-block';},180+6*240+150));}
+function t_appr(){$('tApprBtn').disabled=true;for(let i=0;i<3;i++)tPk.push(setTimeout(()=>{const r=$('tCm'+i);r.classList.add('appr');r.querySelector('.cm-status').childNodes[0].nodeValue='Approved';},150+i*320));tPk.push(setTimeout(()=>{$('tPs2').classList.add('on');$('tPs3').classList.add('on');$('tStatus').textContent='COMMITTEE_APPROVED';$('tLock').classList.add('show');},150+3*320+200));}
+function t_resetPacket(){tPk.forEach(clearTimeout);tPk=[];for(let i=0;i<6;i++)$('tPr'+i).classList.remove('in');for(let i=0;i<3;i++){const r=$('tCm'+i);r.classList.remove('appr');r.querySelector('.cm-status').childNodes[0].nodeValue='Pending';}$('tPs1').classList.remove('on');$('tPs2').classList.remove('on');$('tPs3').classList.remove('on');$('tStatus').textContent='REGISTERED';$('tLock').classList.remove('show');$('tCommittee').classList.remove('show');$('tGenBtn').disabled=false;$('tGenBtn').style.display='flex';$('tApprBtn').disabled=false;$('tApprBtn').style.display='none';$('tB4reset').style.display='none';}
+
+/* ===== UC02 Emergency ===== */
+const E_DATA=[
+ {v:'Kidney · July 2005',s:'Donor: father (O+) · functioning 17 yrs'},
+ {v:'Tacrolimus 3mg · Mycophenolate 500mg',s:'Active immunosuppressant protocol'},
+ {v:'Calcified aortic valve · severe regurgitation',s:'Surgical correction pending'},
+ {v:'Creatinine 1.4 → 5.5 mg/dL',s:'Transplanted kidney in acute failure'},
+ {v:'8 active · antihypertensives + immunosuppressants',s:''},
+ {v:'None documented',s:''}];
+let eDone=false;
+function e_grant(){if(eDone)return;eDone=true;$('eVeil').classList.add('gone');$('eCta').style.display='none';$('eNote').style.display='none';$('eGranted').classList.add('show');$('eRelink').style.display='inline-block';E_DATA.forEach((d,i)=>setTimeout(()=>{$('eF'+i).innerHTML='<span class="fill">'+d.v+(d.s?'<span class="sub">'+d.s+'</span>':'')+'</span>';},250+i*230));setTimeout(()=>$('eAlert').classList.add('show'),250+6*230+200);}
+function e_decline(){if(eDone)return;eDone=true;$('eCta').style.display='none';$('eNote').style.display='none';$('eDeclined').classList.add('show');$('eRelink').style.display='inline-block';setTimeout(()=>$('eDeclineOv').classList.add('show'),250);}
+function e_reset(){eDone=false;$('eVeil').classList.remove('gone');$('eAlert').classList.remove('show');$('eDeclineOv').classList.remove('show');$('eCta').style.display='flex';$('eNote').style.display='flex';$('eGranted').classList.remove('show');$('eDeclined').classList.remove('show');$('eRelink').style.display='none';for(let i=0;i<6;i++)$('eF'+i).innerHTML='<span class="unk"><span class="ubar"></span>Unknown</span>';}
+
+/* ===== UC03 Prescription ===== */
+const RX_CHECKS=[
+ {cls:'warn',ic:'!',l:'<b>Drug interaction</b> — Amoxicillin × Warfarin',v:'Warning'},
+ {cls:'crit',ic:'✕',l:'<b>Allergy cross-check</b> — Penicillin class',v:'Critical'},
+ {cls:'ok',ic:'✓',l:'<b>Duplicate therapy</b> — none',v:'Clear'},
+ {cls:'ok',ic:'✓',l:'<b>Dosage range</b> — within limits',v:'Clear'}];
+const RX_CLEAN=[
+ {cls:'ok',ic:'✓',l:'<b>Drug interaction</b> — Azithromycin',v:'Clear'},
+ {cls:'ok',ic:'✓',l:'<b>Allergy cross-check</b> — no match',v:'Clear'},
+ {cls:'ok',ic:'✓',l:'<b>Duplicate therapy</b> — none',v:'Clear'},
+ {cls:'ok',ic:'✓',l:'<b>Dosage range</b> — within limits',v:'Clear'}];
+let rxT=[];
+function rx_render(list,cb){const box=$('rxChecks');box.innerHTML='';rxT.forEach(clearTimeout);rxT=[];list.forEach((c,i)=>{const el=document.createElement('div');el.className='chk '+c.cls;el.innerHTML='<span class="ck-ic">'+c.ic+'</span><span class="ck-l">'+c.l+'</span><span class="ck-v">'+c.v+'</span>';box.appendChild(el);rxT.push(setTimeout(()=>el.classList.add('show'),120+i*260));});rxT.push(setTimeout(cb,120+list.length*260+150));}
+function rx_run(){$('rxRunBtn').disabled=true;$('rxReset').style.display='inline-block';rx_render(RX_CHECKS,()=>{const v=$('rxVerdict');v.className='verdict block show';v.innerHTML='<b>Signing blocked.</b> A critical allergy match cannot be signed. Replace the drug, or override with a written reason (logged).';$('rxCard').classList.add('fail');$('rxSwapBtn').style.display='flex';});}
+function rx_swap(){$('rxSwapBtn').disabled=true;$('rxDrug').textContent='Azithromycin 500mg';$('rxCard').classList.remove('fail');rx_render(RX_CLEAN,()=>{const v=$('rxVerdict');v.className='verdict pass show';v.innerHTML='<b>All clear — ready to sign.</b> Legible, structured (drug · dose · ICD-10), and audit-trailed.';});}
+function rx_reset(){rxT.forEach(clearTimeout);rxT=[];$('rxChecks').innerHTML='<div style="font-family:var(--mono);font-size:11.5px;color:var(--ink-3);text-align:center;padding:54px 0;">Tap "Run safety check" to test the script →</div>';$('rxVerdict').className='verdict';$('rxCard').classList.remove('fail');$('rxDrug').textContent='Amoxicillin 500mg';$('rxRunBtn').disabled=false;$('rxRunBtn').style.display='flex';$('rxSwapBtn').disabled=false;$('rxSwapBtn').style.display='none';$('rxReset').style.display='none';}
+
+/* ===== UC04 Consent ===== */
+let cN=0;
+function c_addRow(type,txt,ts){const b=$('cLedger');if($('cLhint'))$('cLhint').remove();const el=document.createElement('div');el.className='led-row '+type;el.innerHTML='<span class="led-ic">'+(type==='grant'?'✓':'⊘')+'</span><span class="led-tx">'+txt+'</span><span class="led-ts">'+ts+'</span>';b.appendChild(el);requestAnimationFrame(()=>el.classList.add('show'));return el;}
+let cGrantRow=null;
+function c_grant(){c_addRow('grant','<b>GRANTED</b> · Dr. Mehta · READ · Conditions+Meds · 30d',(cN?'14:'+(40+cN):'14:32')+' today');cN++;$('cGrantBtn').style.display='none';$('cRevokeBtn').style.display='inline-flex';$('cReset').style.display='inline-block';}
+function c_revoke(){const rows=$('cLedger').querySelectorAll('.led-row.grant');if(rows.length)rows[rows.length-1].classList.add('faded');c_addRow('revoke','<b>REVOKED</b> · Dr. Mehta · access withdrawn','14:'+(40+cN)+' today');cN++;$('cRevokeBtn').style.display='none';}
+function c_reset(){cN=0;$('cLedger').innerHTML='<div style="font-family:var(--mono);font-size:11px;color:var(--ink-3);text-align:center;padding:38px 0;" id="cLhint">No events yet — grant access to write the first row →</div>';$('cGrantBtn').style.display='inline-flex';$('cRevokeBtn').style.display='none';$('cReset').style.display='none';}
+
+/* ===== UC05 Vaani ===== */
+const V_LINES=[
+ {w:'Doctor',c:'dr',t:'<span class="dv">क्या तकलीफ़ है?</span> What brings you in?'},
+ {w:'Patient',c:'pt',t:'<span class="dv">तीन दिन से खांसी और बुखार है।</span>'},
+ {w:'Doctor',c:'dr',t:'<span class="dv">साँस लेने में दिक्कत?</span> Any breathlessness?'},
+ {w:'Patient',c:'pt',t:'<span class="dv">हल्की, और छाती में दर्द।</span>'},
+ {w:'Doctor',c:'dr',t:'Chest — crepitations, right base. Likely pneumonia.'}];
+let vT=[];
+function v_start(){$('vStartBtn').disabled=true;$('vReset').style.display='inline-block';$('vStatus').textContent='listening…';const s=$('vStream');s.innerHTML='';vT.forEach(clearTimeout);vT=[];V_LINES.forEach((l,i)=>{const el=document.createElement('div');el.className='vline '+l.c;el.innerHTML='<div class="vwho">'+l.w+'</div><div class="vsaid">'+l.t+'</div>';s.appendChild(el);vT.push(setTimeout(()=>el.classList.add('show'),200+i*620));});vT.push(setTimeout(()=>{$('vStatus').textContent='diarized · structured';$('vSum').classList.add('show');$('vSaveBtn').style.display='flex';},200+V_LINES.length*620+250));}
+function v_save(){$('vSaveBtn').disabled=true;$('vSum').querySelector('.vsum-h span:last-child').textContent='confirmed';$('vSaved').classList.add('show');$('vStatus').textContent='saved ✓';}
+function v_reset(){vT.forEach(clearTimeout);vT=[];$('vStream').innerHTML='<div style="font-family:var(--mono);font-size:11.5px;color:var(--ink-3);text-align:center;padding:48px 0;">Tap "Start dictation" to hear the room →</div>';$('vSum').classList.remove('show');$('vSum').querySelector('.vsum-h span:last-child').textContent='unsaved';$('vSaved').classList.remove('show');$('vStatus').textContent='ready';$('vStartBtn').disabled=false;$('vStartBtn').style.display='flex';$('vSaveBtn').disabled=false;$('vSaveBtn').style.display='none';$('vReset').style.display='none';}
+
+/* ===== UC06 Data ===== */
+function d_open(){$('dCta').style.display='none';$('dReset').style.display='inline-block';[0,1,3].forEach((i,k)=>setTimeout(()=>$('dRec'+i).classList.add('admitted'),200+k*260));$('dRec2').classList.add('held');setTimeout(()=>{$('dCore').classList.add('live');$('dCoreN').textContent='3 consented records · anonymised';},200+3*260+200);}
+function d_reset(){[0,1,2,3].forEach(i=>{$('dRec'+i).classList.remove('admitted');$('dRec'+i).classList.remove('held');});$('dCore').classList.remove('live');$('dCoreN').textContent='awaiting consented records';$('dCta').style.display='flex';$('dReset').style.display='none';}
+
+/* ===== UC07 Infrastructure ===== */
+function i_seed(n){const f=$('dotfield'+n);if(f.children.length)return;for(let i=0;i<112;i++){const d=document.createElement('div');d.className='pt-dot';f.appendChild(d);}}
+function i_converge(){$('infra2').classList.add('converged');$('iCta').style.display='none';$('iReset').style.display='inline-block';}
+function i_reset(){$('infra2').classList.remove('converged');$('iCta').style.display='flex';$('iReset').style.display='none';}
+
+/* cover menu */
+const CARDS=[
+ {n:'Emergency',d:"When the patient can't speak, the record does."},
+ {n:'Transplant · Setu',d:'The hardest journey in medicine — in one place.'},
+ {n:'Prescription',d:'Four safety checks. Doctor and pharmacist, both covered.'},
+ {n:'Vaani',d:'Speak normally. A grounded note writes itself.'},
+ {n:'Consent',d:'The patient owns the record — and can prove it.'},
+ {n:'Data → Intelligence',d:'Consented memory compounds into intelligence.'}];
+const cvMenu=$('cvMenu');
+CARDS.forEach((c,i)=>{const el=document.createElement('div');el.className='cv-card';el.onclick=()=>loadUC(i);el.innerHTML='<div class="cv-num">'+String(i+1).padStart(2,'0')+'</div>'+(GATED.includes(i)?'<span class="cv-lock" title="Protected — access code required">🔒</span>':'')+'<div class="cv-nm">'+c.n+'</div><div class="cv-ds">'+c.d+'</div>';cvMenu.appendChild(el);});
+/* moat gate */
+function showGate(u){gateTarget=u;$('gmErr').classList.remove('show');$('gmInput').value='';$('gateModal').classList.add('show');setTimeout(()=>$('gmInput').focus(),60);}
+function gmClose(){$('gateModal').classList.remove('show');gateTarget=null;}
+function gmSubmit(){if($('gmInput').value.trim().toLowerCase()===PW){unlocked=true;$('gateModal').classList.remove('show');document.querySelectorAll('.cv-lock,.tab-lock').forEach(e=>e.style.display='none');const t=gateTarget;gateTarget=null;if(t!=null)loadUC(t);}else{$('gmErr').classList.add('show');$('gmInput').value='';$('gmInput').focus();}}
+$('gmInput').addEventListener('keydown',e=>{if(e.key==='Enter')gmSubmit();});
+function showCover(){curUC=-1;document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));$('cover').classList.add('active');[...tabsWrap.children].forEach(t=>t.classList.remove('active'));dotsWrap.innerHTML='';$('pb').disabled=true;$('nb').disabled=true;$('nctr').textContent='Cover';}
+
+showCover();
 </script>
 </body>
 </html>
